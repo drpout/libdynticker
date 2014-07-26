@@ -8,6 +8,12 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
+/**
+ * Abstract template for Exchange
+ * 
+ * @author andre
+ * 
+ */
 public abstract class Exchange {
 
 	String url;
@@ -16,9 +22,11 @@ public abstract class Exchange {
 		this.url = url;
 	}
 
+	/**
+	 * 
+	 * @return Returns a list of pairs coin/exchange
+	 */
 	public abstract List<Pair> getPairs();
-
-	public abstract String getLastValue();
 
 	protected void connect() {
 
@@ -49,4 +57,16 @@ public abstract class Exchange {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * 
+	 * 
+	 * @param pair
+	 *            of exchange/coin
+	 * 
+	 * @return Returns the last value of the exchange for a given pair
+	 *         coin/exchange
+	 */
+	public abstract String getLastValue(Pair pair);
+
 }
