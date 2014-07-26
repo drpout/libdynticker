@@ -68,6 +68,13 @@
 	</repositories>
 
 	<dependencies>
+		<!-- Jackson Parser-->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+
 		<!-- JUnit for testing -->
 		<dependency>
 			<groupId>junit</groupId>
@@ -143,7 +150,7 @@
 					<target>${jdk.version}</target>
 				</configuration>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
@@ -157,8 +164,8 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-							<releaseName>${project.version}</releaseName>
-							<tag>${project.version}</tag>
+							<releaseName>${project.artifactId}-${project.version}</releaseName>
+							<tag>${project.artifactId}-${project.version}</tag>
 							<artifact>${project.build.directory}/${project.artifactId}-${project.version}.jar</artifact>
 						</configuration>
 					</execution>

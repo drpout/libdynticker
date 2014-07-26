@@ -1,4 +1,4 @@
-package com.github.andrefbsantos;
+package com.github.andrefbsantos.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -6,18 +6,25 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 
-public class Main {
+public abstract class Exchange {
 
-	public Main() {
-		// TODO Auto-generated constructor stub
+	String url;
+
+	public Exchange(String url) {
+		this.url = url;
 	}
 
-	public static void main(String[] args) {
+	public abstract List<Pair> getPairs();
+
+	public abstract String getLastValue();
+
+	protected void connect() {
 
 		try {
 
-			URL url = new URL("https://www.bitstamp.net/api/ticker/");
+			URL url = new URL(this.url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 			conn.setRequestProperty("Accept", "application/json");
@@ -33,21 +40,13 @@ public class Main {
 			String output;
 			System.out.println("Output from Server .... \n");
 			while ((output = br.readLine()) != null) {
-System.out.println(output);
+				System.out.println(output);
 			}
-
 			conn.disconnect();
-
 		} catch (MalformedURLException e) {
-
 			e.printStackTrace();
-
 		} catch (IOException e) {
-
 			e.printStackTrace();
-
 		}
-
 	}
-
 }
