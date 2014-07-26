@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.core;
+package com.github.andrefbsantos.libdynticker.core;
 
 import java.io.BufferedReader;
 import java.io.IOException;

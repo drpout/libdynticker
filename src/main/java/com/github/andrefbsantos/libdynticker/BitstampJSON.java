@@ -1,4 +1,4 @@
-package com.github.andrefbsantos;
+package com.github.andrefbsantos.libdynticker;
 
 public class BitstampJSON {
 	private String a;

@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.bitstamp;
+package com.github.andrefbsantos.libdynticker.bitstamp;
 
 import java.util.ArrayList;
 import java.util.List;

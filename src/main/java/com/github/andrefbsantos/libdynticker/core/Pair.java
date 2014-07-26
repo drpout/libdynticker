@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.core;
+package com.github.andrefbsantos.libdynticker.core;
 
 public class Pair {
 	private String coin;
