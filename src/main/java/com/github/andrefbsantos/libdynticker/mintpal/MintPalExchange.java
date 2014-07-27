@@ -19,6 +19,8 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 
 /**
+ * Specialization of Exchange for MintPal
+ * 
  * @author andre
  * 
  */
