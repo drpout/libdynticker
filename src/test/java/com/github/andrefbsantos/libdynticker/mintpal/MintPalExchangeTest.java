@@ -13,11 +13,10 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.ExchangeTest;
-import com.github.andrefbsantos.libdynticker.core.ExchangeException;
-import com.github.andrefbsantos.libdynticker.core.Pair;
+import com.github.andrefbsantos.libdynticker.ExchangeException;
+import com.github.andrefbsantos.libdynticker.Pair;
 
-public class MintPalExchangeTest extends ExchangeTest {
+public class MintPalExchangeTest {
 
 	private MintPalExchange testExchange;
 

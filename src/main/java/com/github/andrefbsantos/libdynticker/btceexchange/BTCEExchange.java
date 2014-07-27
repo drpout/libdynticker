@@ -11,8 +11,8 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import com.github.andrefbsantos.libdynticker.core.Exchange;
-import com.github.andrefbsantos.libdynticker.core.Pair;
+import com.github.andrefbsantos.libdynticker.Exchange;
+import com.github.andrefbsantos.libdynticker.Pair;
 
 public class BTCEExchange extends Exchange {
 

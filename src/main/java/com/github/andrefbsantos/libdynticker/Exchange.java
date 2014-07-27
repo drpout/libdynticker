@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.core;
+package com.github.andrefbsantos.libdynticker;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

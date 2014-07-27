@@ -17,15 +17,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.ExchangeTest;
-import com.github.andrefbsantos.libdynticker.core.ExchangeException;
-import com.github.andrefbsantos.libdynticker.core.Pair;
+import com.github.andrefbsantos.libdynticker.ExchangeException;
+import com.github.andrefbsantos.libdynticker.Pair;
 
 /**
  * @author andre
  * 
  */
-public class BitStampExchangeTest extends ExchangeTest {
+public class BitStampExchangeTest {
 
 	BitstampExchange testExchange;
 
@@ -58,7 +57,6 @@ public class BitStampExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Override
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs = testExchange.getPairs();
@@ -66,7 +64,6 @@ public class BitStampExchangeTest extends ExchangeTest {
 		Assert.assertEquals(pairs.get(0).getExchange(), "USD");
 	}
 
-	@Override
 	@Test
 	public void testParseJson() {
 		String coin = "BTC";
@@ -86,7 +83,6 @@ public class BitStampExchangeTest extends ExchangeTest {
 		}
 	}
 
-	@Override
 	@Test
 	public void testGetLastValue() {
 		try {

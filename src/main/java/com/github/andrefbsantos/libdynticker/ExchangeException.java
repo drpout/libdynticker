@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.core;
+package com.github.andrefbsantos.libdynticker;
 
 public class ExchangeException extends Exception {
 
