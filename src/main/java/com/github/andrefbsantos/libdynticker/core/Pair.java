@@ -39,4 +39,8 @@ public class Pair {
 		this.coin = coin;
 	}
 
+	public String toString() {
+		return this.coin + "/" + this.exchange;
+	}
+
 }

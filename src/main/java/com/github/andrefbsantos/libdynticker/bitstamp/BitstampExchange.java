@@ -1,14 +1,9 @@
 package com.github.andrefbsantos.libdynticker.bitstamp;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 import com.github.andrefbsantos.libdynticker.core.Exchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
@@ -23,7 +18,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BitstampExchange extends Exchange {
 
 	public BitstampExchange() {
-		super("https://www.bitstamp.net/api/ticker/");
+		super("https://www.bitstamp.net/api/ticker/", "last");
 	}
 
 	/**
@@ -38,12 +33,12 @@ public class BitstampExchange extends Exchange {
 	}
 
 	@Override
-	public String getLastValue(Pair pair) throws JsonProcessingException,
-			MalformedURLException, IOException {
-		ObjectMapper mapper = new ObjectMapper();
-		JsonNode node = mapper.readTree(new URL(this.getUrl()));
-		String lastValue = node.get("last").getTextValue();
-		System.out.println(lastValue);
-		return lastValue;
+	protected String prepareURL(String coin, String exchange) {
+		return url;
+	}
+
+	@Override
+	protected String parseJSON(JsonNode node, String coin, String exchange) {
+		return node.get(this.getLastValueProperty()).getTextValue();
 	}
 }

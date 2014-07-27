@@ -1,13 +1,15 @@
 /**
  * 
  */
-package com.github.andrefbsantos;
+package com.github.andrefbsantos.libdynticker.bitstamp;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -15,16 +17,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
+import com.github.andrefbsantos.libdynticker.ExchangeTest;
+import com.github.andrefbsantos.libdynticker.core.ExchangeException;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * @author andre
  * 
  */
-public class BitStampExchangeTest {
+public class BitStampExchangeTest extends ExchangeTest {
 
-	BitstampExchange bitstampExchange;
+	BitstampExchange testExchange;
 
 	/**
 	 * @throws java.lang.Exception
@@ -45,7 +48,7 @@ public class BitStampExchangeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		bitstampExchange = new BitstampExchange();
+		testExchange = new BitstampExchange();
 	}
 
 	/**
@@ -55,22 +58,40 @@ public class BitStampExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Override
 	@Test
 	public void testGetPairs() {
-		List<Pair> pairs = bitstampExchange.getPairs();
+		List<Pair> pairs = testExchange.getPairs();
 		Assert.assertEquals(pairs.get(0).getCoin(), "BTC");
 		Assert.assertEquals(pairs.get(0).getExchange(), "USD");
 	}
 
+	@Override
+	@Test
+	public void testParseJson() {
+		String coin = "BTC";
+		String exchange = "USD";
+		JsonNode node;
+		try {
+			node = (new ObjectMapper().readTree(new File("json/bitstamp.json")));
+			String lastValue = testExchange.parseJSON(node, coin, exchange);
+			Assert.assertEquals("600.15", lastValue);
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+			Assert.fail();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Override
 	@Test
 	public void testGetLastValue() {
 		try {
-			bitstampExchange.getLastValue(new Pair("BTC", "USD"));
-		} catch (JsonProcessingException e) {
-			Assert.fail();
-		} catch (MalformedURLException e) {
-			Assert.fail();
-		} catch (IOException e) {
+			testExchange.getLastValue(new Pair("BTC", "USD"));
+		} catch (ExchangeException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}
