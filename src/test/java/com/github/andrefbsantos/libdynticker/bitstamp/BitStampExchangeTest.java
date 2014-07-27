@@ -73,7 +73,8 @@ public class BitStampExchangeTest extends ExchangeTest {
 		String exchange = "USD";
 		JsonNode node;
 		try {
-			node = (new ObjectMapper().readTree(new File("json/bitstamp.json")));
+			node = (new ObjectMapper().readTree(new File(
+					"src/test/json/bitstamp.json")));
 			String lastValue = testExchange.parseJSON(node, coin, exchange);
 			Assert.assertEquals("600.15", lastValue);
 		} catch (JsonProcessingException e) {

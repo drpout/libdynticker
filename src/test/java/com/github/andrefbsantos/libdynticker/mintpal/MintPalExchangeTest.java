@@ -37,7 +37,7 @@ public class MintPalExchangeTest extends ExchangeTest {
 		JsonNode node;
 		try {
 			node = (new ObjectMapper().readTree(new File(
-					"json/mintpal-stats.json")));
+					"src/test/json/mintpal-stats.json")));
 			String lastValue = testExchange.parseJSON(node, coin, exchange);
 			System.out.println(lastValue);
 			Assert.assertEquals("0.00437000", lastValue);
