@@ -13,8 +13,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.ExchangeException;
-import com.github.andrefbsantos.libdynticker.Pair;
+import com.github.andrefbsantos.libdynticker.core.ExchangeException;
+import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class MintPalExchangeTest {
 

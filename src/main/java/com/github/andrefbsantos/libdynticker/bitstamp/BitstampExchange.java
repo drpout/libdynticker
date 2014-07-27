@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
 
-import com.github.andrefbsantos.libdynticker.Exchange;
-import com.github.andrefbsantos.libdynticker.Pair;
+import com.github.andrefbsantos.libdynticker.core.Exchange;
+import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * Specialization of exchange for Bitstamp.com
