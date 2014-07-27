@@ -3,8 +3,11 @@
  */
 package com.github.andrefbsantos;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
+import org.codehaus.jackson.JsonProcessingException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Assert;
@@ -12,15 +15,16 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.andrefbsantos.bitstamp.BitstampExchange;
-import com.github.andrefbsantos.core.Exchange;
-import com.github.andrefbsantos.core.Pair;
+import com.github.andrefbsantos.libdynticker.bitstamp.BitstampExchange;
+import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * @author andre
  * 
  */
 public class BitStampExchangeTest {
+
+	BitstampExchange bitstampExchange;
 
 	/**
 	 * @throws java.lang.Exception
@@ -41,6 +45,7 @@ public class BitStampExchangeTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		bitstampExchange = new BitstampExchange();
 	}
 
 	/**
@@ -52,9 +57,21 @@ public class BitStampExchangeTest {
 
 	@Test
 	public void testGetPairs() {
-		Exchange exchange = new BitstampExchange();
-		List<Pair> pairs = exchange.getPairs();
+		List<Pair> pairs = bitstampExchange.getPairs();
 		Assert.assertEquals(pairs.get(0).getCoin(), "BTC");
 		Assert.assertEquals(pairs.get(0).getExchange(), "USD");
+	}
+
+	@Test
+	public void testGetLastValue() {
+		try {
+			bitstampExchange.getLastValue(new Pair("BTC", "USD"));
+		} catch (JsonProcessingException e) {
+			Assert.fail();
+		} catch (MalformedURLException e) {
+			Assert.fail();
+		} catch (IOException e) {
+			Assert.fail();
+		}
 	}
 }
