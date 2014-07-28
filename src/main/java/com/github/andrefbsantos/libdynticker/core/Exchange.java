@@ -1,12 +1,13 @@
 package com.github.andrefbsantos.libdynticker.core;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonProcessingException;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Abstract template for Exchange
@@ -16,47 +17,28 @@ import java.util.List;
  */
 public abstract class Exchange {
 
-	String url;
+	protected String url;
+	protected String lastValueProperty;
 
-	public Exchange(String url) {
+	/**
+	 * 
+	 * @param url
+	 * @param lastValueProperty
+	 */
+	public Exchange(String url, String lastValueProperty) {
 		this.url = url;
+		this.lastValueProperty = lastValueProperty;
 	}
 
 	/**
 	 * 
 	 * @return Returns a list of pairs coin/exchange
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 * @throws JsonProcessingException
 	 */
-	public abstract List<Pair> getPairs();
-
-	protected void connect() {
-
-		try {
-
-			URL url = new URL(this.url);
-			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-			conn.setRequestMethod("GET");
-			conn.setRequestProperty("Accept", "application/json");
-
-			if (conn.getResponseCode() != 200) {
-				throw new RuntimeException("Failed : HTTP error code : "
-						+ conn.getResponseCode());
-			}
-
-			BufferedReader br = new BufferedReader(new InputStreamReader(
-					(conn.getInputStream())));
-
-			String output;
-			System.out.println("Output from Server .... \n");
-			while ((output = br.readLine()) != null) {
-				System.out.println(output);
-			}
-			conn.disconnect();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	public abstract List<Pair> getPairs() throws JsonProcessingException,
+			MalformedURLException, IOException;
 
 	/**
 	 * 
@@ -66,7 +48,83 @@ public abstract class Exchange {
 	 * 
 	 * @return Returns the last value of the exchange for a given pair
 	 *         coin/exchange
+	 * @throws ExchangeException
+	 * @throws IOException
+	 * @throws MalformedURLException
+	 * @throws JsonProcessingException
 	 */
-	public abstract float getLastValue(Pair pair);
+	public float getLastValue(Pair pair) throws ExchangeException {
+		return this.getLastValue(pair.getCoin(), pair.getExchange());
+	}
+
+	public float getLastValue(String coin, String exchange)
+			throws ExchangeException {
+
+		String apiURL = this.prepareURL(coin, exchange);
+		JsonNode node;
+
+		try {
+			node = (new ObjectMapper()).readTree(new URL(apiURL));
+			return this.parseJSON(node, coin, exchange);
+
+		} catch (JsonProcessingException e) {
+			throw new ExchangeException();
+		} catch (MalformedURLException e) {
+			throw new ExchangeException();
+		} catch (IOException e) {
+			throw new ExchangeException();
+		}
+
+	}
+
+	/**
+	 * 
+	 * @param node
+	 * @param exchange
+	 * @param coin
+	 * @return
+	 */
+	protected abstract String parseJSON(JsonNode node, String coin,
+			String exchange);
+
+	/**
+	 * 
+	 * @param exchange
+	 * @param coin
+	 * @return
+	 */
+	protected abstract String prepareURL(String coin, String exchange);
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getUrl() {
+		return url;
+	}
+
+	/**
+	 * 
+	 * @param url
+	 */
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public String getLastValueProperty() {
+		return lastValueProperty;
+	}
+
+	/**
+	 * 
+	 * @param lastValueProperty
+	 */
+	public void setLastValueProperty(String lastValueProperty) {
+		this.lastValueProperty = lastValueProperty;
+	}
 
 }
