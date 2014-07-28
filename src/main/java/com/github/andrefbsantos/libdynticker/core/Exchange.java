@@ -53,27 +53,19 @@ public abstract class Exchange {
 	 * @throws MalformedURLException
 	 * @throws JsonProcessingException
 	 */
-	public String getLastValue(Pair pair) throws ExchangeException {
+	public String getLastValue(Pair pair) throws JsonProcessingException,
+			MalformedURLException, IOException {
 		return this.getLastValue(pair.getCoin(), pair.getExchange());
 	}
 
 	public String getLastValue(String coin, String exchange)
-			throws ExchangeException {
+			throws JsonProcessingException, MalformedURLException, IOException {
 
 		String apiURL = this.prepareURL(coin, exchange);
 		JsonNode node;
 
-		try {
-			node = (new ObjectMapper()).readTree(new URL(apiURL));
-			return this.parseJSON(node, coin, exchange);
-
-		} catch (JsonProcessingException e) {
-			throw new ExchangeException();
-		} catch (MalformedURLException e) {
-			throw new ExchangeException();
-		} catch (IOException e) {
-			throw new ExchangeException();
-		}
+		node = (new ObjectMapper()).readTree(new URL(apiURL));
+		return this.parseJSON(node, coin, exchange);
 
 	}
 

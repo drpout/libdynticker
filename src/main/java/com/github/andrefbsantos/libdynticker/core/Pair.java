@@ -4,6 +4,11 @@ public class Pair {
 	private String coin;
 	private String exchange;
 
+	/**
+	 * 
+	 * @param coin
+	 * @param exchange
+	 */
 	public Pair(String coin, String exchange) {
 		this.coin = coin;
 		this.exchange = exchange;

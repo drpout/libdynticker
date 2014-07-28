@@ -16,12 +16,8 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class BTCEExchange extends Exchange {
 
-	private String pairsInfo;
-
 	public BTCEExchange() {
 		super("https://btc-e.com/api/3", "last");
-		url = "https://btc-e.com/api/3";
-		pairsInfo = "https://btc-e.com/api/3/info";
 	}
 
 	@Override

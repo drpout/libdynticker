@@ -1,5 +1,3 @@
-package com.github.andrefbsantos.libdynticker.mintpal;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,29 +11,34 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.andrefbsantos.libdynticker.btceexchange.BTCEExchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * @author andre
  * 
  */
-public class MintPalExchangeTest {
+public class BTCEExchangeTest {
 
-	private MintPalExchange testExchange;
+	BTCEExchange testExchange;
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MintPalExchange();
+		testExchange = new BTCEExchange();
+
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * 
-	 */
-	@Test
+	// @Test
 	public void testParseJson() {
 		String coin = "XMR";
 		String exchange = "BTC";
@@ -72,7 +75,7 @@ public class MintPalExchangeTest {
 
 	}
 
-	@Test
+	// @Test
 	public void testGetLastValue() {
 		try {
 			testExchange.getLastValue(new Pair("XMR", "BTC"));

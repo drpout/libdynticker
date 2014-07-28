@@ -5,19 +5,17 @@ package com.github.andrefbsantos.libdynticker.bitstamp;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.core.ExchangeException;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
@@ -27,20 +25,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BitStampExchangeTest {
 
 	BitstampExchange testExchange;
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -75,10 +59,8 @@ public class BitStampExchangeTest {
 			String lastValue = testExchange.parseJSON(node, coin, exchange);
 			Assert.assertEquals("600.15", lastValue);
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
 			Assert.fail();
 		} catch (IOException e) {
-			e.printStackTrace();
 			Assert.fail();
 		}
 	}
@@ -87,9 +69,13 @@ public class BitStampExchangeTest {
 	public void testGetLastValue() {
 		try {
 			testExchange.getLastValue(new Pair("BTC", "USD"));
-		} catch (ExchangeException e) {
-			e.printStackTrace();
+		} catch (JsonProcessingException e) {
+			Assert.fail();
+		} catch (MalformedURLException e) {
+			Assert.fail();
+		} catch (IOException e) {
 			Assert.fail();
 		}
+
 	}
 }
