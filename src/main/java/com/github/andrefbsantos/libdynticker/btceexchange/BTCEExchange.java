@@ -33,11 +33,10 @@ public class BTCEExchange extends Exchange {
 		while (elements.hasNext()) {
 			String element = elements.next();
 			String[] split = element.split("_");
-			String coin = split[0];
-			String exchange = split[0];
+			String coin = split[0].toUpperCase();
+			String exchange = split[0].toUpperCase();
 			pairs.add(new Pair(coin, exchange));
 		}
-
 		return pairs;
 	}
 

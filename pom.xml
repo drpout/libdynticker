@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.github.andrefbsantos</groupId>
+	<groupId>com.github.andrefbsantos.libdynticker</groupId>
 	<artifactId>libdynticker</artifactId>
 	<version>0</version>
 	<packaging>jar</packaging>
@@ -86,7 +86,6 @@
 
 	<build>
 		<plugins>
-
 			<!-- Generates a source code JAR during package -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
