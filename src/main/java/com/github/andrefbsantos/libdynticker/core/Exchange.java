@@ -67,6 +67,6 @@ public abstract class Exchange {
 	 * @return Returns the last value of the exchange for a given pair
 	 *         coin/exchange
 	 */
-	public abstract String getLastValue(Pair pair);
+	public abstract float getLastValue(Pair pair);
 
 }
