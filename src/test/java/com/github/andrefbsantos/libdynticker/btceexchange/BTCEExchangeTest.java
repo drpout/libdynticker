@@ -1,3 +1,5 @@
+package com.github.andrefbsantos.libdynticker.btceexchange;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
