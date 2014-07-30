@@ -1,9 +1,12 @@
 package com.github.andrefbsantos.libdynticker.bitstamp;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 import com.github.andrefbsantos.libdynticker.core.Exchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
@@ -24,13 +27,18 @@ public class BitstampExchange extends Exchange {
 		return pairs;
 	}
 
-	@Override
 	protected String getTickerURL(Pair pair) {
 		return "https://www.bitstamp.net/api/ticker/";
 	}
 
-	@Override
 	protected String parseJSON(JsonNode node, Pair pair) {
 		return node.get("last").getTextValue();
 	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+	}
+
+
 }

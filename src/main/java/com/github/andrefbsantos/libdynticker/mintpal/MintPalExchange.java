@@ -47,14 +47,17 @@ public class MintPalExchange extends Exchange {
 		return pairs;
 	}
 
-	@Override
 	protected String getTickerURL(Pair pair) {
 		return "https://api.mintpal.com/v2/market/stats/" + pair.getCoin() + "/"
 				+ pair.getExchange();
 	}
 
-	@Override
 	protected String parseJSON(JsonNode node, Pair pair) {
 		return node.get("data").get("last_price").getTextValue();
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 }

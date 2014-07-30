@@ -2,12 +2,7 @@ package com.github.andrefbsantos.libdynticker.core;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.List;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Abstract template for Exchange
@@ -42,10 +37,16 @@ public abstract class Exchange {
 	 * @throws JsonProcessingException
 	 */
 	public double getLastValue(Pair pair) throws IOException {
-		String apiURL = this.getTickerURL(pair);
-		JsonNode node = (new ObjectMapper()).readTree(new URL(apiURL));
-		return Double.parseDouble(this.parseJSON(node, pair));
+		return Double.parseDouble(this.getTicker(pair));
 	}
+
+	/**
+	 * 
+	 * @param pair
+	 * @return
+	 * @throws IOException
+	 */
+	protected abstract String getTicker(Pair pair) throws IOException;
 
 	/**
 	 * Returns the url of a ticker for a given pair
@@ -53,7 +54,7 @@ public abstract class Exchange {
 	 * @param pair
 	 * @return
 	 */
-	protected abstract String getTickerURL(Pair pair);
+	//protected abstract String getTickerURL(Pair pair);
 	
 	/**
 	 * Parses a Json and extracts its last value
@@ -61,7 +62,10 @@ public abstract class Exchange {
 	 * @param node
 	 * @param pair
 	 * @return
+	 * @throws IOException 
+	 * @throws MalformedURLException 
+	 * @throws JsonProcessingException 
 	 */
-	protected abstract String parseJSON(JsonNode node, Pair pair);
+	//protected abstract String parseJSON(JsonNode node, Pair pair) throws IOException;
 
 }

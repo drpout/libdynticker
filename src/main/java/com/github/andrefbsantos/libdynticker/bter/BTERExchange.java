@@ -47,12 +47,10 @@ public class BTERExchange extends Exchange{
 		return pairs;
 	}
 
-	@Override
 	protected String getTickerURL(Pair pair) {
 		return "http://data.bter.com/api/1/ticker/"+pair.getCoin()+"_"+pair.getExchange();
 	}
 
-	@Override
 	protected String parseJSON(JsonNode node, Pair pair) {
 		return node.get("last").toString();
 	}
@@ -70,6 +68,13 @@ public class BTERExchange extends Exchange{
 		return Double.parseDouble(this.parseJSON(node, pair));
 	}
 
-
-
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		URL url = new URL(this.getTickerURL(pair));
+		URLConnection uc = url.openConnection();
+		// BTER doesn't awnser calls from java, this property masks it as a browser call 
+        uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+        uc.connect();		
+		return parseJSON(new ObjectMapper().readTree(uc.getInputStream()), pair);
+	}
 }

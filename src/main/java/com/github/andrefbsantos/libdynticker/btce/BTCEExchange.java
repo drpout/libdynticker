@@ -40,14 +40,17 @@ public class BTCEExchange extends Exchange {
 		return pairs;
 	}
 
-	@Override
 	protected String getTickerURL(Pair pair) {
 		return "https://btc-e.com/api/3/ticker/"+pair.getCoin().toLowerCase()+"_"+pair.getExchange().toLowerCase();
 	}
 
-	@Override
 	protected String parseJSON(JsonNode node, Pair pair) {
 		return node.get(pair.getCoin().toLowerCase()+"_"+pair.getExchange().toLowerCase()).get("last").toString();
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 
 }

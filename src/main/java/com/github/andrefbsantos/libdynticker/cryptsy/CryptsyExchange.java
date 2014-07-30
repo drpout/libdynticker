@@ -25,7 +25,7 @@ public class CryptsyExchange extends Exchange {
 		JsonNode markets = (new ObjectMapper()).readTree(new URL("http://pubapi.cryptsy.com/api.php?method=marketdatav2")).get("return").get("markets");
 
 		Iterator<String> fieldNames = markets.getFieldNames();
-		
+
 		while (fieldNames.hasNext()) {
 			String fieldName = fieldNames.next();
 			String coin = markets.get(fieldName).get("primarycode").getTextValue();
@@ -36,15 +36,16 @@ public class CryptsyExchange extends Exchange {
 		return pairs;
 	}
 
-	@Override
 	protected String getTickerURL(Pair pair) {
 		return "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" + pair.getMarket();
 	}
 
-	@Override
 	protected String parseJSON(JsonNode node, Pair pair) {
 		return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
 	}
 
-
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+	}
 }
