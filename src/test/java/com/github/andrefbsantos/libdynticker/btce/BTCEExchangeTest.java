@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.mintpal;
+package com.github.andrefbsantos.libdynticker.btce;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,32 +17,36 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  * @author andre
  * 
  */
-public class MintPalExchangeTest {
+public class BTCEExchangeTest {
 
-	private MintPalExchange testExchange;
+	BTCEExchange testExchange;
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MintPalExchange();
+		testExchange = new BTCEExchange();
+
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * 
-	 */
-	@Test
+	 @Test
 	public void testParseJson() {
-		JsonNode node;
 		try {
-			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/mintpal-stats.json")));
-			Pair pair = new Pair("XMR","BTC");
+			Pair pair = new Pair("BTC", "USD");
+			JsonNode node = (new ObjectMapper().readTree(new File(
+					"src/test/json/btce-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00437000", lastValue);
+			Assert.assertEquals("575", lastValue);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 
@@ -52,28 +56,29 @@ public class MintPalExchangeTest {
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
-			pairs = testExchange.getPairs();
-			Assert.assertNotEquals(0, pairs.size());
-			Assert.assertTrue(pairs.contains(new Pair("AUR", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			pairs = testExchange.getPairs();	
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "RUR")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("TRC", "BTC")));	
 			
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-			
+
 		} catch (IOException e) {
 			Assert.fail();
 		}
 
 	}
 
-	@Test
+	 @Test
 	public void testGetLastValue() {
 		try {
-			float lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
+			float lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}
 
 }
-

@@ -17,14 +17,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BitstampExchange extends Exchange {
 
-	public BitstampExchange() {
-		super("https://www.bitstamp.net/api/ticker/", "last");
-	}
-
-	/**
-	 * 
-	 * @return Returns a list of pairs coin/exchange
-	 */
 	@Override
 	public List<Pair> getPairs() {
 		List<Pair> pairs = new ArrayList<Pair>();
@@ -33,12 +25,12 @@ public class BitstampExchange extends Exchange {
 	}
 
 	@Override
-	protected String prepareURL(String coin, String exchange) {
-		return url;
+	protected String getTickerURL(Pair pair) {
+		return "https://www.bitstamp.net/api/ticker/";
 	}
 
 	@Override
-	protected String parseJSON(JsonNode node, String coin, String exchange) {
-		return node.get(this.getLastValueProperty()).getTextValue();
+	protected String parseJSON(JsonNode node, Pair pair) {
+		return node.get("last").getTextValue();
 	}
 }

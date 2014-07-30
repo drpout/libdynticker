@@ -17,19 +17,6 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public abstract class Exchange {
 
-	protected String url;
-	protected String lastValueProperty;
-
-	/**
-	 * 
-	 * @param url
-	 * @param lastValueProperty
-	 */
-	public Exchange(String url, String lastValueProperty) {
-		this.url = url;
-		this.lastValueProperty = lastValueProperty;
-	}
-
 	/**
 	 * 
 	 * @return Returns a list of pairs coin/exchange
@@ -37,8 +24,7 @@ public abstract class Exchange {
 	 * @throws MalformedURLException
 	 * @throws JsonProcessingException
 	 */
-	public abstract List<Pair> getPairs() throws JsonProcessingException,
-			MalformedURLException, IOException;
+	public abstract List<Pair> getPairs() throws IOException;
 
 	/**
 	 * 
@@ -54,63 +40,26 @@ public abstract class Exchange {
 	 * @throws JsonProcessingException
 	 */
 	public float getLastValue(Pair pair) throws IOException {
-		return this.getLastValue(pair.getCoin(), pair.getExchange());
-	}
-
-	public float getLastValue(String coin, String exchange) throws IOException {
-		String apiURL = this.prepareURL(coin, exchange);
+		String apiURL = this.getTickerURL(pair);
 		JsonNode node = (new ObjectMapper()).readTree(new URL(apiURL));
-		return Float.parseFloat(this.parseJSON(node, coin, exchange));
+		return Float.parseFloat(this.parseJSON(node, pair));
 	}
 
 	/**
+	 * Returns the url of a ticker for a given pair
+	 * 
+	 * @param pair
+	 * @return
+	 */
+	protected abstract String getTickerURL(Pair pair);
+	
+	/**
+	 * Parses a Json and extracts its last value
 	 * 
 	 * @param node
-	 * @param exchange
-	 * @param coin
+	 * @param pair
 	 * @return
 	 */
-	protected abstract String parseJSON(JsonNode node, String coin,
-			String exchange);
-
-	/**
-	 * 
-	 * @param exchange
-	 * @param coin
-	 * @return
-	 */
-	protected abstract String prepareURL(String coin, String exchange);
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getUrl() {
-		return url;
-	}
-
-	/**
-	 * 
-	 * @param url
-	 */
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public String getLastValueProperty() {
-		return lastValueProperty;
-	}
-
-	/**
-	 * 
-	 * @param lastValueProperty
-	 */
-	public void setLastValueProperty(String lastValueProperty) {
-		this.lastValueProperty = lastValueProperty;
-	}
+	protected abstract String parseJSON(JsonNode node, Pair pair);
 
 }

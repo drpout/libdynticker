@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.mintpal;
+package com.github.andrefbsantos.libdynticker.poloniex;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,35 +13,30 @@ import org.junit.Test;
 
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-/**
- * @author andre
- * 
- */
-public class MintPalExchangeTest {
-
-	private MintPalExchange testExchange;
+public class PoloniexTest {
+	
+	PoloniexExchange testExchange;
 
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MintPalExchange();
+		testExchange = new PoloniexExchange();
 	}
 
 	@After
 	public void tearDown() throws Exception {
 	}
 
-	/**
-	 * 
-	 */
 	@Test
 	public void testParseJson() {
+
 		JsonNode node;
 		try {
 			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/mintpal-stats.json")));
+					"src/test/json/poloniex-ticker.json")));
+			
 			Pair pair = new Pair("XMR","BTC");
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00437000", lastValue);
+			String lastValue = testExchange.parseJSON(node, pair );
+			Assert.assertEquals("0.00452783", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}
@@ -54,8 +49,8 @@ public class MintPalExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertNotEquals(0, pairs.size());
-			Assert.assertTrue(pairs.contains(new Pair("AUR", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
 			
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 			
@@ -76,4 +71,3 @@ public class MintPalExchangeTest {
 	}
 
 }
-

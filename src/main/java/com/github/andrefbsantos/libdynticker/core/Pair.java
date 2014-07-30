@@ -3,6 +3,7 @@ package com.github.andrefbsantos.libdynticker.core;
 public class Pair {
 	private String coin;
 	private String exchange;
+	private String market;
 
 	/**
 	 * 
@@ -12,6 +13,23 @@ public class Pair {
 	public Pair(String coin, String exchange) {
 		this.coin = coin;
 		this.exchange = exchange;
+	}
+	
+	/**
+	 * 
+	 * @param coin
+	 * @param exchange
+	 * @param market
+	 */
+	public Pair(String coin, String exchange, String market) {
+		this.coin = coin;
+		this.exchange = exchange;
+		this.market = market;
+	}
+	
+	@Override
+	public boolean equals(Object o){
+		return ((Pair) o).getCoin().equals(this.coin) && ((Pair) o).getExchange().equals(this.exchange); 
 	}
 
 	/**
@@ -46,6 +64,14 @@ public class Pair {
 
 	public String toString() {
 		return this.coin + "/" + this.exchange;
+	}
+
+	public String getMarket() {
+		return market;
+	}
+
+	public void setMarket(String market) {
+		this.market = market;
 	}
 
 }
