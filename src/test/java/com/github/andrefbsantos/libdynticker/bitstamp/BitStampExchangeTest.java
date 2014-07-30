@@ -54,7 +54,7 @@ public class BitStampExchangeTest {
 			JsonNode node;
 
 			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/bitstamp.json")));
+					"src/test/json/bitstamp-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("600.15", lastValue);
 		} catch (IOException e) {
@@ -65,7 +65,7 @@ public class BitStampExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			float lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
+			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			Assert.fail();

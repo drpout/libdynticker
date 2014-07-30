@@ -28,7 +28,7 @@ public class BTERExchange extends Exchange{
 		URL url = new URL("http://data.bter.com/api/1/pairs");
 		URLConnection uc = url.openConnection();
 		
-		// BTER doesn't awnser calls from java, this property masks it as a browser call 
+		// BTER doesn't answer calls from java, this property masks it as a browser call 
         uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 
         uc.connect();
@@ -58,7 +58,7 @@ public class BTERExchange extends Exchange{
 	}
 	
 	@Override
-	public float getLastValue(Pair pair) throws IOException {
+	public double getLastValue(Pair pair) throws IOException {
 		URL url = new URL(this.getTickerURL(pair));
 		URLConnection uc = url.openConnection();
 		
@@ -67,7 +67,7 @@ public class BTERExchange extends Exchange{
 
         uc.connect();
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
-		return Float.parseFloat(this.parseJSON(node, pair));
+		return Double.parseDouble(this.parseJSON(node, pair));
 	}
 
 

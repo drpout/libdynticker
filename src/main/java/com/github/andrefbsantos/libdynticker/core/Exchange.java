@@ -33,16 +33,18 @@ public abstract class Exchange {
 	 *            of exchange/coin
 	 * 
 	 * @return Returns the last value of the exchange for a given pair
-	 *         coin/exchange
+	 *         coin/exchange. We have to use a double because some exchanges
+	 *         measure values in satoshis (10^-8). A float has just 24 bits 
+	 *         of precision which is not enough to represent 8 decimal places.
 	 * @throws ExchangeException
 	 * @throws IOException
 	 * @throws MalformedURLException
 	 * @throws JsonProcessingException
 	 */
-	public float getLastValue(Pair pair) throws IOException {
+	public double getLastValue(Pair pair) throws IOException {
 		String apiURL = this.getTickerURL(pair);
 		JsonNode node = (new ObjectMapper()).readTree(new URL(apiURL));
-		return Float.parseFloat(this.parseJSON(node, pair));
+		return Double.parseDouble(this.parseJSON(node, pair));
 	}
 
 	/**

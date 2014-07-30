@@ -37,7 +37,7 @@ public class BTCEExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
-	 @Test
+	@Test
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
@@ -61,7 +61,7 @@ public class BTCEExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "RUR")));
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("TRC", "BTC")));	
-			
+
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
 		} catch (IOException e) {
@@ -70,10 +70,10 @@ public class BTCEExchangeTest {
 
 	}
 
-	 @Test
+	@Test
 	public void testGetLastValue() {
 		try {
-			float lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
+			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

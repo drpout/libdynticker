@@ -67,7 +67,7 @@ public class CryptsyTest {
 		@Test
 		public void testGetLastValue() {
 			try {
-				float lastValue = testExchange.getLastValue(new Pair("BTC", "USD", "2"));
+				double lastValue = testExchange.getLastValue(new Pair("BTC", "USD", "2"));
 				Assert.assertNotNull(lastValue);
 			} catch (IOException e) {
 				e.printStackTrace();

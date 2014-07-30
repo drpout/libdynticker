@@ -78,7 +78,7 @@ public class BTERExchangeTest {
 		@Test
 		public void testGetLastValue() {
 			try {
-				float lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
+				double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
 				Assert.assertNotNull(lastValue);
 			} catch (IOException e) {
 				e.printStackTrace();

@@ -63,7 +63,7 @@ public class PoloniexTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			float lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
+			double lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			Assert.fail();

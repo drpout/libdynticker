@@ -38,7 +38,7 @@ public class MintPalExchangeTest {
 		JsonNode node;
 		try {
 			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/mintpal-stats.json")));
+					"src/test/json/mintpal-ticker.json")));
 			Pair pair = new Pair("XMR","BTC");
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.00437000", lastValue);
@@ -68,7 +68,7 @@ public class MintPalExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			float lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
+			double lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			Assert.fail();
