@@ -11,15 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class PoloniexTest {
-	
-	PoloniexExchange testExchange;
+public class PoloniexTest extends ExchangeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new PoloniexExchange();
+		testExchange = new PoloniexExchange(System.currentTimeMillis());
 	}
 
 	@After
@@ -31,11 +30,10 @@ public class PoloniexTest {
 
 		JsonNode node;
 		try {
-			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/poloniex-ticker.json")));
-			
-			Pair pair = new Pair("XMR","BTC");
-			String lastValue = testExchange.parseJSON(node, pair );
+			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
+
+			Pair pair = new Pair("XMR", "BTC");
+			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.00452783", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
@@ -51,9 +49,9 @@ public class PoloniexTest {
 			Assert.assertNotEquals(0, pairs.size());
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
-			
+
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-			
+
 		} catch (IOException e) {
 			Assert.fail();
 		}

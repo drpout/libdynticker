@@ -12,15 +12,32 @@ import org.codehaus.jackson.map.ObjectMapper;
 import com.github.andrefbsantos.libdynticker.core.Exchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-
 /**
  * @author andre
  *
  */
-public class PoloniexExchange extends Exchange{
+public class PoloniexExchange extends Exchange {
+
+	public PoloniexExchange(long experiedPeriod) {
+		super(experiedPeriod);
+	}
+
+	protected String getTickerURL(Pair pair) {
+		return "https://poloniex.com/public?command=returnTicker";
+	}
 
 	@Override
-	public List<Pair> getPairs() throws IOException {
+	public String parseJSON(JsonNode node, Pair pair) {
+		return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").getTextValue();
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+	}
+
+	@Override
+	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://poloniex.com/public?command=returnTicker")).getFieldNames();
@@ -35,17 +52,5 @@ public class PoloniexExchange extends Exchange{
 
 		return pairs;
 	}
-
-	@Override
-	protected String getTickerURL(Pair pair) {
-		return "https://poloniex.com/public?command=returnTicker";
-	}
-
-	@Override
-	protected String parseJSON(JsonNode node, Pair pair) {
-		return node.get(pair.getExchange()+"_"+pair.getCoin()).get("last").getTextValue();
-	}
-
-	
 
 }

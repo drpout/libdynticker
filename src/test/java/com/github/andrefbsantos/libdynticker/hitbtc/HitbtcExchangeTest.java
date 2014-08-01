@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.btce;
+package com.github.andrefbsantos.libdynticker.hitbtc;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,17 +14,13 @@ import org.junit.Test;
 import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-/**
- * @author andre
- *
- */
-public class BTCEExchangeTest extends ExchangeTest {
+public class HitbtcExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTCEExchange(System.currentTimeMillis());
+		testExchange = new HitbtcExchange(System.currentTimeMillis());
 
 	}
 
@@ -38,10 +34,10 @@ public class BTCEExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btce-ticker.json")));
+			Pair pair = new Pair("BTC", "EUR");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/hitbtc-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("575", lastValue);
+			Assert.assertEquals("431.05", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -54,10 +50,8 @@ public class BTCEExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "RUR")));
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("TRC", "BTC")));
-
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
 		} catch (IOException e) {
@@ -68,7 +62,7 @@ public class BTCEExchangeTest extends ExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
+			double lastValue = testExchange.getLastValue(new Pair("BTC", "EUR"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
