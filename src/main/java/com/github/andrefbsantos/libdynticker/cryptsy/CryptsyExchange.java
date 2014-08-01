@@ -18,8 +18,27 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class CryptsyExchange extends Exchange {
 
+	public CryptsyExchange(long experiedPeriod) {
+		super(experiedPeriod);
+		// TODO Auto-generated constructor stub
+	}
+
+	protected String getTickerURL(Pair pair) {
+		return "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" + pair.getMarket();
+	}
+
 	@Override
-	public List<Pair> getPairs() throws IOException {
+	public String parseJSON(JsonNode node, Pair pair) {
+		return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+	}
+
+	@Override
+	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 
 		JsonNode markets = (new ObjectMapper()).readTree(new URL("http://pubapi.cryptsy.com/api.php?method=marketdatav2")).get("return").get("markets");
@@ -31,21 +50,8 @@ public class CryptsyExchange extends Exchange {
 			String coin = markets.get(fieldName).get("primarycode").getTextValue();
 			String exchange = markets.get(fieldName).get("secondarycode").getTextValue();
 			String market = markets.get(fieldName).get("marketid").getTextValue();
-			pairs.add(new Pair(coin, exchange,market));
+			pairs.add(new Pair(coin, exchange, market));
 		}
 		return pairs;
-	}
-
-	protected String getTickerURL(Pair pair) {
-		return "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" + pair.getMarket();
-	}
-
-	protected String parseJSON(JsonNode node, Pair pair) {
-		return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
-	}
-
-	@Override
-	protected String getTicker(Pair pair) throws IOException {
-		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 }

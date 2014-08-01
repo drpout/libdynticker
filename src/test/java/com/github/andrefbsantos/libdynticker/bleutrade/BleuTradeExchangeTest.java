@@ -1,8 +1,7 @@
-package com.github.andrefbsantos.libdynticker.bter;
+package com.github.andrefbsantos.libdynticker.bleutrade;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
@@ -16,67 +15,52 @@ import org.junit.Test;
 import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class BTERExchangeTest extends ExchangeTest {
+public class BleuTradeExchangeTest extends ExchangeTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTERExchange(System.currentTimeMillis());
+		testExchange = new BleuTradeExchange(System.currentTimeMillis());
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@After
 	public void tearDown() throws Exception {
 	}
 
 	@Test
-	public void testGetPairs() {
-		List<Pair> pairs;
-
+	public void testGetLastValue() {
 		try {
-			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "CNY")));
-
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch (JsonProcessingException e) {
-			e.printStackTrace();
-			Assert.fail();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-			Assert.fail();
+			double lastValue = testExchange.getLastValue(new Pair("LTC", "BTC"));
+			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
+	}
 
+	@Test
+	public void testGetPairs() {
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (JsonProcessingException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
 	}
 
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node;
-
-			node = (new ObjectMapper().readTree(new File("src/test/json/bter-ticker.json")));
+			Pair pair = new Pair("LTC", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bleutrade-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("605", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
+			Assert.assertEquals("0.01218180", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

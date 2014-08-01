@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.github.andrefbsantos.libdynticker.bitstamp;
 
@@ -14,22 +14,21 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * @author andre
- * 
+ *
  */
-public class BitStampExchangeTest {
-
-	BitstampExchange testExchange;
+public class BitStampExchangeTest extends ExchangeTest {
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BitstampExchange();
+		testExchange = new BitstampExchange(System.currentTimeMillis());
 	}
 
 	/**
@@ -41,20 +40,23 @@ public class BitStampExchangeTest {
 
 	@Test
 	public void testGetPairs() {
-		List<Pair> pairs = testExchange.getPairs();
-		Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-		Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail(e.toString());
+		}
 	}
 
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC","USD");
+			Pair pair = new Pair("BTC", "USD");
 			JsonNode node;
-
-			node = (new ObjectMapper().readTree(new File(
-					"src/test/json/bitstamp-ticker.json")));
+			node = (new ObjectMapper().readTree(new File("src/test/json/bitstamp-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("600.15", lastValue);
 		} catch (IOException e) {
@@ -70,6 +72,5 @@ public class BitStampExchangeTest {
 		} catch (IOException e) {
 			Assert.fail();
 		}
-
 	}
 }

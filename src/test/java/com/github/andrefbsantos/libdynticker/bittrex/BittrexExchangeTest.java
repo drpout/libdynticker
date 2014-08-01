@@ -1,6 +1,5 @@
 package com.github.andrefbsantos.libdynticker.bittrex;
 
-
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -12,15 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-
-public class BittrexExchangeTest {
-	BittrexExchange testExchange;
+public class BittrexExchangeTest extends ExchangeTest {
 
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BittrexExchange();
+		testExchange = new BittrexExchange(System.currentTimeMillis());
 	}
 
 	@After
@@ -44,9 +42,9 @@ public class BittrexExchangeTest {
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
-			pairs = testExchange.getPairs();	
+			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));	
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
@@ -56,7 +54,7 @@ public class BittrexExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "LTC"));
+			double lastValue = testExchange.getLastValue(new Pair("LTC", "BTC"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -11,18 +11,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class HitbtcExchangeTest {
-
-	HitbtcExchange testExchange;
-
+public class HitbtcExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HitbtcExchange();
+		testExchange = new HitbtcExchange(System.currentTimeMillis());
 
 	}
 
@@ -37,8 +35,7 @@ public class HitbtcExchangeTest {
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "EUR");
-			JsonNode node = (new ObjectMapper().readTree(new File(
-					"src/test/json/hitbtc-ticker.json")));
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/hitbtc-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("431.05", lastValue);
 		} catch (IOException e) {
@@ -51,7 +48,7 @@ public class HitbtcExchangeTest {
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
-			pairs = testExchange.getPairs();	
+			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));

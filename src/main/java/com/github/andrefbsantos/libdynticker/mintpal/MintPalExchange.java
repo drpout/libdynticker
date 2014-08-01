@@ -13,29 +13,40 @@ import com.github.andrefbsantos.libdynticker.core.Exchange;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
- * 
+ *
  */
 
 /**
  * Specialization of Exchange for MintPal
- * 
+ *
  * @author andre
- * 
+ *
  */
 public class MintPalExchange extends Exchange {
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairs()
-	 */
+	public MintPalExchange(long experiedPeriod) {
+		super(experiedPeriod);
+	}
+
+	protected String getTickerURL(Pair pair) {
+		return "https://api.mintpal.com/v2/market/stats/" + pair.getCoin() + "/" + pair.getExchange();
+	}
+
 	@Override
-	public List<Pair> getPairs() throws IOException {
+	public String parseJSON(JsonNode node, Pair pair) {
+		return node.get("data").get("last_price").getTextValue();
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+	}
+
+	@Override
+	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 
-		Iterator<JsonNode> elements = (new ObjectMapper())
-				.readTree(new URL("https://api.mintpal.com/v2/market/summary/"))
-				.get("data").getElements();
+		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://api.mintpal.com/v2/market/summary/")).get("data").getElements();
 
 		while (elements.hasNext()) {
 			JsonNode element = elements.next();
@@ -45,19 +56,5 @@ public class MintPalExchange extends Exchange {
 		}
 
 		return pairs;
-	}
-
-	protected String getTickerURL(Pair pair) {
-		return "https://api.mintpal.com/v2/market/stats/" + pair.getCoin() + "/"
-				+ pair.getExchange();
-	}
-
-	protected String parseJSON(JsonNode node, Pair pair) {
-		return node.get("data").get("last_price").getTextValue();
-	}
-
-	@Override
-	protected String getTicker(Pair pair) throws IOException {
-		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 }

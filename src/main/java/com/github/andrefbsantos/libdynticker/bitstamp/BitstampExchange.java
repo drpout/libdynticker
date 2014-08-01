@@ -13,25 +13,30 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 /**
  * Specialization of exchange for Bitstamp.com
- * 
+ *
  * @author andre
- * 
- * 
+ *
+ *
  */
 public class BitstampExchange extends Exchange {
 
-	@Override
-	public List<Pair> getPairs() {
-		List<Pair> pairs = new ArrayList<Pair>();
-		pairs.add(new Pair("BTC", "USD"));
-		return pairs;
+	public BitstampExchange(long experiedPeriod) {
+		super(experiedPeriod);
 	}
+
+	// @Override
+	// public List<Pair> getPairs() {
+	// List<Pair> pairs = new ArrayList<Pair>();
+	// pairs.add(new Pair("BTC", "USD"));
+	// return pairs;
+	// }
 
 	protected String getTickerURL(Pair pair) {
 		return "https://www.bitstamp.net/api/ticker/";
 	}
 
-	protected String parseJSON(JsonNode node, Pair pair) {
+	@Override
+	public String parseJSON(JsonNode node, Pair pair) {
 		return node.get("last").getTextValue();
 	}
 
@@ -40,5 +45,10 @@ public class BitstampExchange extends Exchange {
 		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 
-
+	@Override
+	protected List<Pair> getPairsFromAPI() {
+		List<Pair> pairs = new ArrayList<Pair>();
+		pairs.add(new Pair("BTC", "USD"));
+		return pairs;
+	}
 }
