@@ -21,14 +21,16 @@ public class BTERExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTERExchange(System.currentTimeMillis());
+		testExchange = new BTERExchange();
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

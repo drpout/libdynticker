@@ -21,11 +21,13 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class MintPalExchangeTest extends ExchangeTest {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MintPalExchange(System.currentTimeMillis());
+		testExchange = new MintPalExchange();
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

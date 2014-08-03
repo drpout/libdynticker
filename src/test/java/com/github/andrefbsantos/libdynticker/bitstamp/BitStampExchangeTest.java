@@ -26,14 +26,16 @@ public class BitStampExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BitstampExchange(System.currentTimeMillis());
+		testExchange = new BitstampExchange();
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

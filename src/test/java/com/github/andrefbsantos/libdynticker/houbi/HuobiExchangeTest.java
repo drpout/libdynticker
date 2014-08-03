@@ -17,11 +17,13 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class HuobiExchangeTest extends ExchangeTest {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HuobiExchange(System.currentTimeMillis());
+		testExchange = new HuobiExchange();
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

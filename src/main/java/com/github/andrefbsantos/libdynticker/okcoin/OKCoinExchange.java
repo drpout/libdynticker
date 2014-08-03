@@ -28,6 +28,10 @@ public class OKCoinExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public OKCoinExchange() {
+		super();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

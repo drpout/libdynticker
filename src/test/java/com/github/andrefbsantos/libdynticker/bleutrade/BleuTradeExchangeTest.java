@@ -17,11 +17,13 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class BleuTradeExchangeTest extends ExchangeTest {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BleuTradeExchange(System.currentTimeMillis());
+		testExchange = new BleuTradeExchange();
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

@@ -26,6 +26,10 @@ public class HitbtcExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public HitbtcExchange() {
+		super();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *

@@ -23,6 +23,10 @@ public class BTERExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public BTERExchange() {
+		super();
+	}
+
 	protected String getTickerURL(Pair pair) {
 		return "http://data.bter.com/api/1/ticker/" + pair.getCoin() + "_" + pair.getExchange();
 	}

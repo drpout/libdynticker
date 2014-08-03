@@ -18,6 +18,10 @@ public class BTCChinaExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public BTCChinaExchange() {
+		super();
+	}
+
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();

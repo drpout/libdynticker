@@ -17,11 +17,13 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class OKCoinExchangeTest extends ExchangeTest {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new OKCoinExchange(System.currentTimeMillis());
+		testExchange = new OKCoinExchange();
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

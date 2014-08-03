@@ -18,15 +18,17 @@ public class HitbtcExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HitbtcExchange(System.currentTimeMillis());
+		testExchange = new HitbtcExchange();
 
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

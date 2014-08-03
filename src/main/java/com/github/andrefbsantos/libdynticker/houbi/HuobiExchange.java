@@ -25,12 +25,15 @@ public class HuobiExchange extends Exchange {
 	 */
 	public HuobiExchange(long experiedPeriod) {
 		super(experiedPeriod);
-		// TODO Auto-generated constructor stub
+	}
+
+	public HuobiExchange() {
+		super();
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
@@ -43,7 +46,7 @@ public class HuobiExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */

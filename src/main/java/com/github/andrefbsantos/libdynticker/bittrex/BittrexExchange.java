@@ -24,6 +24,10 @@ public class BittrexExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public BittrexExchange() {
+		super();
+	}
+
 	protected String getTickerURL(Pair pair) {
 		return "https://bittrex.com/api/v1.1/public/getticker?market=" + pair.getExchange() + "-" + pair.getCoin();
 	}

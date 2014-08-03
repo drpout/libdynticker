@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.bittrex;
+package com.github.andrefbsantos.libdynticker.kraken;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,12 +14,12 @@ import org.junit.Test;
 import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class BittrexExchangeTest extends ExchangeTest {
+public class KrakenExchangeTest extends ExchangeTest {
 
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BittrexExchange();
+		testExchange = new KrakenExchange();
 	}
 
 	@Override
@@ -30,10 +30,10 @@ public class BittrexExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bittrex-ticker.json")));
+			Pair pair = new Pair("LTC", "XDG");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/kraken-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.01290501", lastValue);
+			Assert.assertEquals("37000.00000", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
@@ -45,8 +45,8 @@ public class BittrexExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
@@ -56,7 +56,7 @@ public class BittrexExchangeTest extends ExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			double lastValue = testExchange.getLastValue(new Pair("LTC", "BTC"));
+			double lastValue = testExchange.getLastValue(new Pair("XBT", "EUR"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

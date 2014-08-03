@@ -20,7 +20,10 @@ public class CryptsyExchange extends Exchange {
 
 	public CryptsyExchange(long experiedPeriod) {
 		super(experiedPeriod);
-		// TODO Auto-generated constructor stub
+	}
+
+	public CryptsyExchange() {
+		super();
 	}
 
 	protected String getTickerURL(Pair pair) {

@@ -28,6 +28,10 @@ public class MintPalExchange extends Exchange {
 		super(experiedPeriod);
 	}
 
+	public MintPalExchange() {
+		super();
+	}
+
 	protected String getTickerURL(Pair pair) {
 		return "https://api.mintpal.com/v2/market/stats/" + pair.getCoin() + "/" + pair.getExchange();
 	}

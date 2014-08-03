@@ -19,14 +19,16 @@ public class CryptsyTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new CryptsyExchange(System.currentTimeMillis());
+		testExchange = new CryptsyExchange();
 	}
 
 	/**
 	 * @throws java.lang.Exception
 	 */
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

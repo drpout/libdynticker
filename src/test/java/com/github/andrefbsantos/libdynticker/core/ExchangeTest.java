@@ -1,11 +1,16 @@
 package com.github.andrefbsantos.libdynticker.core;
 
+import static org.mockito.Mockito.verify;
+
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.mockito.Mockito;
 
 /**
  * Abstract tests for other exchanges that inherit this class
@@ -16,6 +21,50 @@ import org.junit.Test;
 @Ignore
 public class ExchangeTest {
 	protected Exchange testExchange;
+
+	@Before
+	public void setUp() throws Exception {
+
+	}
+
+	@After
+	public void tearDown() throws Exception {
+
+	}
+
+	@Test
+	public void testSecondGetPairsFromAPIDoesntActive() {
+		try {
+			Exchange exchange = Mockito.spy(testExchange);
+			exchange.setExperiedPeriod(Long.MAX_VALUE);
+			exchange.getPairs();
+			verify(exchange, Mockito.times(1)).getPairsFromAPI();
+			Assert.assertNotNull(exchange.getTimestamp());
+			exchange.getPairs();
+			verify(exchange, Mockito.times(1)).getPairsFromAPI();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+	}
+
+	@Test
+	public void testSecondGetPairsFromAPIDoesActive() {
+		try {
+			Exchange exchange = Mockito.spy(testExchange);
+			exchange.setExperiedPeriod(-1);
+			exchange.getPairs();
+			verify(exchange, Mockito.times(1)).getPairsFromAPI();
+			Assert.assertNotNull(exchange.getTimestamp());
+			exchange.getPairs();
+			verify(exchange, Mockito.times(2)).getPairsFromAPI();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+	}
 
 	@Test
 	public void testGetLastValueWithPairsFromGetPairs() {
@@ -29,17 +78,19 @@ public class ExchangeTest {
 			Assert.fail();
 		}
 
-		int numberOfExamples = 2;
+		int numberOfExamples;
+		// numberOfExamples = pairs.size();
+		numberOfExamples = 1;
 		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
 			try {
 				Pair pair = pairs.get(i);
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
+				System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
 			} catch (IOException e) {
 				e.printStackTrace();
 				Assert.fail();
 			}
 		}
-
 	}
 }

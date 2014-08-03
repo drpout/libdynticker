@@ -16,11 +16,13 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class PoloniexTest extends ExchangeTest {
 
+	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new PoloniexExchange(System.currentTimeMillis());
+		testExchange = new PoloniexExchange();
 	}
 
+	@Override
 	@After
 	public void tearDown() throws Exception {
 	}

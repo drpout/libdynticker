@@ -31,6 +31,10 @@ public class BitstampExchange extends Exchange {
 	// return pairs;
 	// }
 
+	public BitstampExchange() {
+		super();
+	}
+
 	protected String getTickerURL(Pair pair) {
 		return "https://www.bitstamp.net/api/ticker/";
 	}
