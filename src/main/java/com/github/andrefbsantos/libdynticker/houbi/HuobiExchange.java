@@ -21,6 +21,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class HuobiExchange extends Exchange {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2794648766042705435L;
+
+	/**
 	 * @param experiedPeriod
 	 */
 	public HuobiExchange(long experiedPeriod) {

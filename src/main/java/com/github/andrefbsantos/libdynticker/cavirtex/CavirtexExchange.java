@@ -25,6 +25,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class CavirtexExchange extends Exchange {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8776748943580993440L;
+
+	/**
 	 * @param experiedPeriod
 	 */
 	public CavirtexExchange(long experiedPeriod) {

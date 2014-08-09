@@ -19,6 +19,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BTERExchange extends Exchange {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7381868474342713326L;
+
 	public BTERExchange(long experiedPeriod) {
 		super(experiedPeriod);
 	}

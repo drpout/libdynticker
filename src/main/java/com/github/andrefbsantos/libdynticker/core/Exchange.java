@@ -1,6 +1,7 @@
 package com.github.andrefbsantos.libdynticker.core;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,8 +13,12 @@ import org.codehaus.jackson.JsonNode;
  * @author andre
  *
  */
-public abstract class Exchange {
+public abstract class Exchange implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1347314871911347281L;
 	private long experiedPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;

@@ -15,6 +15,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 
 public class KrakenExchange extends Exchange {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3075375312699693001L;
+
 	public KrakenExchange(long experiedPeriod) {
 		super(experiedPeriod);
 	}

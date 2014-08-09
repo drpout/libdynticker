@@ -22,6 +22,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class HitbtcExchange extends Exchange {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6351467619722156105L;
+
 	public HitbtcExchange(long experiedPeriod) {
 		super(experiedPeriod);
 	}

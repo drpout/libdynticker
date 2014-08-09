@@ -18,6 +18,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class CryptsyExchange extends Exchange {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6281445783811901717L;
+
 	public CryptsyExchange(long experiedPeriod) {
 		super(experiedPeriod);
 	}
