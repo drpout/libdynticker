@@ -15,16 +15,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BTCChinaExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -5622379299328147137L;
 
 	public BTCChinaExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("BTCChina", experiedPeriod);
 	}
 
 	public BTCChinaExchange() {
-		super();
+		super("BTCChina");
 	}
 
 	@Override

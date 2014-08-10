@@ -23,21 +23,21 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class HitbtcExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 6351467619722156105L;
 
 	public HitbtcExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Hitbtc", experiedPeriod);
 	}
 
 	public HitbtcExchange() {
-		super();
+		super("Hitbtc");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#getTickerURL(com.github.andrefbsantos
 	 * .libdynticker.core.Pair)
@@ -48,7 +48,7 @@ public class HitbtcExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)

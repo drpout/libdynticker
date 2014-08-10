@@ -21,16 +21,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BittrexExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2450579046081447040L;
 
 	public BittrexExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Bittrex", experiedPeriod);
 	}
 
 	public BittrexExchange() {
-		super();
+		super("Bittrex");
 	}
 
 	protected String getTickerURL(Pair pair) {

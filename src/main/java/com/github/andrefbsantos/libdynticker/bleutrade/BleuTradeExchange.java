@@ -22,16 +22,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BleuTradeExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -1042920630414897319L;
 
 	public BleuTradeExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("BleuTrade", experiedPeriod);
 	}
 
 	public BleuTradeExchange() {
-		super();
+		super("BleuTrade");
 	}
 
 	@Override

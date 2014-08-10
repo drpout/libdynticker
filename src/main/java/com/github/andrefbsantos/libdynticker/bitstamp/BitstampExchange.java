@@ -21,12 +21,12 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BitstampExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 8420288560764284730L;
 
 	public BitstampExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Bitstamp", experiedPeriod);
 	}
 
 	// @Override
@@ -37,7 +37,7 @@ public class BitstampExchange extends Exchange {
 	// }
 
 	public BitstampExchange() {
-		super();
+		super("Bitstamp");
 	}
 
 	protected String getTickerURL(Pair pair) {

@@ -21,7 +21,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class HuobiExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2794648766042705435L;
 
@@ -29,16 +29,16 @@ public class HuobiExchange extends Exchange {
 	 * @param experiedPeriod
 	 */
 	public HuobiExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Huobi", experiedPeriod);
 	}
 
 	public HuobiExchange() {
-		super();
+		super("Huobi");
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
@@ -51,7 +51,7 @@ public class HuobiExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */

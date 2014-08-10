@@ -13,26 +13,29 @@ import org.codehaus.jackson.JsonNode;
  * @author andre
  *
  */
-public abstract class Exchange implements Serializable{
+public abstract class Exchange implements Serializable {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1347314871911347281L;
 	private long experiedPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
+	private String name;
 
-	public Exchange(long experiedPeriod) {
+	public Exchange(String name, long experiedPeriod) {
 		this.setExperiedPeriod(experiedPeriod);
+		this.name = name;
 	}
 
 	/**
 	 * Initialize with a period of one week(7*24*60*60*1000)
 	 *
 	 */
-	public Exchange() {
+	public Exchange(String name) {
 		this.setExperiedPeriod(604800000);
+		this.name = name;
 	}
 
 	/**
@@ -110,5 +113,19 @@ public abstract class Exchange implements Serializable{
 	 */
 	public void setExperiedPeriod(long experiedPeriod) {
 		this.experiedPeriod = experiedPeriod;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 }

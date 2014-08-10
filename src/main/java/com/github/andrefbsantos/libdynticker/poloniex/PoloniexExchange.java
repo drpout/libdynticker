@@ -19,16 +19,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class PoloniexExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = -2215369226500768293L;
 
 	public PoloniexExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Poloniex", experiedPeriod);
 	}
 
 	public PoloniexExchange() {
-		super();
+		super("Poloniex");
 	}
 
 	protected String getTickerURL(Pair pair) {

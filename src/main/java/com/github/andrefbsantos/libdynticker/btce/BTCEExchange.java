@@ -21,16 +21,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BTCEExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1342005711423170125L;
 
 	public BTCEExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("BTCE", experiedPeriod);
 	}
 
 	public BTCEExchange() {
-		super();
+		super("BTCE");
 	}
 
 	protected String getTickerURL(Pair pair) {

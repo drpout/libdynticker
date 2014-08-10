@@ -28,14 +28,14 @@ public class AllcoinExchange extends Exchange {
 	private static final long serialVersionUID = -2353215696650751173L;
 
 	public AllcoinExchange() {
-		super();
+		super("Allcoin");
 	}
 
 	/**
 	 * @param experiedPeriod
 	 */
 	public AllcoinExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("Allcoin", experiedPeriod);
 	}
 
 	/*

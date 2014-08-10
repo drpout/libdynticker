@@ -124,4 +124,9 @@ public class ExchangeTest {
 			Assert.fail();
 		}
 	}
+
+	@Test
+	public void testName() {
+		Assert.assertEquals(testExchange.getName() + "Exchange", testExchange.getClass().getSimpleName());
+	}
 }

@@ -25,16 +25,16 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class MintPalExchange extends Exchange {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 6030375175840478473L;
 
 	public MintPalExchange(long experiedPeriod) {
-		super(experiedPeriod);
+		super("MintPal", experiedPeriod);
 	}
 
 	public MintPalExchange() {
-		super();
+		super("MintPal");
 	}
 
 	protected String getTickerURL(Pair pair) {
