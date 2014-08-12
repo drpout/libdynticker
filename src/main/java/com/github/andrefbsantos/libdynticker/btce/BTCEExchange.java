@@ -30,7 +30,7 @@ public class BTCEExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)

@@ -14,6 +14,8 @@ Currently supported exchanges:
 * [OKCoin International](https://www.okcoin.com)
 * [BTC China](https://btcchina.com)
 * [Bter](https://bter.com)
+* [Kraken](https://www.kraken.com/)
+* [CaVirtEx](https://www.cavirtex.com)
 * [Cryptsy](https://cryptsy.com)
 * [Mintpal](https://mintpal.com)
 * [Poloniex](https://www.poloniex.com)
@@ -21,3 +23,7 @@ Currently supported exchanges:
 * [HitBTC](https://hitbtc.com)
 * [BlueTrade](https://bleutrade.com)
 * [AllCoin](https://www.allcoin.com)
+
+Building
+--------
+ `mvn package` to create a jar.

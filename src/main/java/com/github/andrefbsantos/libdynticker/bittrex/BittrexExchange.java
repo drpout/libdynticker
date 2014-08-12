@@ -35,7 +35,6 @@ public class BittrexExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	// <<<<<<< HEAD
 			IOException {
 		JsonNode node = new ObjectMapper().readTree(new URL(this.getTickerURL(pair)));
 
@@ -44,10 +43,6 @@ public class BittrexExchange extends Exchange {
 		} else {
 			throw new MalformedURLException(node.get("message").getTextValue());
 		}
-		// =======
-		// IOException {
-		// return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
-		// >>>>>>> 461e11925604db02e6a84b96ad074e96115ffead
 	}
 
 	@Override

@@ -61,7 +61,6 @@ public class VoSExchange extends Exchange {
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
 		if (node.get("status").getTextValue().equals("success")) {
 			Iterator<JsonNode> elements = node.get("data").getElements();
-			System.out.println(pair);
 			if (elements.hasNext()) {
 				JsonNode next = elements.next();
 				return next.get("price").get("value").getTextValue();

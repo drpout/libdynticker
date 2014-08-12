@@ -16,9 +16,6 @@ import org.reflections.Reflections;
  */
 public abstract class Exchange {
 
-	/**
-	 *
-	 */
 	private long experiedPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;

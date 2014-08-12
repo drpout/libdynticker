@@ -22,6 +22,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  *
  */
 public class AllcoinExchange extends Exchange {
+
 	/**
 	 * @param experiedPeriod
 	 */
@@ -31,7 +32,7 @@ public class AllcoinExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
@@ -58,19 +59,19 @@ public class AllcoinExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		// https://www.allcoin.com/api2/pair/LTC_BTC
 		String url = "https://www.allcoin.com/api2/pair/" + pair.getCoin() + "_" + pair.getExchange();
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
@@ -83,7 +84,7 @@ public class AllcoinExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)

@@ -21,9 +21,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BleuTradeExchange extends Exchange {
 
-	/**
-	 *
-	 */
 	public BleuTradeExchange(long experiedPeriod) {
 		super("BleuTrade", experiedPeriod);
 	}
