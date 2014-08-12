@@ -31,8 +31,12 @@ public class CryptsyExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.get("success").toString().equals("1")) {
+			return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+		} else {
+			throw new IOException(node.get("error").getTextValue());
+		}
 	}
 
 	@Override

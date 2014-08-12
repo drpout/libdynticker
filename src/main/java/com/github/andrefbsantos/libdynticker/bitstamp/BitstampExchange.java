@@ -40,8 +40,12 @@ public class BitstampExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("last").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.has("last")) {
+			return node.get("last").getTextValue();
+		} else {
+			throw new IOException();
+		}
 	}
 
 	@Override

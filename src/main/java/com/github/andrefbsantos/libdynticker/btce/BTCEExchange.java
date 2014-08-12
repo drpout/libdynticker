@@ -32,9 +32,20 @@ public class BTCEExchange extends Exchange {
 		return "https://btc-e.com/api/3/ticker/" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
+	 * com.github.andrefbsantos.libdynticker.core.Pair)
+	 */
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").toString();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.has(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())) {
+			return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").toString();
+		} else {
+			throw new IOException(node.get("error").getTextValue());
+		}
 	}
 
 	@Override

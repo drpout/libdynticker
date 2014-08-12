@@ -77,7 +77,7 @@ public abstract class Exchange {
 	 */
 	protected abstract String getTicker(Pair pair) throws IOException;
 
-	public abstract String parseJSON(JsonNode node, Pair pair);
+	public abstract String parseJSON(JsonNode node, Pair pair) throws IOException;
 
 	/**
 	 * @return the timestamp

@@ -66,6 +66,11 @@ public class ExchangeTest {
 
 	}
 
+	@Test(expected = IOException.class)
+	public void testInvalidPair() throws IOException {
+		testExchange.getLastValue(new Pair("InvalidCoin", "InvalidExchange"));
+	}
+
 	@Test
 	public void testGetLastValueWithPairsFromGetPairs() {
 		List<Pair> pairs = null;
@@ -79,11 +84,12 @@ public class ExchangeTest {
 		}
 
 		int numberOfExamples;
-		// numberOfExamples = pairs.size();
-		numberOfExamples = 1;
+		numberOfExamples = pairs.size();
+		// numberOfExamples = 1;
 		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
 			try {
 				Pair pair = pairs.get(i);
+				System.out.println(pair);
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
 				System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));

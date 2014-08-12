@@ -75,4 +75,8 @@ public class BitStampExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
+
+	@Override
+	public void testInvalidPair() throws IOException {
+	}
 }

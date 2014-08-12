@@ -66,15 +66,32 @@ public class AllcoinExchange extends Exchange {
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
+	 * libdynticker.core.Pair)
+	 */
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		// https://www.allcoin.com/api2/pair/LTC_BTC
 		String url = "https://www.allcoin.com/api2/pair/" + pair.getCoin() + "_" + pair.getExchange();
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		if (node.get("code").getIntValue() > 0) {
+			return parseJSON(node, pair);
+		} else {
+			throw new MalformedURLException(node.get("data").getTextValue());
+		}
 	}
 
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see
+	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
+	 * com.github.andrefbsantos.libdynticker.core.Pair)
+	 */
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) {
 		return node.get("data").get("trade_price").getTextValue();
