@@ -27,10 +27,6 @@ public class PoloniexExchange extends Exchange {
 		super("Poloniex", experiedPeriod);
 	}
 
-	public PoloniexExchange() {
-		super("Poloniex");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "https://poloniex.com/public?command=returnTicker";
 	}

@@ -19,7 +19,7 @@ public class KrakenExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new KrakenExchange();
+		testExchange = new KrakenExchange(10000);
 	}
 
 	@Override

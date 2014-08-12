@@ -22,7 +22,7 @@ public class CryptsyTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new CryptsyExchange();
+		testExchange = new CryptsyExchange(10000);
 	}
 
 	/**

@@ -29,10 +29,6 @@ public class BittrexExchange extends Exchange {
 		super("Bittrex", experiedPeriod);
 	}
 
-	public BittrexExchange() {
-		super("Bittrex");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "https://bittrex.com/api/v1.1/public/getticker?market=" + pair.getExchange() + "-" + pair.getCoin();
 	}
@@ -44,13 +40,13 @@ public class BittrexExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
 	}
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bittrex.com/api/v1.1/public/getmarkets")).get("result").getElements();

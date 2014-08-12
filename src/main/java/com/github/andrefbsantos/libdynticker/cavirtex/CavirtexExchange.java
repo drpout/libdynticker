@@ -36,18 +36,14 @@ public class CavirtexExchange extends Exchange {
 		super("Cavirtex", experiedPeriod);
 	}
 
-	public CavirtexExchange() {
-		super("Cavirtex");
-	}
-
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		String url = "https://www.cavirtex.com/api2/ticker.json";
 		List<Pair> pairs = new ArrayList<Pair>();
 		URLConnection uc = (new URL(url)).openConnection();
@@ -71,13 +67,13 @@ public class CavirtexExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		String url = "https://www.cavirtex.com/api2/ticker.json?currencypair=" + pair.getCoin() + pair.getExchange();
 		URLConnection uc = (new URL(url)).openConnection();
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
@@ -92,7 +88,7 @@ public class CavirtexExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)

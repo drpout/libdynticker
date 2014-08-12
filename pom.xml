@@ -68,11 +68,17 @@
 	</repositories>
 
 	<dependencies>
-	
+
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.9-RC1</version>
 		</dependency>
 
 		<dependency>
@@ -88,7 +94,7 @@
 			<version>1.9.5</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>

@@ -33,10 +33,6 @@ public class MintPalExchange extends Exchange {
 		super("MintPal", experiedPeriod);
 	}
 
-	public MintPalExchange() {
-		super("MintPal");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "https://api.mintpal.com/v2/market/stats/" + pair.getCoin() + "/" + pair.getExchange();
 	}

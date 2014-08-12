@@ -20,7 +20,7 @@ public class HuobiExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HuobiExchange();
+		testExchange = new HuobiExchange(10000);
 	}
 
 	@Override

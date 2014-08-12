@@ -29,17 +29,6 @@ public class BitstampExchange extends Exchange {
 		super("Bitstamp", experiedPeriod);
 	}
 
-	// @Override
-	// public List<Pair> getPairs() {
-	// List<Pair> pairs = new ArrayList<Pair>();
-	// pairs.add(new Pair("BTC", "USD"));
-	// return pairs;
-	// }
-
-	public BitstampExchange() {
-		super("Bitstamp");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "https://www.bitstamp.net/api/ticker/";
 	}

@@ -32,13 +32,9 @@ public class HuobiExchange extends Exchange {
 		super("Huobi", experiedPeriod);
 	}
 
-	public HuobiExchange() {
-		super("Huobi");
-	}
-
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
@@ -51,7 +47,7 @@ public class HuobiExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */

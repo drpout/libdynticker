@@ -27,10 +27,6 @@ public class CryptsyExchange extends Exchange {
 		super("Cryptsy", experiedPeriod);
 	}
 
-	public CryptsyExchange() {
-		super("Cryptsy");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" + pair.getMarket();
 	}

@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonNode;
+import org.reflections.Reflections;
 
 /**
  * Abstract template for Exchange
@@ -29,14 +31,14 @@ public abstract class Exchange implements Serializable {
 		this.name = name;
 	}
 
-	/**
-	 * Initialize with a period of one week(7*24*60*60*1000)
-	 *
-	 */
-	public Exchange(String name) {
-		this.setExperiedPeriod(604800000);
-		this.name = name;
-	}
+	// /**
+	// * Initialize with a period of one week(7*24*60*60*1000)
+	// *
+	// */
+	// public Exchange(String name) {
+	// this.setExperiedPeriod(604800000);
+	// this.name = name;
+	// }
 
 	/**
 	 *
@@ -65,6 +67,8 @@ public abstract class Exchange implements Serializable {
 		} else if ((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
 			return this.pairs;
 		} else {
+			// TODO throw a custom exception where there is no internet connection. The exception
+			// includes the previous list of pairs and the timestamp.
 			return this.pairs = this.getPairsFromAPI();
 		}
 	}
@@ -90,15 +94,8 @@ public abstract class Exchange implements Serializable {
 	/**
 	 * @return the timestamp
 	 */
-	public Timestamp getTimestamp() {
+	protected Timestamp getTimestamp() {
 		return timestamp;
-	}
-
-	/**
-	 * @param timestamp the timestamp to set
-	 */
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
 	}
 
 	/**
@@ -122,10 +119,10 @@ public abstract class Exchange implements Serializable {
 		return name;
 	}
 
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
+	public static Set<Class<? extends Exchange>> getExchanges() {
+		Reflections reflections = new Reflections("com.github.andrefbsantos.libdynticker");
+		Set<Class<? extends Exchange>> exchanges =
+				reflections.getSubTypesOf(Exchange.class);
+		return exchanges;
 	}
 }

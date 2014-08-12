@@ -29,10 +29,6 @@ public class BTCEExchange extends Exchange {
 		super("BTCE", experiedPeriod);
 	}
 
-	public BTCEExchange() {
-		super("BTCE");
-	}
-
 	protected String getTickerURL(Pair pair) {
 		return "https://btc-e.com/api/3/ticker/" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 	}

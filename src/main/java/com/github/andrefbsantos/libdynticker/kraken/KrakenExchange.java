@@ -24,10 +24,6 @@ public class KrakenExchange extends Exchange {
 		super("Kraken", experiedPeriod);
 	}
 
-	public KrakenExchange() {
-		super("Kraken");
-	}
-
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();

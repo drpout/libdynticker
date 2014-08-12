@@ -21,7 +21,7 @@ public class HitbtcExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HitbtcExchange();
+		testExchange = new HitbtcExchange(10000);
 
 	}
 

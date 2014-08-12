@@ -20,7 +20,7 @@ public class BTCChinaExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTCChinaExchange();
+		testExchange = new BTCChinaExchange(10000);
 	}
 
 	@Override

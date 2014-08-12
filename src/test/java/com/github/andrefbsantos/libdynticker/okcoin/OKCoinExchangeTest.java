@@ -20,7 +20,7 @@ public class OKCoinExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new OKCoinExchange();
+		testExchange = new OKCoinExchange(10000);
 	}
 
 	@Override

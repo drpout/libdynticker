@@ -24,7 +24,7 @@ public class BTERExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTERExchange();
+		testExchange = new BTERExchange(10000);
 	}
 
 	/**

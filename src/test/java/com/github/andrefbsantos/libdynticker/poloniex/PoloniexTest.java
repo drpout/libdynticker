@@ -19,7 +19,7 @@ public class PoloniexTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new PoloniexExchange();
+		testExchange = new PoloniexExchange(10000);
 	}
 
 	@Override

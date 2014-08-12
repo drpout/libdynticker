@@ -30,10 +30,6 @@ public class BleuTradeExchange extends Exchange {
 		super("BleuTrade", experiedPeriod);
 	}
 
-	public BleuTradeExchange() {
-		super("BleuTrade");
-	}
-
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		String url = "https://bleutrade.com/api/v2/public/getticker?market=" + pair.getExchange() + "_" + pair.getCoin();
