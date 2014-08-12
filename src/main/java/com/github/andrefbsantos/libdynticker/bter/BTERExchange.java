@@ -20,11 +20,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BTERExchange extends Exchange {
 
 	public BTERExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public BTERExchange() {
-		super();
+		super("BTER", experiedPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {
@@ -32,8 +28,12 @@ public class BTERExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("last").toString();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.get("result").getTextValue().equals("true")) {
+			return node.get("last").toString();
+		} else {
+			throw new IOException(node.get("message").getTextValue());
+		}
 	}
 
 	@Override
@@ -62,17 +62,12 @@ public class BTERExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		URL url = new URL("http://data.bter.com/api/1/pairs");
 		URLConnection uc = url.openConnection();
-
 		// BTER doesn't answer calls from java, this property masks it as a browser call
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-
 		uc.connect();
-
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(uc.getInputStream()).getElements();
-
 		while (elements.hasNext()) {
 			String element = elements.next().getTextValue();
 			String[] split = element.split("_");

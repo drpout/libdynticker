@@ -24,11 +24,7 @@ public class HuobiExchange extends Exchange {
 	 * @param experiedPeriod
 	 */
 	public HuobiExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public HuobiExchange() {
-		super();
+		super("Huobi", experiedPeriod);
 	}
 
 	/*

@@ -22,7 +22,7 @@ public class CavirtexExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new CavirtexExchange();
+		testExchange = new CavirtexExchange(10000);
 	}
 
 	@Override

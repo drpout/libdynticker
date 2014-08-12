@@ -21,11 +21,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BTCEExchange extends Exchange {
 
 	public BTCEExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public BTCEExchange() {
-		super();
+		super("BTC-E", experiedPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {
@@ -34,7 +30,7 @@ public class BTCEExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)
@@ -56,9 +52,7 @@ public class BTCEExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://btc-e.com/api/3/info")).get("pairs").getFieldNames();
-
 		while (elements.hasNext()) {
 			String element = elements.next();
 			String[] split = element.split("_");

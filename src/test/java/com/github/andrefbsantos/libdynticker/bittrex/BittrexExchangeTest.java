@@ -19,7 +19,7 @@ public class BittrexExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BittrexExchange();
+		testExchange = new BittrexExchange(10000);
 	}
 
 	@Override

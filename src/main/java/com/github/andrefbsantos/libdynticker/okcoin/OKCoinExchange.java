@@ -25,16 +25,12 @@ public class OKCoinExchange extends Exchange {
 	 * @param experiedPeriod
 	 */
 	public OKCoinExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public OKCoinExchange() {
-		super();
+		super("OKCoin", experiedPeriod);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getPairsFromAPI()
 	 */
 	@Override
@@ -49,7 +45,7 @@ public class OKCoinExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see com.github.andrefbsantos.libdynticker.core.Exchange#getTicker(com.github.andrefbsantos.
 	 * libdynticker.core.Pair)
 	 */

@@ -29,7 +29,7 @@ public class BitStampExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BitstampExchange();
+		testExchange = new BitstampExchange(10000);
 	}
 
 	/**
@@ -74,9 +74,5 @@ public class BitStampExchangeTest extends ExchangeTest {
 		} catch (IOException e) {
 			Assert.fail();
 		}
-	}
-
-	@Override
-	public void testInvalidPair() throws IOException {
 	}
 }

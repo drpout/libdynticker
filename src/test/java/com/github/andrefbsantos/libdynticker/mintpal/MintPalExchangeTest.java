@@ -24,7 +24,7 @@ public class MintPalExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MintPalExchange();
+		testExchange = new MintPalExchange(10000);
 	}
 
 	@Override

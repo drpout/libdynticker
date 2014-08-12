@@ -21,11 +21,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BittrexExchange extends Exchange {
 
 	public BittrexExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public BittrexExchange() {
-		super();
+		super("Bittrex", experiedPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {
@@ -39,7 +35,8 @@ public class BittrexExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	// <<<<<<< HEAD
+			IOException {
 		JsonNode node = new ObjectMapper().readTree(new URL(this.getTickerURL(pair)));
 
 		if (node.get("success").getBooleanValue()) {
@@ -47,11 +44,15 @@ public class BittrexExchange extends Exchange {
 		} else {
 			throw new MalformedURLException(node.get("message").getTextValue());
 		}
+		// =======
+		// IOException {
+		// return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+		// >>>>>>> 461e11925604db02e6a84b96ad074e96115ffead
 	}
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bittrex.com/api/v1.1/public/getmarkets")).get("result").getElements();

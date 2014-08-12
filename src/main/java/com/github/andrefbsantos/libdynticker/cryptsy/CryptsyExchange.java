@@ -19,11 +19,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class CryptsyExchange extends Exchange {
 
 	public CryptsyExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public CryptsyExchange() {
-		super();
+		super("Cryptsy", experiedPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

@@ -33,20 +33,31 @@ public class ExchangeTest {
 	}
 
 	@Test
-	public void testSecondGetPairsFromAPIDoesntActive() {
+	public void testGetLastValueWithPairsFromGetPairs() {
+		List<Pair> pairs = null;
 		try {
-			Exchange exchange = Mockito.spy(testExchange);
-			exchange.setExperiedPeriod(Long.MAX_VALUE);
-			exchange.getPairs();
-			verify(exchange, Mockito.times(1)).getPairsFromAPI();
-			Assert.assertNotNull(exchange.getTimestamp());
-			exchange.getPairs();
-			verify(exchange, Mockito.times(1)).getPairsFromAPI();
+			pairs = testExchange.getPairs();
+			Assert.assertNotNull(pairs);
+			Assert.assertTrue(pairs.size() > 0);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 
+		int numberOfExamples;
+		// numberOfExamples = pairs.size();
+		numberOfExamples = 3;
+		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
+			try {
+				Pair pair = pairs.get(i);
+				double lastValue = testExchange.getLastValue(pair);
+				Assert.assertNotNull(lastValue);
+				System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
+			} catch (IOException e) {
+				e.printStackTrace();
+				Assert.fail();
+			}
+		}
 	}
 
 	@Test
@@ -63,7 +74,6 @@ public class ExchangeTest {
 			e.printStackTrace();
 			Assert.fail();
 		}
-
 	}
 
 	@Test(expected = IOException.class)
@@ -72,31 +82,18 @@ public class ExchangeTest {
 	}
 
 	@Test
-	public void testGetLastValueWithPairsFromGetPairs() {
-		List<Pair> pairs = null;
+	public void testSecondGetPairsFromAPIDoesntActive() {
 		try {
-			pairs = testExchange.getPairs();
-			Assert.assertNotNull(pairs);
-			Assert.assertTrue(pairs.size() > 0);
+			Exchange exchange = Mockito.spy(testExchange);
+			exchange.setExperiedPeriod(Long.MAX_VALUE);
+			exchange.getPairs();
+			verify(exchange, Mockito.times(1)).getPairsFromAPI();
+			Assert.assertNotNull(exchange.getTimestamp());
+			exchange.getPairs();
+			verify(exchange, Mockito.times(1)).getPairsFromAPI();
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
-		}
-
-		int numberOfExamples;
-		numberOfExamples = pairs.size();
-		// numberOfExamples = 1;
-		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
-			try {
-				Pair pair = pairs.get(i);
-				System.out.println(pair);
-				double lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-				System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
-			} catch (IOException e) {
-				e.printStackTrace();
-				Assert.fail();
-			}
 		}
 	}
 }

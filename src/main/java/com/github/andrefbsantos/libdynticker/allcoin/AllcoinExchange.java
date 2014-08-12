@@ -26,11 +26,7 @@ public class AllcoinExchange extends Exchange {
 	 * @param experiedPeriod
 	 */
 	public AllcoinExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public AllcoinExchange() {
-		super();
+		super("Allcoin", experiedPeriod);
 	}
 
 	/*

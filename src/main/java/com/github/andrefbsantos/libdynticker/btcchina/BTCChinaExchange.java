@@ -15,11 +15,7 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class BTCChinaExchange extends Exchange {
 
 	public BTCChinaExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public BTCChinaExchange() {
-		super();
+		super("BTCChina", experiedPeriod);
 	}
 
 	@Override

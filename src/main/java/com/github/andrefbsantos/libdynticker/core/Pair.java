@@ -1,6 +1,12 @@
 package com.github.andrefbsantos.libdynticker.core;
 
-public class Pair {
+import java.io.Serializable;
+
+public class Pair implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7350917343984132966L;
 	private String coin;
 	private String exchange;
 	private String market;

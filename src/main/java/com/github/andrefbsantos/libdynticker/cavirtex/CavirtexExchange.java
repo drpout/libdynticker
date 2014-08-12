@@ -28,11 +28,7 @@ public class CavirtexExchange extends Exchange {
 	 * @param experiedPeriod
 	 */
 	public CavirtexExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public CavirtexExchange() {
-		super();
+		super("Cavirtex", experiedPeriod);
 	}
 
 	/*

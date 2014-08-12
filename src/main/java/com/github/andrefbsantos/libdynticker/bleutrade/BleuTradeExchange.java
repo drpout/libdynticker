@@ -21,38 +21,32 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BleuTradeExchange extends Exchange {
 
+	/**
+	 *
+	 */
 	public BleuTradeExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public BleuTradeExchange() {
-		super();
+		super("BleuTrade", experiedPeriod);
 	}
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		String url = "https://bleutrade.com/api/v2/public/getticker?market=" + pair.getExchange() + "_" + pair.getCoin();
-
-		(new ObjectMapper()).readTree(new URL(url)).get("result").getElements().next().get("Last").getTextValue();
-
 		return parseJSON((new ObjectMapper()).readTree(new URL(url)), pair);
 	}
 
-	protected String getTickerURL(Pair pair) {
-		return "https://bleutrade.com/api/v1/" + pair.getCoin() + "_" + pair.getExchange();
-	}
-
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("result").getElements().next().get("Last").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.get("success").getTextValue().equals("true")) {
+			return node.get("result").getElements().next().get("Last").getTextValue();
+		} else {
+			throw new IOException(node.get("message").getTextValue());
+		}
 	}
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bleutrade.com/api/v2/public/getmarkets")).get("result").getElements();
-
 		while (elements.hasNext()) {
 			JsonNode next = elements.next();
 			boolean isActive = next.get("IsActive").getTextValue().equals("true");

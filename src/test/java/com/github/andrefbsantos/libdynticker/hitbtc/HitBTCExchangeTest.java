@@ -14,14 +14,14 @@ import org.junit.Test;
 import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class HitbtcExchangeTest extends ExchangeTest {
+public class HitBTCExchangeTest extends ExchangeTest {
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new HitbtcExchange();
+		testExchange = new HitBTCExchange(10000);
 
 	}
 

@@ -3,8 +3,10 @@ package com.github.andrefbsantos.libdynticker.core;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Set;
 
 import org.codehaus.jackson.JsonNode;
+import org.reflections.Reflections;
 
 /**
  * Abstract template for Exchange
@@ -14,21 +16,27 @@ import org.codehaus.jackson.JsonNode;
  */
 public abstract class Exchange {
 
+	/**
+	 *
+	 */
 	private long experiedPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
+	private String name;
 
-	public Exchange(long experiedPeriod) {
+	public Exchange(String name, long experiedPeriod) {
 		this.setExperiedPeriod(experiedPeriod);
+		this.name = name;
 	}
 
-	/**
-	 * Initialize with a period of one week(7*24*60*60*1000)
-	 *
-	 */
-	public Exchange() {
-		this.setExperiedPeriod(604800000);
-	}
+	// /**
+	// * Initialize with a period of one week(7*24*60*60*1000)
+	// *
+	// */
+	// public Exchange(String name) {
+	// this.setExperiedPeriod(604800000);
+	// this.name = name;
+	// }
 
 	/**
 	 *
@@ -57,6 +65,8 @@ public abstract class Exchange {
 		} else if ((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
 			return this.pairs;
 		} else {
+			// TODO throw a custom exception where there is no internet connection. The exception
+			// includes the previous list of pairs and the timestamp.
 			return this.pairs = this.getPairsFromAPI();
 		}
 	}
@@ -82,15 +92,8 @@ public abstract class Exchange {
 	/**
 	 * @return the timestamp
 	 */
-	public Timestamp getTimestamp() {
+	protected Timestamp getTimestamp() {
 		return timestamp;
-	}
-
-	/**
-	 * @param timestamp the timestamp to set
-	 */
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
 	}
 
 	/**
@@ -105,5 +108,18 @@ public abstract class Exchange {
 	 */
 	public void setExperiedPeriod(long experiedPeriod) {
 		this.experiedPeriod = experiedPeriod;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	public static Set<Class<? extends Exchange>> getExchanges() {
+		Reflections reflections = new Reflections("com.github.andrefbsantos.libdynticker");
+		Set<Class<? extends Exchange>> exchanges = reflections.getSubTypesOf(Exchange.class);
+		return exchanges;
 	}
 }

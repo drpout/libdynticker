@@ -16,29 +16,20 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class KrakenExchange extends Exchange {
 
 	public KrakenExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public KrakenExchange() {
-		super();
+		super("Kraken", experiedPeriod);
 	}
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		URL url = new URL("https://api.kraken.com/0/public/AssetPairs");
 		URLConnection uc = url.openConnection();
 
-		// BTER doesn't answer calls from java, this property masks it as a browser call
+		// Mask call as if it was made by a browser
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-
 		uc.connect();
-
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream()).get("result");
-
 		Iterator<String> fieldNames = node.getFieldNames();
-
 		while (fieldNames.hasNext()) {
 			String next = fieldNames.next();
 			JsonNode jsonNode = node.get(next);
@@ -62,8 +53,12 @@ public class KrakenExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("result").get(this.pairCode(pair)).get("c").getElements().next().getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (!node.get("error").getElements().hasNext()) {
+			return node.get("result").get(this.pairCode(pair)).get("c").getElements().next().getTextValue();
+		} else {
+			throw new IOException(node.get("error").getElements().next().getTextValue());
+		}
 	}
 
 	private String pairCode(Pair pair) {

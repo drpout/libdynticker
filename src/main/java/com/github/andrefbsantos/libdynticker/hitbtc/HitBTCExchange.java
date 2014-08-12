@@ -20,19 +20,15 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  * @author andre
  *
  */
-public class HitbtcExchange extends Exchange {
+public class HitBTCExchange extends Exchange {
 
-	public HitbtcExchange(long experiedPeriod) {
-		super(experiedPeriod);
-	}
-
-	public HitbtcExchange() {
-		super();
+	public HitBTCExchange(long experiedPeriod) {
+		super("HitBTC", experiedPeriod);
 	}
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#getTickerURL(com.github.andrefbsantos
 	 * .libdynticker.core.Pair)
@@ -43,7 +39,7 @@ public class HitbtcExchange extends Exchange {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see
 	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
 	 * com.github.andrefbsantos.libdynticker.core.Pair)
