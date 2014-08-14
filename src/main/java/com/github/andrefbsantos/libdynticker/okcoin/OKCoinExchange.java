@@ -22,6 +22,11 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
 public class OKCoinExchange extends Exchange {
 
 	/**
+	 *
+	 */
+	private static final long serialVersionUID = -5651405483457018909L;
+
+	/**
 	 * @param experiedPeriod
 	 */
 	public OKCoinExchange(long experiedPeriod) {
