@@ -1,7 +1,6 @@
 package com.github.andrefbsantos.libdynticker.core;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
@@ -15,12 +14,8 @@ import org.reflections.Reflections;
  * @author andre
  *
  */
-public abstract class Exchange implements Serializable {
+public abstract class Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1347314871911347281L;
 	private long experiedPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
@@ -60,11 +55,11 @@ public abstract class Exchange implements Serializable {
 
 	final public List<Pair> getPairs() throws IOException {
 		long currentTime = System.currentTimeMillis();
-		if (timestamp == null) {
+		if(timestamp == null) {
 			this.pairs = this.getPairsFromAPI();
 			timestamp = new Timestamp(currentTime);
 			return this.pairs;
-		} else if ((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
+		} else if((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
 			return this.pairs;
 		} else {
 			// TODO throw a custom exception where there is no internet connection. The exception

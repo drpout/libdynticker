@@ -13,10 +13,12 @@ Currently supported exchanges:
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)
 * [BTC China](https://btcchina.com)
+* [Bitcoin.de](https://www.bitcoin.de)
+* [Kraken](https://www.kraken.com)
+* [LocalBitcoins](https://localbitcoins.com)
 * [Bter](https://bter.com)
-* [Bitcoin de](https://www.bitcoin.des)
-* [Kraken](https://www.kraken.com/)
 * [CaVirtEx](https://www.cavirtex.com)
+* [VoS](https://www.vaultofsatoshi.com/)
 * [Cryptsy](https://cryptsy.com)
 * [Mintpal](https://mintpal.com)
 * [Poloniex](https://www.poloniex.com)
@@ -24,8 +26,6 @@ Currently supported exchanges:
 * [HitBTC](https://hitbtc.com)
 * [BlueTrade](https://bleutrade.com)
 * [AllCoin](https://www.allcoin.com)
-* [LocalBitcoins](https://localbitcoins.com/)
-* [VoS](https://www.vaultofsatoshi.com/)
 
 Building
 --------
