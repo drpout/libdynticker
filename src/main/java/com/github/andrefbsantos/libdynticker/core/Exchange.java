@@ -22,18 +22,9 @@ public abstract class Exchange {
 	private String name;
 
 	public Exchange(String name, long experiedPeriod) {
-		this.setExperiedPeriod(experiedPeriod);
+		setExperiedPeriod(experiedPeriod);
 		this.name = name;
 	}
-
-	// /**
-	// * Initialize with a period of one week(7*24*60*60*1000)
-	// *
-	// */
-	// public Exchange(String name) {
-	// this.setExperiedPeriod(604800000);
-	// this.name = name;
-	// }
 
 	/**
 	 *
@@ -49,22 +40,22 @@ public abstract class Exchange {
 	 * @throws IOException
 	 */
 	public double getLastValue(Pair pair) throws NumberFormatException, IOException {
-		double lastValue = Double.parseDouble(this.getTicker(pair));
+		double lastValue = Double.parseDouble(getTicker(pair));
 		return lastValue;
 	}
 
 	final public List<Pair> getPairs() throws IOException {
 		long currentTime = System.currentTimeMillis();
 		if (timestamp == null) {
-			this.pairs = this.getPairsFromAPI();
+			pairs = getPairsFromAPI();
 			timestamp = new Timestamp(currentTime);
-			return this.pairs;
+			return pairs;
 		} else if ((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
-			return this.pairs;
+			return pairs;
 		} else {
 			// TODO throw a custom exception where there is no internet connection. The exception
 			// includes the previous list of pairs and the timestamp.
-			return this.pairs = this.getPairsFromAPI();
+			return pairs = getPairsFromAPI();
 		}
 	}
 
