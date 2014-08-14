@@ -18,11 +18,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class CryptsyExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 6281445783811901717L;
-
 	public CryptsyExchange(long experiedPeriod) {
 		super("Cryptsy", experiedPeriod);
 	}
@@ -32,8 +27,12 @@ public class CryptsyExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.get("success").toString().equals("1")) {
+			return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+		} else {
+			throw new IOException(node.get("error").getTextValue());
+		}
 	}
 
 	@Override

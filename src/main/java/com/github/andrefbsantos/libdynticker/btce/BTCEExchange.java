@@ -20,22 +20,28 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BTCEExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 1342005711423170125L;
-
 	public BTCEExchange(long experiedPeriod) {
-		super("BTCE", experiedPeriod);
+		super("BTC-E", experiedPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {
 		return "https://btc-e.com/api/3/ticker/" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * com.github.andrefbsantos.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
+	 * com.github.andrefbsantos.libdynticker.core.Pair)
+	 */
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").toString();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.has(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())) {
+			return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").toString();
+		} else {
+			throw new IOException(node.get("error").getTextValue());
+		}
 	}
 
 	@Override
@@ -46,9 +52,7 @@ public class BTCEExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://btc-e.com/api/3/info")).get("pairs").getFieldNames();
-
 		while (elements.hasNext()) {
 			String element = elements.next();
 			String[] split = element.split("_");

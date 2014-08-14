@@ -11,9 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.github.andrefbsantos.libdynticker.core.Exchange;
-import com.github.andrefbsantos.libdynticker.core.Pair;
-
 public class GetAllExchanges {
 
 	private Set<Class<? extends Exchange>> exchanges;
@@ -29,13 +26,12 @@ public class GetAllExchanges {
 
 	@Test
 	public void testGetExchanges() throws SecurityException, NoSuchMethodException,
-	IllegalArgumentException,
-			InstantiationException, IllegalAccessException, InvocationTargetException, IOException {
+			IllegalArgumentException, InstantiationException, IllegalAccessException,
+			InvocationTargetException, IOException {
 
 		for (Class<? extends Exchange> exchangeClass : exchanges) {
 			Constructor<? extends Exchange> constructor = exchangeClass.getConstructor(Long.class);
-			Exchange newInstance = constructor.newInstance(100000);
-
+			Exchange newInstance = constructor.newInstance(100000.0);
 			Assert.assertNotNull(newInstance);
 			Assert.assertNotNull(newInstance.getName());
 			List<Pair> pairs = newInstance.getPairs();

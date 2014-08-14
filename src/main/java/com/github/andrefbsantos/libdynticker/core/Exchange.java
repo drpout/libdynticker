@@ -89,7 +89,7 @@ public abstract class Exchange implements Serializable {
 	 */
 	protected abstract String getTicker(Pair pair) throws IOException;
 
-	public abstract String parseJSON(JsonNode node, Pair pair);
+	public abstract String parseJSON(JsonNode node, Pair pair) throws IOException;
 
 	/**
 	 * @return the timestamp
@@ -121,8 +121,7 @@ public abstract class Exchange implements Serializable {
 
 	public static Set<Class<? extends Exchange>> getExchanges() {
 		Reflections reflections = new Reflections("com.github.andrefbsantos.libdynticker");
-		Set<Class<? extends Exchange>> exchanges =
-				reflections.getSubTypesOf(Exchange.class);
+		Set<Class<? extends Exchange>> exchanges = reflections.getSubTypesOf(Exchange.class);
 		return exchanges;
 	}
 }

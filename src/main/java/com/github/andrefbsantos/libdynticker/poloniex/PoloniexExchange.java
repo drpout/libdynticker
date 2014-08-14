@@ -18,11 +18,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class PoloniexExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -2215369226500768293L;
-
 	public PoloniexExchange(long experiedPeriod) {
 		super("Poloniex", experiedPeriod);
 	}
@@ -32,8 +27,12 @@ public class PoloniexExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.has(pair.getExchange().toUpperCase() + "_" + pair.getCoin().toUpperCase())) {
+			return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").getTextValue();
+		} else {
+			throw new IOException();
+		}
 	}
 
 	@Override
@@ -44,9 +43,7 @@ public class PoloniexExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://poloniex.com/public?command=returnTicker")).getFieldNames();
-
 		while (elements.hasNext()) {
 			String element = elements.next();
 			String[] split = element.split("_");

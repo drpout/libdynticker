@@ -1,4 +1,4 @@
-package com.github.andrefbsantos.libdynticker.poloniex;
+package com.github.andrefbsantos.libdynticker.hitbtc;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,14 +14,20 @@ import org.junit.Test;
 import com.github.andrefbsantos.libdynticker.core.ExchangeTest;
 import com.github.andrefbsantos.libdynticker.core.Pair;
 
-public class PoloniexTest extends ExchangeTest {
-
+public class HitBTCExchangeTest extends ExchangeTest {
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new PoloniexExchange(10000);
+		testExchange = new HitBTCExchange(10000);
+
 	}
 
+	/**
+	 * @throws java.lang.Exception
+	 */
 	@Override
 	@After
 	public void tearDown() throws Exception {
@@ -29,18 +35,15 @@ public class PoloniexTest extends ExchangeTest {
 
 	@Test
 	public void testParseJson() {
-
-		JsonNode node;
 		try {
-			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
-
-			Pair pair = new Pair("XMR", "BTC");
+			Pair pair = new Pair("BTC", "EUR");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/hitbtc-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00452783", lastValue);
+			Assert.assertEquals("431.05", lastValue);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
-
 	}
 
 	@Test
@@ -48,10 +51,9 @@ public class PoloniexTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertNotEquals(0, pairs.size());
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
-
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
 		} catch (IOException e) {
@@ -62,11 +64,11 @@ public class PoloniexTest extends ExchangeTest {
 	@Test
 	public void testGetLastValue() {
 		try {
-			double lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
+			double lastValue = testExchange.getLastValue(new Pair("BTC", "EUR"));
 			Assert.assertNotNull(lastValue);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-
 }

@@ -50,7 +50,7 @@ public class ExchangeTest {
 
 		int numberOfExamples;
 		// numberOfExamples = pairs.size();
-		numberOfExamples = 1;
+		numberOfExamples = 3;
 		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
 			try {
 				Pair pair = pairs.get(i);
@@ -80,6 +80,11 @@ public class ExchangeTest {
 		}
 	}
 
+	@Test(expected = IOException.class)
+	public void testInvalidPair() throws IOException {
+		testExchange.getLastValue(new Pair("InvalidCoin", "InvalidExchange"));
+	}
+
 	@Test
 	public void testSecondGetPairsFromAPIDoesntActive() {
 		try {
@@ -91,35 +96,6 @@ public class ExchangeTest {
 			exchange.getPairs();
 			verify(exchange, Mockito.times(1)).getPairsFromAPI();
 		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testSerialize() {
-		try {
-			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-			ObjectOutputStream objectOutputStream = new ObjectOutputStream(byteArrayOutputStream);
-			objectOutputStream.writeObject(testExchange);
-			byte[] bytes = byteArrayOutputStream.toByteArray();
-			objectOutputStream.close();
-			byteArrayOutputStream.close();
-			ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(bytes);
-			ObjectInputStream in = new ObjectInputStream(byteArrayInputStream);
-			Exchange newExchange = (Exchange) in.readObject();
-			in.close();
-			byteArrayInputStream.close();
-
-			Assert.assertEquals(testExchange.getClass(), newExchange.getClass());
-			Assert.assertEquals(testExchange.getExperiedPeriod(), newExchange.getExperiedPeriod());
-			Assert.assertEquals(testExchange.getTimestamp(), newExchange.getTimestamp());
-			Assert.assertEquals(testExchange.getPairs(), newExchange.getPairs());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}

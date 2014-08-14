@@ -20,11 +20,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BitstampExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 8420288560764284730L;
-
 	public BitstampExchange(long experiedPeriod) {
 		super("Bitstamp", experiedPeriod);
 	}
@@ -34,8 +29,12 @@ public class BitstampExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("last").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (pair.getExchange().equals("USD") && pair.getCoin().equals("BTC")) {
+			return node.get("last").getTextValue();
+		} else {
+			throw new IOException("Invalid Pair");
+		}
 	}
 
 	@Override

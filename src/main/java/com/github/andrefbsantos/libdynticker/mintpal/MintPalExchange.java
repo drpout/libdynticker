@@ -24,11 +24,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class MintPalExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = 6030375175840478473L;
-
 	public MintPalExchange(long experiedPeriod) {
 		super("MintPal", experiedPeriod);
 	}
@@ -38,8 +33,12 @@ public class MintPalExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("data").get("last_price").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if (node.get("status").getTextValue().equals("success")) {
+			return node.get("data").get("last_price").getTextValue();
+		} else {
+			throw new IOException(node.get("message").getTextValue());
+		}
 	}
 
 	@Override
@@ -49,17 +48,19 @@ public class MintPalExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
-		List<Pair> pairs = new ArrayList<Pair>();
-
-		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://api.mintpal.com/v2/market/summary/")).get("data").getElements();
-
-		while (elements.hasNext()) {
-			JsonNode element = elements.next();
-			String coin = element.get("code").getTextValue();
-			String exchange = element.get("exchange").getTextValue();
-			pairs.add(new Pair(coin, exchange));
+		JsonNode node = (new ObjectMapper()).readTree(new URL("https://api.mintpal.com/v2/market/summary/"));
+		if (node.get("status").getTextValue().equals("success")) {
+			List<Pair> pairs = new ArrayList<Pair>();
+			Iterator<JsonNode> elements = node.get("data").getElements();
+			while (elements.hasNext()) {
+				JsonNode element = elements.next();
+				String coin = element.get("code").getTextValue();
+				String exchange = element.get("exchange").getTextValue();
+				pairs.add(new Pair(coin, exchange));
+			}
+			return pairs;
+		} else {
+			throw new IOException(node.get("message").getTextValue());
 		}
-
-		return pairs;
 	}
 }

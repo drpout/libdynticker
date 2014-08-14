@@ -20,11 +20,6 @@ import com.github.andrefbsantos.libdynticker.core.Pair;
  */
 public class BittrexExchange extends Exchange {
 
-	/**
-	 *
-	 */
-	private static final long serialVersionUID = -2450579046081447040L;
-
 	public BittrexExchange(long experiedPeriod) {
 		super("Bittrex", experiedPeriod);
 	}
@@ -41,7 +36,13 @@ public class BittrexExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
-		return parseJSON(new ObjectMapper().readTree(new URL(this.getTickerURL(pair))), pair);
+		JsonNode node = new ObjectMapper().readTree(new URL(this.getTickerURL(pair)));
+
+		if (node.get("success").getBooleanValue()) {
+			return parseJSON(node, pair);
+		} else {
+			throw new MalformedURLException(node.get("message").getTextValue());
+		}
 	}
 
 	@Override
