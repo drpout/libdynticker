@@ -57,7 +57,7 @@ public class BTC38Exchange extends Exchange {
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
 		if (node.has("ticker")) {
-			return String.valueOf(node.get("ticker").get("last"));
+			return node.get("ticker").get("last").toString();
 		} else {
 			throw new IOException();
 		}
