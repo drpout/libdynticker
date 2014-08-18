@@ -2,11 +2,7 @@ package com.github.andrefbsantos.libdynticker.core;
 
 import static org.mockito.Mockito.verify;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
 
 import org.junit.After;
@@ -99,10 +95,5 @@ public class ExchangeTest {
 			e.printStackTrace();
 			Assert.fail();
 		}
-	}
-
-	@Test
-	public void testName() {
-		Assert.assertEquals(testExchange.getName() + "Exchange", testExchange.getClass().getSimpleName());
 	}
 }
