@@ -1,7 +1,7 @@
 libdynticker
 ============
 
-Java library to retrieve trading pairs and last value from cryptocurrency exchanges.
+Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.
 
 The main goal of libdynticker is to get the traded pairs dynamically. That way it can cope with the highly mutable altcoin exchanges where new pairs are added and removed each week. The result of this is that once a new exchange is added all trading pairs come along immediately.
 
@@ -26,6 +26,10 @@ Currently supported exchanges:
 * [HitBTC](https://hitbtc.com)
 * [BlueTrade](https://bleutrade.com)
 * [AllCoin](https://www.allcoin.com)
+* [BTC38](http://www.btc38.com)
+
+* [BullionVault](https://www.bullionvault.com)
+
 
 Building
 --------

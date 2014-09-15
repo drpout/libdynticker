@@ -15,7 +15,6 @@ public class BullionVaultExchange extends Exchange {
 
 	public BullionVaultExchange(long experiedPeriod) {
 		super("BullionVaul", experiedPeriod);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -25,8 +24,8 @@ public class BullionVaultExchange extends Exchange {
 		String[] securities = { "AUX", "AGX" };
 		String[] valuations = { "USD", "GBP", "EUR", "JPY", "AUD", "CAD", "CHF" };
 
-		for (String security : securities) {
-			for (String valuation : valuations) {
+		for(String security : securities) {
+			for(String valuation : valuations) {
 				pairs.add(new Pair(security, valuation));
 			}
 		}
@@ -42,7 +41,7 @@ public class BullionVaultExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.has("latestPrice")) {
+		if(node.has("latestPrice")) {
 
 			return String.valueOf(node.get("latestPrice").get("price"));
 		} else {
