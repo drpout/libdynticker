@@ -52,10 +52,7 @@ public class BleuTradeExchange extends Exchange {
 				String exchange = next.get("BaseCurrency").getTextValue();
 				Pair pair = new Pair(coin, exchange);
 				pairs.add(pair);
-			} else {
-		
-	}
-
+			}
 		}
 		return pairs;
 	}

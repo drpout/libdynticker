@@ -34,7 +34,6 @@ public class BTC38ExchangeTest extends ExchangeTest {
 			Pair pair = new Pair("LTC", "BTC");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btc38-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			System.out.println(lastValue);
 			Assert.assertEquals("0.008", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
