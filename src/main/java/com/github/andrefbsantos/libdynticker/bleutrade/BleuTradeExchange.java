@@ -53,8 +53,8 @@ public class BleuTradeExchange extends Exchange {
 				Pair pair = new Pair(coin, exchange);
 				pairs.add(pair);
 			} else {
-				System.out.println("aaa");
-			}
+		
+	}
 
 		}
 		return pairs;
