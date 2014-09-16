@@ -9,7 +9,7 @@
 	<version>0</version>
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
-	<description>Java library to retrieve trading pairs and last value from cryptocurrency exchanges.</description>
+	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
 	<inceptionYear>2014</inceptionYear>
 
 	<scm>
