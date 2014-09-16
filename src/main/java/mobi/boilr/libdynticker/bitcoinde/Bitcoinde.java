@@ -40,7 +40,7 @@ public class Bitcoinde extends Exchange {
 			if (elements.hasNext()) {
 				return elements.next().get("price").toString();
 			} else {
-				return "0";
+				throw new IOException();
 			}
 		} else {
 			throw new IOException("Invalid Pair");

@@ -65,9 +65,7 @@ public class VoSExchange extends Exchange {
 				JsonNode next = elements.next();
 				return next.get("price").get("value").getTextValue();
 			} else {
-				// When no trade is found, returns 0. That's how blue trade handles markets with no
-				// transactions
-				return "0";
+				throw new IOException();
 			}
 		} else {
 			throw new IOException();
