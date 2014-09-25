@@ -5,16 +5,16 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class BullionVaultExchange extends Exchange {
 
 	public BullionVaultExchange(long experiedPeriod) {
-		super("BullionVaul", experiedPeriod);
+		super("BullionVault", experiedPeriod);
 	}
 
 	@Override
@@ -24,8 +24,8 @@ public class BullionVaultExchange extends Exchange {
 		String[] securities = { "AUX", "AGX" };
 		String[] valuations = { "USD", "GBP", "EUR", "JPY", "AUD", "CAD", "CHF" };
 
-		for(String security : securities) {
-			for(String valuation : valuations) {
+		for (String security : securities) {
+			for (String valuation : valuations) {
 				pairs.add(new Pair(security, valuation));
 			}
 		}
