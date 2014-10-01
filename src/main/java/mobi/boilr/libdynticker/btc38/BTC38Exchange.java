@@ -7,17 +7,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class BTC38Exchange extends Exchange {
 
 	public BTC38Exchange(long experiedPeriod) {
 		super("BTC38", experiedPeriod);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -56,7 +55,7 @@ public class BTC38Exchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.has("ticker")) {
+		if(node.has("ticker")) {
 			return node.get("ticker").get("last").toString();
 		} else {
 			throw new IOException();

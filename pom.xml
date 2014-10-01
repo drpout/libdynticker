@@ -164,6 +164,11 @@
 				<groupId>de.jutzig</groupId>
 				<artifactId>github-release-plugin</artifactId>
 				<version>1.0.3</version>
+				<configuration>
+					<releaseName>${project.version}</releaseName>
+					<tag>${project.version}</tag>
+					<prerelease>true</prerelease>
+				</configuration>
 				<executions>
 					<execution>
 						<id>github-upload-jar</id>
@@ -173,8 +178,6 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-							<releaseName>${project.version}</releaseName>
-							<tag>${project.version}</tag>
 							<artifact>${project.build.directory}/${project.artifactId}-${project.version}.jar</artifact>
 						</configuration>
 					</execution>
@@ -186,8 +189,6 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-							<releaseName>${project.version}</releaseName>
-							<tag>${project.version}</tag>
 							<artifact>${project.build.directory}/${project.artifactId}-${project.version}-javadoc.jar</artifact>
 						</configuration>
 					</execution>
@@ -199,8 +200,6 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-							<releaseName>${project.version}</releaseName>
-							<tag>${project.version}</tag>
 							<artifact>${project.build.directory}/${project.artifactId}-${project.version}-sources.jar</artifact>
 						</configuration>
 					</execution>
@@ -212,8 +211,6 @@
 						</goals>
 						<inherited>false</inherited>
 						<configuration>
-							<releaseName>${project.version}</releaseName>
-							<tag>${project.version}</tag>
 							<artifact>${project.build.directory}/${project.artifactId}-${project.version}.pom</artifact>
 						</configuration>
 					</execution>
