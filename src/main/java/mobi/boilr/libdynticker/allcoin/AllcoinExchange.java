@@ -24,11 +24,6 @@ import mobi.boilr.libdynticker.core.Pair;
 public class AllcoinExchange extends Exchange {
 
 	/**
-	 *
-	 */
-	private static final long serialVersionUID = -2353215696650751173L;
-
-	/**
 	 * @param experiedPeriod
 	 */
 	public AllcoinExchange(long experiedPeriod) {
