@@ -27,9 +27,6 @@ public class VoSExchange extends Exchange {
 		List<String> coins = new ArrayList<String>();
 		List<String> exchanges = new ArrayList<String>();
 
-		exchanges.add("USD");
-		exchanges.add("CAD");
-
 		while (elements.hasNext()) {
 			JsonNode next = elements.next();
 			String code = next.get("code").getTextValue();
@@ -45,9 +42,7 @@ public class VoSExchange extends Exchange {
 				}
 			}
 		}
-
 		return pairs;
-
 	}
 
 	@Override
