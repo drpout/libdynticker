@@ -6,7 +6,7 @@
 
 	<groupId>mobi.boilr.libdynticker</groupId>
 	<artifactId>libdynticker</artifactId>
-	<version>0</version>
+	<version>0.0.0</version>
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
 	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
