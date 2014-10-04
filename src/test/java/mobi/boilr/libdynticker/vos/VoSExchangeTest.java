@@ -42,6 +42,10 @@ public class VoSExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CAD")));
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+			
+			for(Pair pair : pairs){
+				System.out.println(pair);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail(e.toString());
@@ -70,5 +74,4 @@ public class VoSExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
 }

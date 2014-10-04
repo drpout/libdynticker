@@ -45,16 +45,18 @@ public class ExchangeTest {
 		}
 
 		int numberOfExamples;
-		// numberOfExamples = pairs.size();
-		numberOfExamples = 3;
+		 //numberOfExamples = pairs.size();
+		numberOfExamples = 1;
 		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
+			Pair pair = null;
 			try {
-				Pair pair = pairs.get(i);
+				pair = pairs.get(i);
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
-				System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
+				//	System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
 			} catch (IOException e) {
 				e.printStackTrace();
+				System.out.println(pair);
 				Assert.fail();
 			}
 		}

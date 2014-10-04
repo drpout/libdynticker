@@ -51,9 +51,8 @@ public class LocalBitcoinsTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "SEK")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "GBP")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "PLN")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (JsonProcessingException e) {
 			Assert.fail();

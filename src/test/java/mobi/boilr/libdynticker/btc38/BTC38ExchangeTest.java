@@ -75,5 +75,4 @@ public class BTC38ExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
 }

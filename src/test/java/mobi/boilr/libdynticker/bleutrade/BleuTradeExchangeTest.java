@@ -68,5 +68,4 @@ public class BleuTradeExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
 }

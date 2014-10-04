@@ -58,7 +58,6 @@ public class BTCEExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "RUR")));
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("TRC", "BTC")));
 
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 

@@ -54,7 +54,7 @@ public class MintPalExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertNotEquals(0, pairs.size());
-			Assert.assertTrue(pairs.contains(new Pair("AUR", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
@@ -67,7 +67,7 @@ public class MintPalExchangeTest extends ExchangeTest {
 		double lastValue;
 		List<Pair> pairs = new ArrayList<Pair>();
 		pairs.add(new Pair("DOGE", "BTC"));
-		pairs.add(new Pair("AUR", "BTC"));
+		pairs.add(new Pair("LTC", "BTC"));
 		try {
 			for (Pair pair : pairs) {
 				lastValue = testExchange.getLastValue(pair);

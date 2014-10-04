@@ -39,7 +39,7 @@ public class CryptsyTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("RBBT", "LTC")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
 		} catch (IOException e) {
