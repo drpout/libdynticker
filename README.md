@@ -40,3 +40,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ## Versioning
 libdynticker follows [Semantic Versioning](http://semver.org) with the API being the public methods and attributes provided by the [Exchange](/src/main/java/mobi/boilr/libdynticker/core/Exchange.java) and [Pair](/src/main/java/mobi/boilr/libdynticker/core/Pair.java) classes.
+
+## License
+All libdynticker code is licensed under [GNU LGPL v3](/LICENSE) or later. Copyright belongs to the [contributors listed on GitHub](https://github.com/andrefbsantos/libdynticker/graphs/contributors).
