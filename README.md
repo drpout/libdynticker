@@ -13,11 +13,13 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BTC-E](https://btc-e.com)
 * [Bter](https://bter.com)
 * [CaVirtEx](https://www.cavirtex.com)
+* [CHBTC](https://www.chbtc.com)
 * [Huobi](https://www.huobi.com)
 * [Kraken](https://www.kraken.com)
 * [LocalBitcoins](https://localbitcoins.com)
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)
+* [Peatio](https://peatio.com)
 
 ### Altcoins
 * [AllCoin](https://www.allcoin.com)
@@ -34,6 +36,9 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
 * [Melotic](https://www.melotic.com)
+
+### Futures and stocks
+* [796 Exchange](https://796.com)
 
 ## Building
  `mvn package` to create a jar.
