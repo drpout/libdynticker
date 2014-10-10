@@ -8,6 +8,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Bitcoin and altcoins to FIAT
 * [Bitcoin.de](https://www.bitcoin.de)
+* [Bitfinex](https://www.bitfinex.com)
 * [Bitstamp](https://www.bitstamp.net)
 * [BTC China](https://btcchina.com)
 * [BTC-E](https://btc-e.com)
