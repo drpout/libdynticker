@@ -63,7 +63,7 @@ public class BTC38ExchangeTest extends ExchangeTest {
 
 		pairs.add(new Pair("LTC", "CNY"));
 		pairs.add(new Pair("BTC", "CNY"));
-		pairs.add(new Pair("LTC", "BTC"));
+		pairs.add(new Pair("DOGE", "BTC"));
 
 		try {
 			for(Pair pair : pairs) {

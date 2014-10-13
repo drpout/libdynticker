@@ -7,16 +7,22 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ## Supported exchanges
 
 ### Bitcoin and altcoins to FIAT
+* [ANX](https://anxpro.com)
 * [Bitcoin.de](https://www.bitcoin.de)
 * [Bitfinex](https://www.bitfinex.com)
 * [Bitstamp](https://www.bitstamp.net)
 * [BTC China](https://btcchina.com)
+* [BTC Markets](https://btcmarkets.net)
 * [BTC-E](https://btc-e.com)
 * [Bter](https://bter.com)
+* [CampBX](http://campbx.com)
 * [CaVirtEx](https://www.cavirtex.com)
+* [CEX.IO](http://cex.io)
 * [CHBTC](https://www.chbtc.com)
 * [Huobi](https://www.huobi.com)
+* [itBit](https://www.itbit.com)
 * [Kraken](https://www.kraken.com)
+* [LakeBTC](http://lakebtc.com)
 * [LocalBitcoins](https://localbitcoins.com)
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)

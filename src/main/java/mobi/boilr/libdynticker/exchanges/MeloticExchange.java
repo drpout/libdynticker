@@ -24,7 +24,7 @@ public class MeloticExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		URL url = new URL("https://www.melotic.com/api/markets");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -46,16 +46,13 @@ public class MeloticExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		// http://www.melotic.com/api/markets/gold-btc/ticker
-		String address = "https://www.melotic.com/api/markets/" + pair.getCoin().toLowerCase() + "-" +
-				pair.getExchange().toLowerCase() + "/ticker";
-		URL url = new URL(address);
-		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection urlConnection = (HttpURLConnection) (new URL("https://www.melotic.com/api/markets/"
+				+ pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + "/ticker")).openConnection();
 		urlConnection.setRequestProperty("Accept", "*/*");
 		urlConnection.connect();
-		InputStream is = urlConnection.getInputStream();
-		JsonNode node = (new ObjectMapper()).readTree(is);
+		JsonNode node = (new ObjectMapper()).readTree(urlConnection.getInputStream());
 		if(node.has("message"))
 			throw new MalformedURLException(node.get("message").getTextValue());
 		return parseJSON(node, pair);
