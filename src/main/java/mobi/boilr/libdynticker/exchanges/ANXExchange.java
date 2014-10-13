@@ -29,7 +29,6 @@ public class ANXExchange extends Exchange {
 		tempPairs.add(new Pair("BTC", "NZD"));
 		tempPairs.add(new Pair("LTC", "BTC"));
 		tempPairs.add(new Pair("PPC", "BTC"));
-		tempPairs.add(new Pair("PPC", "LTC"));
 		tempPairs.add(new Pair("NMC", "BTC"));
 		tempPairs.add(new Pair("DOGE", "BTC"));
 		pairs = Collections.unmodifiableList(tempPairs);

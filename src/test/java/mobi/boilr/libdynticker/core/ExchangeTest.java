@@ -39,22 +39,21 @@ public class ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertNotNull(pairs);
 			Assert.assertTrue(pairs.size() > 0);
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 
-		int numberOfExamples;
-		 //numberOfExamples = pairs.size();
-		numberOfExamples = 1;
-		for (int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
+		int numberOfExamples = pairs.size();
+		for(int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
 			Pair pair = null;
 			try {
 				pair = pairs.get(i);
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
-				//	System.out.println(String.format("%-20s %-10s %-20s", testExchange.getClass().getSimpleName(), pair, lastValue));
-			} catch (IOException e) {
+				// System.out.println(String.format("%-20s %-10s %-20s",
+				// testExchange.getClass().getSimpleName(), pair, lastValue));
+			} catch(IOException e) {
 				e.printStackTrace();
 				System.out.println(pair);
 				Assert.fail();
@@ -72,7 +71,7 @@ public class ExchangeTest {
 			Assert.assertNotNull(exchange.getTimestamp());
 			exchange.getPairs();
 			verify(exchange, Mockito.times(2)).getPairsFromAPI();
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -93,7 +92,7 @@ public class ExchangeTest {
 			Assert.assertNotNull(exchange.getTimestamp());
 			exchange.getPairs();
 			verify(exchange, Mockito.times(1)).getPairsFromAPI();
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
