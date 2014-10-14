@@ -33,7 +33,7 @@ public class CoinswapExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinswap-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.00000088", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -47,7 +47,7 @@ public class CoinswapExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "DOGE")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
@@ -57,14 +57,9 @@ public class CoinswapExchangeTest extends ExchangeTest {
 		try {
 			double lastValue = testExchange.getLastValue(new Pair("DOGE", "BTC"));
 			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
-	}
-
-	@Test(expected = IOException.class)
-	public void testFailGetLastValue() throws NumberFormatException, IOException {
-		testExchange.getLastValue(new Pair("InvalidCoin", "CNY"));
 	}
 }

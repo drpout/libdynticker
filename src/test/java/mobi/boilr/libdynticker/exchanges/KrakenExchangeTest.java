@@ -34,7 +34,7 @@ public class KrakenExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/kraken-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("37000.00000", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -48,18 +48,7 @@ public class KrakenExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("XBT", "EUR"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

@@ -12,12 +12,6 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-/**
- * Abstract tests for other exchanges that inherit this class
- *
- * @author andre
- *
- */
 @Ignore
 public class ExchangeTest {
 	protected Exchange testExchange;
@@ -39,23 +33,18 @@ public class ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertNotNull(pairs);
 			Assert.assertTrue(pairs.size() > 0);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 
-		int numberOfExamples = pairs.size();
-		for(int i = 0; i < numberOfExamples && i < pairs.size(); i++) {
-			Pair pair = null;
+		for (Pair pair : pairs) {
 			try {
-				pair = pairs.get(i);
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
-				// System.out.println(String.format("%-20s %-10s %-20s",
-				// testExchange.getClass().getSimpleName(), pair, lastValue));
-			} catch(IOException e) {
+			} catch (Exception e) {
 				e.printStackTrace();
-				System.out.println(pair);
+				System.err.println(pair);
 				Assert.fail();
 			}
 		}
@@ -71,7 +60,7 @@ public class ExchangeTest {
 			Assert.assertNotNull(exchange.getTimestamp());
 			exchange.getPairs();
 			verify(exchange, Mockito.times(2)).getPairsFromAPI();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -92,7 +81,7 @@ public class ExchangeTest {
 			Assert.assertNotNull(exchange.getTimestamp());
 			exchange.getPairs();
 			verify(exchange, Mockito.times(1)).getPairsFromAPI();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}

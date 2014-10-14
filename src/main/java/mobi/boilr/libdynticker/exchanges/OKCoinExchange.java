@@ -34,6 +34,8 @@ public class OKCoinExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
+		if(!pairs.contains(pair))
+			throw new IOException("Invalid pair.");
 		String url = "";
 		if(pair.getExchange().equals("USD")) {
 			// https://www.okcoin.com/api/ticker.do?symbol=ltc_usd&ok=1

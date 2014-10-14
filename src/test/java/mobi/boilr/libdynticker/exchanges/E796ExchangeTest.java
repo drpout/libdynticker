@@ -33,7 +33,7 @@ public class E796ExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/796-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("325.00", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
@@ -46,26 +46,8 @@ public class E796ExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BNC BTC Futures (weekly)", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("ASICMINER", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BNC BTC Futures (weekly)", "USD"));
-			Assert.assertNotNull(lastValue);
-			lastValue = testExchange.getLastValue(new Pair("ASICMINER", "BTC"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test(expected = IOException.class)
-	public void testFailGetLastValue() throws NumberFormatException, IOException {
-		testExchange.getLastValue(new Pair("Invalid", "BTC"));
-	}
-
 }

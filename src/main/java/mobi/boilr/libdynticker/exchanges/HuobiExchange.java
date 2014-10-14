@@ -32,6 +32,8 @@ public class HuobiExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
+		if(!pairs.contains(pair))
+			throw new IOException("Invalid pair.");
 		String url = "http://market.huobi.com/staticmarket/ticker_" + pair.getCoin().toLowerCase() + "_json.js";
 		return this.parseJSON((new ObjectMapper()).readTree(new URL(url)), pair);
 	}

@@ -15,10 +15,6 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.MappingJsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
-/**
- * @author andre
- *
- */
 public class CryptsyExchange extends Exchange {
 
 	public CryptsyExchange(long experiedPeriod) {
@@ -31,7 +27,7 @@ public class CryptsyExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.get("success").toString().equals("1")) {
+		if(node.get("success").toString().equals("1")) {
 			return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
 		} else {
 			throw new IOException(node.get("error").getTextValue());
@@ -40,7 +36,7 @@ public class CryptsyExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		return parseJSON((new ObjectMapper()).readTree(new URL(this.getTickerURL(pair))), pair);
+		return parseJSON((new ObjectMapper()).readTree(new URL(getTickerURL(pair))), pair);
 	}
 
 	// http://stackoverflow.com/questions/11507231/android-parsing-json-file-with-a-large-property-with-low-memory-usage

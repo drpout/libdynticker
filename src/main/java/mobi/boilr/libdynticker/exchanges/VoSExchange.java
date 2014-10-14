@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class VoSExchange extends Exchange {
 
@@ -36,7 +36,7 @@ public class VoSExchange extends Exchange {
 
 		for (String coin : coins) {
 			for (String exchange : exchanges) {
-				if (!coin.equals(exchange)) {
+				if(!coin.equals(exchange)) {
 					Pair pair = new Pair(coin, exchange);
 					pairs.add(pair);
 				}
@@ -54,13 +54,13 @@ public class VoSExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.get("status").getTextValue().equals("success")) {
+		if(node.get("status").getTextValue().equals("success")) {
 			Iterator<JsonNode> elements = node.get("data").getElements();
-			if (elements.hasNext()) {
+			if(elements.hasNext()) {
 				JsonNode next = elements.next();
 				return next.get("price").get("value").getTextValue();
 			} else {
-				throw new IOException();
+				throw new IOException("Data for " + pair + " is empty.");
 			}
 		} else {
 			throw new IOException();

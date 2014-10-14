@@ -33,7 +33,7 @@ public class BTCMarketsExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btcmarkets-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("444.95", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
@@ -46,25 +46,8 @@ public class BTCMarketsExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "AUD")));
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "AUD")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "AUD"));
-			Assert.assertNotNull(lastValue);
-			lastValue = testExchange.getLastValue(new Pair("LTC", "AUD"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test(expected = IOException.class)
-	public void testFailGetLastValue() throws NumberFormatException, IOException {
-		testExchange.getLastValue(new Pair("Invalid", "BTC"));
 	}
 }

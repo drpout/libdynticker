@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class KrakenExchange extends Exchange {
 
@@ -54,7 +54,7 @@ public class KrakenExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (!node.get("error").getElements().hasNext()) {
+		if(!node.get("error").getElements().hasNext()) {
 			return node.get("result").get(this.pairCode(pair)).get("c").getElements().next().getTextValue();
 		} else {
 			throw new IOException(node.get("error").getElements().next().getTextValue());
@@ -62,8 +62,8 @@ public class KrakenExchange extends Exchange {
 	}
 
 	private String pairCode(Pair pair) {
-		String exchangeCode = pair.getExchange().equals("USD") || pair.getExchange().equals("EUR") || pair.getExchange().equals("KWR") ? "Z" : "X";
-		String coinCode = pair.getCoin().equals("USD") || pair.getCoin().equals("USD") || pair.getCoin().equals("USD") ? "Z" : "X";
+		String exchangeCode = pair.getExchange().equals("USD") || pair.getExchange().equals("EUR") ? "Z" : "X";
+		String coinCode = pair.getCoin().equals("USD") || pair.getCoin().equals("EUR") ? "Z" : "X";
 		return coinCode + pair.getCoin() + exchangeCode + pair.getExchange();
 	}
 }

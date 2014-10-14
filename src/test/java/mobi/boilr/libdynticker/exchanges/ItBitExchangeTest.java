@@ -33,7 +33,7 @@ public class ItBitExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/itbit-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("376.94000000", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
@@ -46,25 +46,8 @@ public class ItBitExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("XBT", "EUR")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("XBT", "USD"));
-			Assert.assertNotNull(lastValue);
-			lastValue = testExchange.getLastValue(new Pair("XBT", "EUR"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test(expected = IOException.class)
-	public void testFailGetLastValue() throws NumberFormatException, IOException {
-		testExchange.getLastValue(new Pair("Invalid", "BTC"));
 	}
 }

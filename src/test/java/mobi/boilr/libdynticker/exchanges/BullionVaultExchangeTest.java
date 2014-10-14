@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.ExchangeTest;
@@ -35,7 +34,7 @@ public class BullionVaultExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bullionvault-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("41789.44398", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -50,30 +49,9 @@ public class BullionVaultExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("AUX", "EUR")));
 			Assert.assertTrue(pairs.contains(new Pair("AGX", "AUD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		double lastValue;
-		List<Pair> pairs = new ArrayList<Pair>();
-
-		pairs.add(new Pair("AUX", "USD"));
-		pairs.add(new Pair("AUX", "EUR"));
-		pairs.add(new Pair("AGX", "AUD"));
-
-		try {
-			for(Pair pair : pairs) {
-				lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
 }

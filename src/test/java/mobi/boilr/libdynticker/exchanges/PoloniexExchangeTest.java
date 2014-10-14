@@ -29,15 +29,13 @@ public class PoloniexExchangeTest extends ExchangeTest {
 
 	@Test
 	public void testParseJson() {
-
 		JsonNode node;
 		try {
 			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
-
 			Pair pair = new Pair("XMR", "BTC");
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.00452783", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 
@@ -51,22 +49,9 @@ public class PoloniexExchangeTest extends ExchangeTest {
 			Assert.assertNotEquals(0, pairs.size());
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
-
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("XMR", "BTC"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
 }

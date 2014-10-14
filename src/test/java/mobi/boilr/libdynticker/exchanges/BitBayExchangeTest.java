@@ -14,12 +14,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class BTCChinaExchangeTest extends ExchangeTest {
-
+public class BitBayExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BTCChinaExchange(10000);
+		testExchange = new BitBayExchange(1000);
 	}
 
 	@Override
@@ -30,12 +29,11 @@ public class BTCChinaExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "CNY");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btcchina-ticker.json")));
+			Pair pair = new Pair("BTC", "PLN");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bitbay-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("3684.01", lastValue);
+			Assert.assertEquals("1353", lastValue);
 		} catch (IOException e) {
-			e.printStackTrace();
 			Assert.fail();
 		}
 	}
@@ -45,10 +43,9 @@ public class BTCChinaExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "CNY")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "PLN")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "PLN")));
+			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
 		}

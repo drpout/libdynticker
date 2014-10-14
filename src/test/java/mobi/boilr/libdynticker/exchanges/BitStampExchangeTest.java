@@ -34,7 +34,7 @@ public class BitStampExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail(e.toString());
 		}
@@ -48,17 +48,7 @@ public class BitStampExchangeTest extends ExchangeTest {
 			node = (new ObjectMapper().readTree(new File("src/test/json/bitstamp-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("600.15", lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

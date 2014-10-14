@@ -3,7 +3,6 @@ package mobi.boilr.libdynticker.exchanges;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.ExchangeTest;
@@ -37,7 +36,7 @@ public class CavirtexExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cavirtex-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("630.00001", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -52,40 +51,15 @@ public class CavirtexExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "CAD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "LTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			Assert.fail();
-		} catch(MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			Assert.fail();
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		double lastValue;
-		List<Pair> pairs = new ArrayList<Pair>();
-		pairs.add(new Pair("BTC", "CAD"));
-		pairs.add(new Pair("LTC", "CAD"));
-		pairs.add(new Pair("BTC", "LTC"));
-		try {
-			for(Pair pair : pairs) {
-				lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-			}
-		} catch(JsonProcessingException e) {
-			e.printStackTrace();
-			Assert.fail();
-		} catch(MalformedURLException e) {
-			e.printStackTrace();
-			Assert.fail();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-
 }

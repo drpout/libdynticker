@@ -6,16 +6,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-/**
- * @author andre
- *
- */
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class PoloniexExchange extends Exchange {
 
 	public PoloniexExchange(long experiedPeriod) {
@@ -28,7 +24,7 @@ public class PoloniexExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.has(pair.getExchange().toUpperCase() + "_" + pair.getCoin().toUpperCase())) {
+		if(node.has(pair.getExchange().toUpperCase() + "_" + pair.getCoin().toUpperCase())) {
 			return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").getTextValue();
 		} else {
 			throw new IOException();

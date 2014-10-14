@@ -22,7 +22,6 @@ public class BTC38Exchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		String[] exchanges = { "cny", "btc" };
 		String addr = "http://api.btc38.com/v1/ticker.php?c=all&mk_type=";
 
@@ -55,10 +54,10 @@ public class BTC38Exchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.has("ticker")) {
+		if(node.has("ticker") && node.get("ticker").isObject()) {
 			return node.get("ticker").get("last").toString();
 		} else {
-			throw new IOException();
+			throw new IOException("No data for pair " + pair + ".");
 		}
 	}
 

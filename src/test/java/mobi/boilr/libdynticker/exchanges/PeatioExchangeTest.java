@@ -29,11 +29,11 @@ public class PeatioExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("DOG", "CNY");
+			Pair pair = new Pair("DOGE", "CNY");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/peatio-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00229", lastValue);
-		} catch(IOException e) {
+			Assert.assertEquals("0.001503", lastValue);
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
@@ -44,25 +44,10 @@ public class PeatioExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
-			Assert.assertTrue(pairs.contains(new Pair("DOG", "CNY")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("DOG", "CNY"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test(expected = IOException.class)
-	public void testFailGetLastValue() throws NumberFormatException, IOException {
-		testExchange.getLastValue(new Pair("InvalidCoin", "CNY"));
 	}
 }

@@ -34,7 +34,7 @@ public class AllcoinExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/allcoin-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.01250000", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -47,18 +47,7 @@ public class AllcoinExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("LTC", "BTC"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

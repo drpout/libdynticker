@@ -29,17 +29,6 @@ public class LocalBitcoinsExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -47,10 +36,10 @@ public class LocalBitcoinsExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			Assert.fail();
 			e.printStackTrace();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -63,7 +52,7 @@ public class LocalBitcoinsExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/localbitcoins-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("4175.95", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}

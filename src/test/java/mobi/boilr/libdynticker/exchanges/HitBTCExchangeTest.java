@@ -34,7 +34,7 @@ public class HitBTCExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/hitbtc-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("431.05", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -50,18 +50,7 @@ public class HitBTCExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "EUR"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

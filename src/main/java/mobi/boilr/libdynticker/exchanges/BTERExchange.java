@@ -7,16 +7,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-/**
- * @author andre
- *
- */
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+
 public class BTERExchange extends Exchange {
 
 	public BTERExchange(long experiedPeriod) {
@@ -29,8 +25,12 @@ public class BTERExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.get("result").getTextValue().equals("true")) {
-			return node.get("last").toString();
+		if(node.get("result").getTextValue().equals("true")) {
+			JsonNode lastValueNode = node.get("last");
+			if(lastValueNode.isTextual())
+				return lastValueNode.getTextValue();
+			else
+				return lastValueNode.toString();
 		} else {
 			throw new IOException(node.get("message").getTextValue());
 		}
@@ -40,10 +40,8 @@ public class BTERExchange extends Exchange {
 	public double getLastValue(Pair pair) throws IOException {
 		URL url = new URL(this.getTickerURL(pair));
 		URLConnection uc = url.openConnection();
-
 		// BTER doesn't awnser calls from java, this property masks it as a browser call
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-
 		uc.connect();
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
 		return Double.parseDouble(this.parseJSON(node, pair));
@@ -75,7 +73,6 @@ public class BTERExchange extends Exchange {
 			String exchange = split[1].toUpperCase();
 			pairs.add(new Pair(coin, exchange));
 		}
-
 		return pairs;
 	}
 }

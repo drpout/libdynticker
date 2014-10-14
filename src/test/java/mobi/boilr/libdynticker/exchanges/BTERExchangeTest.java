@@ -32,7 +32,6 @@ public class BTERExchangeTest extends ExchangeTest {
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
-
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
@@ -40,17 +39,16 @@ public class BTERExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "CNY")));
 
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(JsonProcessingException e) {
+		} catch (JsonProcessingException e) {
 			e.printStackTrace();
 			Assert.fail();
-		} catch(MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			Assert.fail();
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
-
 	}
 
 	@Test
@@ -62,21 +60,9 @@ public class BTERExchangeTest extends ExchangeTest {
 			node = (new ObjectMapper().readTree(new File("src/test/json/bter-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("605", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
 }

@@ -34,7 +34,7 @@ public class BTCEExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btce-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("575", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -51,18 +51,7 @@ public class BTCEExchangeTest extends ExchangeTest {
 
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 
-		} catch(IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

@@ -7,17 +7,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import mobi.boilr.libdynticker.core.Exchange;
+import mobi.boilr.libdynticker.core.Pair;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
-
-/**
- * @author andre
- *
- */
 public class BittrexExchange extends Exchange {
 
 	public BittrexExchange(long experiedPeriod) {
@@ -35,10 +31,9 @@ public class BittrexExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		JsonNode node = new ObjectMapper().readTree(new URL(this.getTickerURL(pair)));
-
-		if (node.get("success").getBooleanValue()) {
+		if(node.get("success").getBooleanValue()) {
 			return parseJSON(node, pair);
 		} else {
 			throw new MalformedURLException(node.get("message").getTextValue());
@@ -47,11 +42,9 @@ public class BittrexExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bittrex.com/api/v1.1/public/getmarkets")).get("result").getElements();
-
 		while (elements.hasNext()) {
 			JsonNode element = elements.next();
 			String coin = element.get("MarketCurrency").getTextValue();

@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import mobi.boilr.libdynticker.core.ExchangeTest;
+import mobi.boilr.libdynticker.core.Pair;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
@@ -11,24 +14,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import mobi.boilr.libdynticker.core.ExchangeTest;
-import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libdynticker.exchanges.CryptsyExchange;
-
 public class CryptsyExchangeTest extends ExchangeTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Override
 	@Before
 	public void setUp() throws Exception {
 		testExchange = new CryptsyExchange(10000);
 	}
 
-	/**
-	 * @throws java.lang.Exception
-	 */
 	@Override
 	@After
 	public void tearDown() throws Exception {

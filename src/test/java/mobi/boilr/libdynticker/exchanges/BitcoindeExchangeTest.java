@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.ExchangeTest;
@@ -35,7 +34,7 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bitcoinde-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("442.9", lastValue);
-		} catch(IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -48,28 +47,8 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		} catch (IOException e) {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		double lastValue;
-		List<Pair> pairs = new ArrayList<Pair>();
-
-		pairs.add(new Pair("BTC", "EUR"));
-
-		try {
-			for(Pair pair : pairs) {
-				lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-				// System.out.println(lastValue);
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
 }
