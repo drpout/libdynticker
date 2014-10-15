@@ -47,8 +47,8 @@ public class CryptonitExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "LTC")));
-			Assert.assertTrue(pairs.contains(new Pair("EUR", "NMC")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
