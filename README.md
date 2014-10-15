@@ -8,8 +8,11 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Bitcoin and altcoins to FIAT
 * [ANX](https://anxpro.com)
+* [BitBay](https://bitbay.pl)
 * [Bitcoin.de](https://www.bitcoin.de)
+* [Bitcurex](http://bitcurex.com)
 * [Bitfinex](https://www.bitfinex.com)
+* [BitMarket.pl](https://www.bitmarket.pl)
 * [Bitstamp](https://www.bitstamp.net)
 * [BTC China](https://btcchina.com)
 * [BTC Markets](https://btcmarkets.net)
@@ -21,11 +24,13 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CHBTC](https://www.chbtc.com)
 * [Huobi](https://www.huobi.com)
 * [itBit](https://www.itbit.com)
+* [Justcoin](https://justcoin.com)
 * [Kraken](https://www.kraken.com)
 * [LakeBTC](http://lakebtc.com)
 * [LocalBitcoins](https://localbitcoins.com)
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)
+* [Paymium](https://paymium.com)
 * [Peatio](https://peatio.com)
 
 ### Altcoins
@@ -33,6 +38,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Bittrex](https://bittrex.com)
 * [BlueTrade](https://bleutrade.com)
 * [BTC38](http://www.btc38.com)
+* [Cryptonit](https://cryptonit.net)
 * [Cryptsy](https://cryptsy.com)
 * [Coin-Swap](https://coin-swap.net)
 * [HitBTC](https://hitbtc.com)
@@ -44,8 +50,9 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BullionVault](https://www.bullionvault.com)
 * [Melotic](https://www.melotic.com)
 
-### Futures and stocks
+### Futures, stocks and securities
 * [796 Exchange](https://796.com)
+* [Crypto-Trade](https://crypto-trade.com)
 
 ## Building
  `mvn package` to create a jar.
