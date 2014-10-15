@@ -168,6 +168,10 @@
 					<releaseName>${project.version}</releaseName>
 					<tag>${project.version}</tag>
 					<prerelease>true</prerelease>
+					<description>
+						\+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
+						\* Corrected bugs in several exchanges which were listing inactive pairs.
+					</description>
 				</configuration>
 				<executions>
 					<execution>

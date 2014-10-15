@@ -14,18 +14,17 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class ItBitExchange extends Exchange {
+public class BitMarketPlExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("XBT", "USD"));
-		tempPairs.add(new Pair("XBT", "SGD"));
-		tempPairs.add(new Pair("XBT", "EUR"));
+		tempPairs.add(new Pair("BTC", "PLN"));
+		tempPairs.add(new Pair("LTC", "PLN"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public ItBitExchange(long experiedPeriod) {
-		super("itBit", experiedPeriod);
+	public BitMarketPlExchange(long experiedPeriod) {
+		super("BitMarket.pl", experiedPeriod);
 	}
 
 	@Override
@@ -35,19 +34,16 @@ public class ItBitExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
-		// https://api.itbit.com/v1/markets/XBTUSD/ticker
-		String url = "https://api.itbit.com/v1/markets/" + pair.getCoin() + pair.getExchange() + "/ticker";
+	IOException {
+		// https://www.bitmarket.pl/json/BTCPLN/ticker.json
+		String url = "https://www.bitmarket.pl/json/" + pair.getCoin() + pair.getExchange() + "/ticker.json";
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		// TODO Check for error
-		if(node.has("error"))
-			throw new MalformedURLException(node.get("error").get("message").getTextValue());
 		return parseJSON(node, pair);
 	}
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("lastPrice").getTextValue();
+		return node.get("last").toString();
 	}
 
 }
