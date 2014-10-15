@@ -30,14 +30,14 @@ public class CryptonitExchange extends Exchange {
 		};		
 		List<String[]> elements = new ObjectMapper().readValue((uc.getInputStream()),typeReference);
 		for(String[] node : elements){
-			pairs.add(new Pair(node[0],node[1]));
+			pairs.add(new Pair(node[1],node[0]));
 		}
 		return pairs;
 	}
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String addr = "https://cryptonit.net/apiv2/rest/public/ccorder.json?bid_currency="+pair.getCoin()+"&ask_currency="+pair.getExchange()+"&rate=1";
+		String addr = "https://cryptonit.net/apiv2/rest/public/ccorder.json?bid_currency="+pair.getExchange()+"&ask_currency="+pair.getCoin()+"&rate=1";
 		URLConnection uc = new URL(addr).openConnection();
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 		uc.connect();
