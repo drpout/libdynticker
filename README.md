@@ -38,6 +38,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Bittrex](https://bittrex.com)
 * [BlueTrade](https://bleutrade.com)
 * [BTC38](http://www.btc38.com)
+* [CCEDK](https://www.ccedk.com)
 * [Cryptonit](https://cryptonit.net)
 * [Cryptsy](https://cryptsy.com)
 * [Coin-Swap](https://coin-swap.net)

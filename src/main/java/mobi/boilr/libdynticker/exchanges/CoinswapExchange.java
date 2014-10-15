@@ -74,15 +74,14 @@ public class CoinswapExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		noCheckCertificate();
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://api.coin-swap.net/market/summary")).getElements();
 		doCheckCertificate();
 		for(JsonNode element; elements.hasNext();) {
 			element = elements.next();
-			Pair pair = new Pair(element.get("symbol").getTextValue(), element.get("exchange").getTextValue());
-			pairs.add(pair);
+			pairs.add(new Pair(element.get("symbol").getTextValue(), element.get("exchange").getTextValue()));
 		}
 		return pairs;
 	}
@@ -99,7 +98,7 @@ public class CoinswapExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		// https://api.coin-swap.net/market/stats/DOGE/BTC
 		String url = "https://api.coin-swap.net/market/stats/" + pair.getCoin() + "/" + pair.getExchange();
 		noCheckCertificate();
