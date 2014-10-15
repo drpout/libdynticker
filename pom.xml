@@ -23,6 +23,10 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
+		<release.description>
+			\+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
+			\* Corrected bugs in several exchanges which were listing inactive pairs.
+		</release.description>
 	</properties>
 
 	<developers>
@@ -168,10 +172,7 @@
 					<releaseName>${project.version}</releaseName>
 					<tag>${project.version}</tag>
 					<prerelease>true</prerelease>
-					<description>
-						\+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
-						\* Corrected bugs in several exchanges which were listing inactive pairs.
-					</description>
+					<description>${release.description}</description>
 				</configuration>
 				<executions>
 					<execution>
