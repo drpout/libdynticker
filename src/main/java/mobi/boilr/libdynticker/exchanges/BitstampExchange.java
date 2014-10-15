@@ -30,10 +30,10 @@ public class BitstampExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(pair.getExchange().equals("USD") && pair.getCoin().equals("BTC")) {
+		if(pairs.contains(pair)) {
 			return node.get("last").getTextValue();
 		} else {
-			throw new IOException("Invalid Pair");
+			throw new IOException(pair + " is invalid.");
 		}
 	}
 
