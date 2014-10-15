@@ -30,7 +30,9 @@ public class VoSExchange extends Exchange {
 		while (elements.hasNext()) {
 			JsonNode next = elements.next();
 			String code = next.get("code").getTextValue();
-			coins.add(code);
+			if(next.get("tradeable").asBoolean())
+				coins.add(code);
+			
 			exchanges.add(code);
 		}
 

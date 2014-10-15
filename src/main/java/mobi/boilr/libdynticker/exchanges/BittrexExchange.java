@@ -47,9 +47,11 @@ public class BittrexExchange extends Exchange {
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bittrex.com/api/v1.1/public/getmarkets")).get("result").getElements();
 		while (elements.hasNext()) {
 			JsonNode element = elements.next();
-			String coin = element.get("MarketCurrency").getTextValue();
-			String exchange = element.get("BaseCurrency").getTextValue();
-			pairs.add(new Pair(coin, exchange));
+			if(element.get("IsActive").asBoolean()){
+				String coin = element.get("MarketCurrency").getTextValue();
+				String exchange = element.get("BaseCurrency").getTextValue();
+				pairs.add(new Pair(coin, exchange));
+			}
 		}
 		return pairs;
 	}

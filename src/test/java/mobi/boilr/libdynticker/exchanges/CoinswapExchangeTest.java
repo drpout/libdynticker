@@ -51,15 +51,14 @@ public class CoinswapExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("DOGE", "BTC"));
-			Assert.assertNotNull(lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
+	
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("500")){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
 		}
 	}
 }

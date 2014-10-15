@@ -31,11 +31,15 @@ public class BTC38Exchange extends Exchange {
 			uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			uc.connect();
 			JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
+
 			Iterator<String> coins = node.getFieldNames();
+
 			while (coins.hasNext()) {
 				String coin = coins.next();
-				Pair pair = new Pair(coin.toUpperCase(), exch.toUpperCase());
-				pairs.add(pair);
+				if(node.get(coin).get("ticker").isObject()){
+					Pair pair = new Pair(coin.toUpperCase(), exch.toUpperCase());
+					pairs.add(pair);
+				}
 			}
 		}
 		return pairs;

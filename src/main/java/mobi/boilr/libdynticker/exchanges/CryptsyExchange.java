@@ -28,7 +28,12 @@ public class CryptsyExchange extends Exchange {
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
 		if(node.get("success").toString().equals("1")) {
-			return node.get("return").get("markets").get(pair.getCoin()).get("lasttradeprice").getTextValue();
+			String lastValue =  node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
+			if(lastValue == null){
+				throw new IOException("No last value for " + pair + ".");
+			}else{
+				return lastValue;
+			}
 		} else {
 			throw new IOException(node.get("error").getTextValue());
 		}

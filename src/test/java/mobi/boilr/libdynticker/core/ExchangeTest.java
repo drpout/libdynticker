@@ -43,11 +43,15 @@ public class ExchangeTest {
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
 			} catch (Exception e) {
-				e.printStackTrace();
-				System.err.println(pair);
-				Assert.fail();
+				handleException(pair, e);
 			}
 		}
+	}
+
+	protected void handleException(Pair pair, Exception e) {
+		System.err.println(pair);
+		e.printStackTrace();
+		Assert.fail();
 	}
 
 	@Test
