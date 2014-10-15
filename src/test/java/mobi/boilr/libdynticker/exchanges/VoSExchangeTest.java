@@ -35,7 +35,8 @@ public class VoSExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CAD")));
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+			Assert.assertFalse(pairs.contains(new Pair("USD", "CAD")));
+			Assert.assertFalse(pairs.contains(new Pair("CAD", "USD")));
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail(e.toString());
@@ -54,14 +55,14 @@ public class VoSExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD"));
-			Assert.assertNotNull(lastValue);
-		} catch (IOException e) {
-			Assert.fail();
+	
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("empty")){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
 		}
 	}
 }

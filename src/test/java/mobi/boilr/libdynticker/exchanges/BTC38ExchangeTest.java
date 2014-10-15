@@ -2,13 +2,13 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.ExchangeTest;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
@@ -16,7 +16,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class BTC38ExchangeTest extends ExchangeTest {
-
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -48,7 +47,6 @@ public class BTC38ExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "CNY")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch(IOException e) {
 			e.printStackTrace();
@@ -56,23 +54,13 @@ public class BTC38ExchangeTest extends ExchangeTest {
 		}
 	}
 
-	@Test
-	public void testGetLastValue() {
-		double lastValue;
-		List<Pair> pairs = new ArrayList<Pair>();
-
-		pairs.add(new Pair("LTC", "CNY"));
-		pairs.add(new Pair("BTC", "CNY"));
-		pairs.add(new Pair("DOGE", "BTC"));
-
-		try {
-			for(Pair pair : pairs) {
-				lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-			}
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof JsonParseException){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
 		}
 	}
 }

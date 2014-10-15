@@ -56,15 +56,14 @@ public class CryptsyExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
-	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("BTC", "USD", "2"));
-			Assert.assertNotNull(lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
+	
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("No last value")){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
 		}
 	}
 }

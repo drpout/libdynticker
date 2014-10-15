@@ -29,23 +29,12 @@ public class BleuTradeExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testGetLastValue() {
-		try {
-			double lastValue = testExchange.getLastValue(new Pair("LTC", "BTC"));
-			Assert.assertNotNull(lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("CDN", "SWIFT")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch(JsonProcessingException e) {
 			Assert.fail();
@@ -66,6 +55,35 @@ public class BleuTradeExchangeTest extends ExchangeTest {
 		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
+		}
+	}
+	
+	@Override
+	@Test
+	public void testGetLastValueWithPairsFromGetPairs() {
+		List<Pair> pairs = null;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertNotNull(pairs);
+			Assert.assertTrue(pairs.size() > 0);
+		} catch(IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+
+		int numberOfExamples = 100;
+		int size = numberOfExamples <= pairs.size() ? numberOfExamples : pairs.size();
+		for(int i = 0; i < size; i++) {
+			Pair pair = null;
+			try {
+				pair = pairs.get(i);
+				double lastValue = testExchange.getLastValue(pair);
+				Assert.assertNotNull(lastValue);
+			} catch(IOException e) {
+				System.out.println(pair);
+				e.printStackTrace();
+				Assert.fail();
+			}
 		}
 	}
 }
