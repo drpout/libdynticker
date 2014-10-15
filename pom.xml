@@ -169,9 +169,8 @@
 					<tag>${project.version}</tag>
 					<prerelease>true</prerelease>
 					<description>
-						+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
-						* Corrected bugs in several exchanges which were listing inactive pairs.
-						* Simplified test and increased their coverage.
+						\+ Added exchanges: BitBay, Bitcurex, BitMarket.pl, Crypto-Trade, Cryptonit, Justcoin and Paymium.
+						\* Corrected bugs in several exchanges which were listing inactive pairs.
 					</description>
 				</configuration>
 				<executions>
