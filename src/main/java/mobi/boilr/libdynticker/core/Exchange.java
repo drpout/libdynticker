@@ -10,9 +10,6 @@ import org.reflections.Reflections;
 
 /**
  * Abstract template for Exchange
- *
- * @author andre
- *
  */
 public abstract class Exchange {
 
@@ -27,8 +24,6 @@ public abstract class Exchange {
 	}
 
 	/**
-	 *
-	 *
 	 * @param pair
 	 *            of exchange/coin
 	 *
@@ -46,11 +41,11 @@ public abstract class Exchange {
 
 	final public List<Pair> getPairs() throws IOException {
 		long currentTime = System.currentTimeMillis();
-		if (timestamp == null) {
+		if(timestamp == null) {
 			pairs = getPairsFromAPI();
 			timestamp = new Timestamp(currentTime);
 			return pairs;
-		} else if ((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
+		} else if((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
 			return pairs;
 		} else {
 			// TODO throw a custom exception where there is no internet connection. The exception

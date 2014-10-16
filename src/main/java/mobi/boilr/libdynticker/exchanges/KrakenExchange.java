@@ -31,13 +31,12 @@ public class KrakenExchange extends Exchange {
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream()).get("result");
 		Iterator<String> fieldNames = node.getFieldNames();
 		String coin, exchange;
-		for(JsonNode jsonNode; fieldNames.hasNext();) {
+		for (JsonNode jsonNode; fieldNames.hasNext();) {
 			jsonNode = node.get(fieldNames.next());
 			coin = jsonNode.get("base").getTextValue().substring(1);
 			exchange = jsonNode.get("quote").getTextValue().substring(1);
 			pairs.add(new Pair(coin, exchange));
 		}
-
 		return pairs;
 	}
 

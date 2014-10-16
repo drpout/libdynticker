@@ -22,6 +22,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CaVirtEx](https://www.cavirtex.com)
 * [CEX.IO](http://cex.io)
 * [CHBTC](https://www.chbtc.com)
+* [CoinMkt](https://coinmkt.com)
 * [Huobi](https://www.huobi.com)
 * [itBit](https://www.itbit.com)
 * [Justcoin](https://justcoin.com)
@@ -35,16 +36,20 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Altcoins
 * [AllCoin](https://www.allcoin.com)
+* [Atomic Trade](https://www.atomic-trade.com)
 * [Bittrex](https://bittrex.com)
 * [BlueTrade](https://bleutrade.com)
 * [BTC38](http://www.btc38.com)
+* [C-CEX](https://c-cex.com)
 * [CCEDK](https://www.ccedk.com)
+* [Coins-E](http://coins-e.com)
 * [Cryptonit](https://cryptonit.net)
 * [Cryptsy](https://cryptsy.com)
 * [Coin-Swap](https://coin-swap.net)
 * [HitBTC](https://hitbtc.com)
 * [Mintpal](https://mintpal.com)
 * [Poloniex](https://www.poloniex.com)
+* [Vircurex](https://vircurex.com)
 * [VoS](https://www.vaultofsatoshi.com)
 
 ### Bullion
