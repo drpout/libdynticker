@@ -22,16 +22,9 @@ public class BTCEExchange extends Exchange {
 		return "https://btc-e.com/api/3/ticker/" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * mobi.boilr.libdynticker.core.Exchange#parseJSON(org.codehaus.jackson.JsonNode,
-	 * mobi.boilr.libdynticker.core.Pair)
-	 */
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.has(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())) {
+		if(node.has(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())) {
 			return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").toString();
 		} else {
 			throw new IOException(node.get("error").getTextValue());
@@ -47,12 +40,9 @@ public class BTCEExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://btc-e.com/api/3/info")).get("pairs").getFieldNames();
-		while (elements.hasNext()) {
-			String element = elements.next();
-			String[] split = element.split("_");
-			String coin = split[0].toUpperCase();
-			String exchange = split[1].toUpperCase();
-			pairs.add(new Pair(coin, exchange));
+		for(String[] split; elements.hasNext();) {
+			split = elements.next().toUpperCase().split("_");
+			pairs.add(new Pair(split[0], split[1]));
 		}
 		return pairs;
 	}

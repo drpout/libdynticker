@@ -40,14 +40,10 @@ public class PoloniexExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<String> elements = (new ObjectMapper()).readTree(new URL("https://poloniex.com/public?command=returnTicker")).getFieldNames();
-		while (elements.hasNext()) {
-			String element = elements.next();
-			String[] split = element.split("_");
-			String coin = split[1];
-			String exchange = split[0];
-			pairs.add(new Pair(coin, exchange));
+		for(String[] split; elements.hasNext();) {
+			split = elements.next().split("_");
+			pairs.add(new Pair(split[1], split[0]));
 		}
-
 		return pairs;
 	}
 

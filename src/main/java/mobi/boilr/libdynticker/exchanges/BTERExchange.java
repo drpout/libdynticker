@@ -66,12 +66,9 @@ public class BTERExchange extends Exchange {
 		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 		uc.connect();
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(uc.getInputStream()).getElements();
-		while (elements.hasNext()) {
-			String element = elements.next().getTextValue();
-			String[] split = element.split("_");
-			String coin = split[0].toUpperCase();
-			String exchange = split[1].toUpperCase();
-			pairs.add(new Pair(coin, exchange));
+		for(String[] split; elements.hasNext();) {
+			split = elements.next().getTextValue().toUpperCase().split("_");
+			pairs.add(new Pair(split[0], split[1]));
 		}
 		return pairs;
 	}

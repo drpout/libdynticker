@@ -22,17 +22,17 @@ public class BitfinexExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		TypeReference<List<String>> typeRef = new TypeReference<List<String>>() {
 		};
 		List<String> symbols = (new ObjectMapper()).readValue(new URL("https://api.bitfinex.com/v1/symbols"), typeRef);
+		String coin, exchange;
 		for(String sym : symbols) {
 			sym = sym.toUpperCase();
-			String coin = sym.substring(0, 3);
-			String exchange = sym.substring(3, 6);
-			Pair pair = new Pair(coin, exchange);
-			pairs.add(pair);
+			coin = sym.substring(0, 3);
+			exchange = sym.substring(3, 6);
+			pairs.add(new Pair(coin, exchange));
 		}
 		return pairs;
 	}

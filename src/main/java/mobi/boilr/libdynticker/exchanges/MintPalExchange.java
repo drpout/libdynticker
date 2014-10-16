@@ -42,10 +42,11 @@ public class MintPalExchange extends Exchange {
 		if(node.get("status").getTextValue().equals("success")) {
 			List<Pair> pairs = new ArrayList<Pair>();
 			Iterator<JsonNode> elements = node.get("data").getElements();
-			while(elements.hasNext()) {
-				JsonNode element = elements.next();
-				String coin = element.get("code").getTextValue();
-				String exchange = element.get("exchange").getTextValue();
+			String coin, exchange;
+			for(JsonNode element; elements.hasNext();) {
+				element = elements.next();
+				coin = element.get("code").getTextValue();
+				exchange = element.get("exchange").getTextValue();
 				pairs.add(new Pair(coin, exchange));
 			}
 			return pairs;

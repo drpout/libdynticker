@@ -22,20 +22,19 @@ public class PeatioExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://peatio.com:443/api/v2/markets.json")).getElements();
 		for(String[] pairSplit; elements.hasNext();) {
 			pairSplit = elements.next().get("name").getTextValue().split("/");
-			Pair pair = new Pair(pairSplit[0], pairSplit[1]);
-			pairs.add(pair);
+			pairs.add(new Pair(pairSplit[0], pairSplit[1]));
 		}
 		return pairs;
 	}
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		// https://peatio.com:443/api/v2/tickers/dogcny.json
 		String url = "https://peatio.com:443/api/v2/tickers/" + pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase() + ".json";
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));

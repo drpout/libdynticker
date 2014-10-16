@@ -24,7 +24,7 @@ public class MeloticExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		URL url = new URL("https://www.melotic.com/api/markets");
 		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
@@ -33,13 +33,9 @@ public class MeloticExchange extends Exchange {
 		InputStream is = urlConnection.getInputStream();
 		JsonNode elements = (new ObjectMapper()).readTree(is);
 		Iterator<String> fieldNames = elements.getFieldNames();
-		while(fieldNames.hasNext()) {
-			String element = fieldNames.next();
-			String[] split = element.split("-");
-			String coin = split[0].toUpperCase();
-			String exchange = split[1].toUpperCase();
-			Pair pair = new Pair(coin, exchange);
-			pairs.add(pair);
+		for(String[] split; fieldNames.hasNext();) {
+			split = fieldNames.next().toUpperCase().split("-");
+			pairs.add(new Pair(split[0], split[1]));
 		}
 		return pairs;
 	}

@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class LocalBitcoinsExchange extends Exchange {
 
@@ -24,12 +24,9 @@ public class LocalBitcoinsExchange extends Exchange {
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<String> exchanges = node.getFieldNames();
-
-		while (exchanges.hasNext()) {
-			String exchange = exchanges.next();
+		while(exchanges.hasNext()) {
 			// LocalBitcoins only deals with BTC to others currencies
-			Pair pair = new Pair("BTC", exchange);
-			pairs.add(pair);
+			pairs.add(new Pair("BTC", exchanges.next()));
 		}
 		return pairs;
 	}
@@ -43,7 +40,7 @@ public class LocalBitcoinsExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if (node.has(pair.getExchange().toUpperCase())) {
+		if(node.has(pair.getExchange().toUpperCase())) {
 			return node.get(pair.getExchange()).get("rates").get("last").getTextValue();
 		} else {
 			throw new IOException();

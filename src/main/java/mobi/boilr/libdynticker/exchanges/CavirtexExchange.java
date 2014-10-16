@@ -32,12 +32,9 @@ public class CavirtexExchange extends Exchange {
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
 		if(node.get("status").getTextValue().equals("ok")) {
 			Iterator<String> pairCode = node.get("ticker").getFieldNames();
-			while(pairCode.hasNext()) {
-				String next = pairCode.next().toString();
-				String coin = next.substring(0, 3);
-				String exchange = next.substring(3, 6);
-				Pair pair = new Pair(coin, exchange);
-				pairs.add(pair);
+			for(String next; pairCode.hasNext();) {
+				next = pairCode.next().toString();
+				pairs.add(new Pair(next.substring(0, 3), next.substring(3, 6)));
 			}
 			return pairs;
 		} else {

@@ -26,21 +26,18 @@ public class VoSExchange extends Exchange {
 		Iterator<JsonNode> elements = node.get("data").getElements();
 		List<String> coins = new ArrayList<String>();
 		List<String> exchanges = new ArrayList<String>();
-
-		while (elements.hasNext()) {
-			JsonNode next = elements.next();
-			String code = next.get("code").getTextValue();
+		String code;
+		for(JsonNode next; elements.hasNext();) {
+			next = elements.next();
+			code = next.get("code").getTextValue();
 			if(next.get("tradeable").asBoolean())
 				coins.add(code);
-			
 			exchanges.add(code);
 		}
-
-		for (String coin : coins) {
-			for (String exchange : exchanges) {
+		for(String coin : coins) {
+			for(String exchange : exchanges) {
 				if(!coin.equals(exchange)) {
-					Pair pair = new Pair(coin, exchange);
-					pairs.add(pair);
+					pairs.add(new Pair(coin, exchange));
 				}
 			}
 		}

@@ -25,20 +25,17 @@ public class BTC38Exchange extends Exchange {
 		String[] exchanges = { "cny", "btc" };
 		String addr = "http://api.btc38.com/v1/ticker.php?c=all&mk_type=";
 
-		for (String exch : exchanges) {
+		for(String exch : exchanges) {
 			URL url = new URL(addr + exch);
 			URLConnection uc = url.openConnection();
 			uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
 			uc.connect();
 			JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
-
 			Iterator<String> coins = node.getFieldNames();
-
-			while (coins.hasNext()) {
-				String coin = coins.next();
-				if(node.get(coin).get("ticker").isObject()){
-					Pair pair = new Pair(coin.toUpperCase(), exch.toUpperCase());
-					pairs.add(pair);
+			for(String coin; coins.hasNext();) {
+				coin = coins.next();
+				if(node.get(coin).get("ticker").isObject()) {
+					pairs.add(new Pair(coin.toUpperCase(), exch.toUpperCase()));
 				}
 			}
 		}
@@ -64,5 +61,4 @@ public class BTC38Exchange extends Exchange {
 			throw new IOException("No data for pair " + pair + ".");
 		}
 	}
-
 }

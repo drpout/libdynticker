@@ -26,16 +26,15 @@ public class AllcoinExchange extends Exchange {
 		JsonNode elements = (new ObjectMapper()).readTree(new URL("https://www.allcoin.com/api2/pairs")).get("data");
 		Iterator<String> fieldNames = elements.getFieldNames();
 
+		String[] split;
+		String element;
 		while(fieldNames.hasNext()) {
-			String element = fieldNames.next();
+			element = fieldNames.next();
 			// Status : 1: online -1: closed temporarily -2: closed permanently
 			// Don't add when markets closed permanently
 			if(elements.get(element).get("status").getTextValue().equals("1") || elements.get(element).get("status").getTextValue().equals("-1")) {
-				String[] split = element.split("_");
-				String coin = split[0];
-				String exchange = split[1];
-				Pair pair = new Pair(coin, exchange);
-				pairs.add(pair);
+				split = element.split("_");
+				pairs.add(new Pair(split[0], split[1]));
 			}
 		}
 
@@ -44,7 +43,7 @@ public class AllcoinExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		// https://www.allcoin.com/api2/pair/LTC_BTC
 		String url = "https://www.allcoin.com/api2/pair/" + pair.getCoin() + "_" + pair.getExchange();
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));

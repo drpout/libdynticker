@@ -30,13 +30,12 @@ public class KrakenExchange extends Exchange {
 		uc.connect();
 		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream()).get("result");
 		Iterator<String> fieldNames = node.getFieldNames();
-		while (fieldNames.hasNext()) {
-			String next = fieldNames.next();
-			JsonNode jsonNode = node.get(next);
-			String coin = jsonNode.get("base").getTextValue().substring(1);
-			String exchange = jsonNode.get("quote").getTextValue().substring(1);
-			Pair pair = new Pair(coin, exchange);
-			pairs.add(pair);
+		String coin, exchange;
+		for(JsonNode jsonNode; fieldNames.hasNext();) {
+			jsonNode = node.get(fieldNames.next());
+			coin = jsonNode.get("base").getTextValue().substring(1);
+			exchange = jsonNode.get("quote").getTextValue().substring(1);
+			pairs.add(new Pair(coin, exchange));
 		}
 
 		return pairs;

@@ -35,8 +35,7 @@ public class CryptoTradeExchange extends Exchange {
 				for(String[] pairSplit; elements.hasNext();) {
 					fieldNames = elements.next().getFieldNames();
 					pairSplit = fieldNames.next().toUpperCase().split("_");
-					Pair pair = new Pair(pairSplit[0], pairSplit[1]);
-					pairs.add(pair);
+					pairs.add(new Pair(pairSplit[0], pairSplit[1]));
 				}
 			}
 			JsonNode securityPairs = node.get("security_pairs");
@@ -47,8 +46,7 @@ public class CryptoTradeExchange extends Exchange {
 				String[] pairSplit;
 				for(String sym : symbols) {
 					pairSplit = sym.toUpperCase().split("_");
-					Pair pair = new Pair(pairSplit[0], pairSplit[1]);
-					pairs.add(pair);
+					pairs.add(new Pair(pairSplit[0], pairSplit[1]));
 				}
 			}
 		}

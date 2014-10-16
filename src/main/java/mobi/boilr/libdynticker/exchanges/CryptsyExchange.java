@@ -28,10 +28,10 @@ public class CryptsyExchange extends Exchange {
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
 		if(node.get("success").toString().equals("1")) {
-			String lastValue =  node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
-			if(lastValue == null){
+			String lastValue = node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
+			if(lastValue == null) {
 				throw new IOException("No last value for " + pair + ".");
-			}else{
+			} else {
 				return lastValue;
 			}
 		} else {
@@ -63,12 +63,12 @@ public class CryptsyExchange extends Exchange {
 		parser.nextToken();// markets' Start
 		parser.nextToken();
 
-		while (parser.nextToken() != JsonToken.END_OBJECT) {
+		for(String id, coin, exchange; parser.nextToken() != JsonToken.END_OBJECT;) {
 			parser.nextToken(); // value
 
 			parser.nextToken(); // marketId
 			parser.nextToken(); // marketId value
-			String id = parser.getText();
+			id = parser.getText();
 
 			parser.nextToken(); // label
 			parser.nextToken(); // label's value
@@ -87,14 +87,14 @@ public class CryptsyExchange extends Exchange {
 
 			parser.nextToken(); // primarycode
 			parser.nextToken();
-			String coin = parser.getText();
+			coin = parser.getText();
 
 			parser.nextToken(); // secondaryname
 			parser.nextToken();
 
 			parser.nextToken(); // secondarycode
 			parser.nextToken();
-			String exchange = parser.getText();
+			exchange = parser.getText();
 
 			parser.nextToken(); // recentrades
 			parser.nextToken();

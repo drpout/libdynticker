@@ -6,11 +6,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class JustcoinExchange extends Exchange {
 
@@ -24,10 +24,10 @@ public class JustcoinExchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		String addr = "https://justcoin.com/api/v1/markets";
 		Iterator<JsonNode> elements = new ObjectMapper().readTree(new URL(addr)).getElements();
-		while(elements.hasNext()){
-			JsonNode node = elements.next();
-			String id = node.get("id").getTextValue();
-			pairs.add(new Pair(id.substring(0,3), id.substring(3,6)));		}
+		for(String id; elements.hasNext();) {
+			id = elements.next().get("id").getTextValue();
+			pairs.add(new Pair(id.substring(0, 3), id.substring(3, 6)));
+		}
 		return pairs;
 	}
 
@@ -41,13 +41,14 @@ public class JustcoinExchange extends Exchange {
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
 		Iterator<JsonNode> elements = node.getElements();
-		while(elements.hasNext()){
+		while(elements.hasNext()) {
 			JsonNode next = elements.next();
 			String id = next.get("id").getTextValue();
-			if(id.toLowerCase().equals(pair.getCoin().toLowerCase()+pair.getExchange().toLowerCase())){
+			if(id.toLowerCase().equals(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase())) {
 				return next.get("last").getTextValue();
 			}
-			//pairs.add(new Pair(node.getTextValue().substring(0,3), node.getTextValue().substring(3,3)));
+			// pairs.add(new Pair(node.getTextValue().substring(0,3),
+			// node.getTextValue().substring(3,3)));
 		}
 		throw new IOException("Pair not found");
 	}
