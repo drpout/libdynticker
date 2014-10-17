@@ -68,6 +68,7 @@ public class Pair implements Serializable{
 		this.coin = coin;
 	}
 
+	@Override
 	public String toString() {
 		return this.coin + "/" + this.exchange;
 	}
