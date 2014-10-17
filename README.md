@@ -17,7 +17,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BTC China](https://btcchina.com)
 * [BTC Markets](https://btcmarkets.net)
 * [BTC-E](https://btc-e.com)
-* [Bter](https://bter.com)
 * [CampBX](http://campbx.com)
 * [CaVirtEx](https://www.cavirtex.com)
 * [CEX.IO](http://cex.io)
@@ -40,6 +39,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Bittrex](https://bittrex.com)
 * [BlueTrade](https://bleutrade.com)
 * [BTC38](http://www.btc38.com)
+* [Bter](https://bter.com)
 * [C-CEX](https://c-cex.com)
 * [CCEDK](https://www.ccedk.com)
 * [Coins-E](http://coins-e.com)
@@ -50,7 +50,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Mintpal](https://mintpal.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
-* [VoS](https://www.vaultofsatoshi.com)
+* [Vault of Satoshi](https://www.vaultofsatoshi.com)
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
