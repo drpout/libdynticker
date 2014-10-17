@@ -37,7 +37,8 @@ public class VoSExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("USD", "CAD")));
 			Assert.assertFalse(pairs.contains(new Pair("CAD", "USD")));
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail(e.toString());
 		}
@@ -48,20 +49,23 @@ public class VoSExchangeTest extends ExchangeTest {
 		try {
 			Pair pair = new Pair("BTC", "CAD");
 			JsonNode node;
-			node = (new ObjectMapper().readTree(new File("src/test/json/vos-ticker.json")));
+			node = (new ObjectMapper().readTree(new File(
+					"src/test/json/vos-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("622.34038318", lastValue);
-		} catch (IOException e) {
+		}
+		catch (IOException e) {
 			Assert.fail();
 		}
 	}
-	
+
 	@Override
 	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && e.getMessage().contains("empty")){
+		if (e instanceof IOException && e.getMessage().contains("empty")) {
 			System.err.println(pair);
 			System.err.println(e);
-		}else{
+		}
+		else {
 			super.handleException(pair, e);
 		}
 	}

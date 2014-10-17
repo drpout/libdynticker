@@ -31,10 +31,12 @@ public class BTC38ExchangeTest extends ExchangeTest {
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("LTC", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btc38-ticker.json")));
+			JsonNode node = (new ObjectMapper().readTree(new File(
+					"src/test/json/btc38-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.008", lastValue);
-		} catch(IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -48,7 +50,8 @@ public class BTC38ExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "CNY")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -56,10 +59,11 @@ public class BTC38ExchangeTest extends ExchangeTest {
 
 	@Override
 	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof JsonParseException){
+		if (e instanceof JsonParseException) {
 			System.err.println(pair);
 			System.err.println(e);
-		}else{
+		}
+		else {
 			super.handleException(pair, e);
 		}
 	}

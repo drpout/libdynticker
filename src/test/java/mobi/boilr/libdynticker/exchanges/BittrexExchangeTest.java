@@ -31,10 +31,12 @@ public class BittrexExchangeTest extends ExchangeTest {
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bittrex-ticker.json")));
+			JsonNode node = (new ObjectMapper().readTree(new File(
+					"src/test/json/bittrex-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("0.01290501", lastValue);
-		} catch(IOException e) {
+		}
+		catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -48,7 +50,8 @@ public class BittrexExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(IOException e) {
+		}
+		catch (IOException e) {
 			Assert.fail();
 		}
 	}
