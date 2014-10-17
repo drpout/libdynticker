@@ -10,7 +10,10 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 
 public class OKCoinExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -20,6 +23,17 @@ public class OKCoinExchange extends Exchange {
 		tempPairs.add(new Pair("LTC", "USD"));
 		tempPairs.add(new Pair("BTC", "CNY"));
 		tempPairs.add(new Pair("LTC", "CNY"));
+
+		tempPairs.add(new Pair("BTC Futures (this week)", "USD"));
+		tempPairs.add(new Pair("BTC Futures (next week)", "USD"));
+		tempPairs.add(new Pair("BTC Futures (month)", "USD"));
+		tempPairs.add(new Pair("BTC Futures (quarter)", "USD"));
+
+		tempPairs.add(new Pair("LTC Futures (this week)", "USD"));
+		tempPairs.add(new Pair("LTC Futures (next week)", "USD"));
+		tempPairs.add(new Pair("LTC Futures (month)", "USD"));
+		tempPairs.add(new Pair("LTC Futures (quarter)", "USD"));
+
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
@@ -37,16 +51,45 @@ public class OKCoinExchange extends Exchange {
 		if(!pairs.contains(pair))
 			throw new IOException("Invalid pair.");
 		String url = "";
-		if(pair.getExchange().equals("USD")) {
+
+		if(pair.getCoin().contains("Futures")) {
+			String contractTtpe = null;
+			if(pair.getCoin().contains("this week")) {
+				contractTtpe = "this_week";
+			}
+			else if(pair.getCoin().contains("next week")) {
+				contractTtpe = "this_week";
+			}
+			else if(pair.getCoin().contains("month")) {
+				contractTtpe = "this_week";
+			}
+			else if(pair.getCoin().contains("quarter")) {
+				contractTtpe = "quarter";
+			}
+			else {
+				throw new IOException();
+			}
+			url = "https://www.okcoin.com/api/future_ticker.do?symbol=" + pair.getCoin().substring(0, 3).toLowerCase() + "_"
+					+ pair.getExchange().toLowerCase() + "&" + "contractType=" + contractTtpe;
+			JsonNode node = new ObjectMapper().readTree(new URL(url));
+			return parseJSONFuture(node, pair);
+		}
+		else if(pair.getExchange().equals("USD")) {
 			// https://www.okcoin.com/api/ticker.do?symbol=ltc_usd&ok=1
 			url = "https://www.okcoin.com/api/ticker.do?symbol=" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase() + "&ok=1";
-		} else if(pair.getExchange().equals("CNY")) {
+		}
+		else if(pair.getExchange().equals("CNY")) {
 			url = "https://www.okcoin.cn/api/ticker.do?symbol=" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
-		} else {
-
 		}
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
 		return parseJSON(node, pair);
+	}
+
+	protected String parseJSONFuture(JsonNode node, Pair pair) throws JsonParseException, JsonMappingException, IOException {
+		TypeReference<JsonNode[]> typeReference = new TypeReference<JsonNode[]>() {
+		};
+		JsonNode[] values = new ObjectMapper().readValue(node.get("ticker"), typeReference);
+		return values[0].get("last").toString();
 	}
 
 	@Override

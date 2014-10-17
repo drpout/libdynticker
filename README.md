@@ -7,6 +7,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ## Supported exchanges
 
 ### Bitcoin and altcoins to FIAT
+* [1Bse](https://www.1bse.com/)
 * [ANX](https://anxpro.com)
 * [BitBay](https://bitbay.pl)
 * [Bitcoin.de](https://www.bitcoin.de)
@@ -14,6 +15,8 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Bitfinex](https://www.bitfinex.com)
 * [BitMarket.pl](https://www.bitmarket.pl)
 * [Bitstamp](https://www.bitstamp.net)
+* [BTC100](https://www.btc100.com/)
+* [BtcTrade](https://www.btctrade.com)
 * [BTC China](https://btcchina.com)
 * [BTC Markets](https://btcmarkets.net)
 * [BTC-E](https://btc-e.com)
