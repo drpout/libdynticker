@@ -24,13 +24,12 @@ public abstract class Exchange {
 	}
 
 	/**
-	 * @param pair
-	 *            of exchange/coin
+	 * @param pair of exchange/coin
 	 *
 	 * @return Returns the last value of the exchange for a given pair
-	 *         coin/exchange. We have to use a double because some exchanges
-	 *         measure values in satoshis (10^-8). A float has just 24 bits
-	 *         of precision which is not enough to represent 8 decimal places.
+	 * coin/exchange. We have to use a double because some exchanges measure
+	 * values in satoshis (10^-8). A float has just 24 bits of precision which
+	 * is not enough to represent 8 decimal places.
 	 * @throws NumberFormatException
 	 * @throws IOException
 	 */
@@ -45,10 +44,13 @@ public abstract class Exchange {
 			pairs = getPairsFromAPI();
 			timestamp = new Timestamp(currentTime);
 			return pairs;
-		} else if((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
+		}
+		else if((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
 			return pairs;
-		} else {
-			// TODO throw a custom exception where there is no internet connection. The exception
+		}
+		else {
+			// TODO throw a custom exception where there is no internet
+			// connection. The exception
 			// includes the previous list of pairs and the timestamp.
 			return pairs = getPairsFromAPI();
 		}
@@ -57,7 +59,7 @@ public abstract class Exchange {
 	/**
 	 * Get pairs from a remote API, specificy for each exchange
 	 *
-	 * @return
+	 * @return List of traded pairs
 	 * @throws IOException
 	 */
 	protected abstract List<Pair> getPairsFromAPI() throws IOException;
@@ -65,7 +67,7 @@ public abstract class Exchange {
 	/**
 	 *
 	 * @param pair
-	 * @return
+	 * @return Json with ticker information
 	 * @throws IOException
 	 */
 	protected abstract String getTicker(Pair pair) throws IOException;
