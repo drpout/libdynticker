@@ -16,8 +16,8 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CCEXExchange extends Exchange {
 
-	public CCEXExchange(long experiedPeriod) {
-		super("C-CEX", experiedPeriod);
+	public CCEXExchange(long expiredPeriod) {
+		super("C-CEX", expiredPeriod);
 	}
 
 	@Override

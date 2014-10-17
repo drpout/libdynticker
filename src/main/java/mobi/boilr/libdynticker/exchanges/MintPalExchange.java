@@ -14,8 +14,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class MintPalExchange extends Exchange {
 
-	public MintPalExchange(long experiedPeriod) {
-		super("MintPal", experiedPeriod);
+	public MintPalExchange(long expiredPeriod) {
+		super("MintPal", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

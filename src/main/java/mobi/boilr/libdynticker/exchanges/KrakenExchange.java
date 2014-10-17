@@ -15,8 +15,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class KrakenExchange extends Exchange {
 
-	public KrakenExchange(long experiedPeriod) {
-		super("Kraken", experiedPeriod);
+	public KrakenExchange(long expiredPeriod) {
+		super("Kraken", expiredPeriod);
 	}
 
 	@Override

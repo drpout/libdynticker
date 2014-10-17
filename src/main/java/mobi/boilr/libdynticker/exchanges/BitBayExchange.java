@@ -27,8 +27,8 @@ public class BitBayExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitBayExchange(long experiedPeriod) {
-		super("BitBay", experiedPeriod);
+	public BitBayExchange(long expiredPeriod) {
+		super("BitBay", expiredPeriod);
 	}
 
 	@Override

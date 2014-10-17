@@ -23,8 +23,8 @@ public class BTCMarketsExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BTCMarketsExchange(long experiedPeriod) {
-		super("BTC Markets", experiedPeriod);
+	public BTCMarketsExchange(long expiredPeriod) {
+		super("BTC Markets", expiredPeriod);
 	}
 
 	@Override

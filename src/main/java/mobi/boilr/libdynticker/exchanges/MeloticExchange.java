@@ -18,8 +18,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class MeloticExchange extends Exchange {
 
-	public MeloticExchange(long experiedPeriod) {
-		super("Melotic", experiedPeriod);
+	public MeloticExchange(long expiredPeriod) {
+		super("Melotic", expiredPeriod);
 	}
 
 	@Override

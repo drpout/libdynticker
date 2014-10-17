@@ -51,8 +51,8 @@ public class CEXIOExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public CEXIOExchange(long experiedPeriod) {
-		super("CEX.IO", experiedPeriod);
+	public CEXIOExchange(long expiredPeriod) {
+		super("CEX.IO", expiredPeriod);
 	}
 
 	@Override

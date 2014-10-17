@@ -34,8 +34,8 @@ public class ANXExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public ANXExchange(long experiedPeriod) {
-		super("ANX", experiedPeriod);
+	public ANXExchange(long expiredPeriod) {
+		super("ANX", expiredPeriod);
 	}
 
 	@Override

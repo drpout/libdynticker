@@ -24,8 +24,8 @@ public class ItBitExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public ItBitExchange(long experiedPeriod) {
-		super("itBit", experiedPeriod);
+	public ItBitExchange(long expiredPeriod) {
+		super("itBit", expiredPeriod);
 	}
 
 	@Override

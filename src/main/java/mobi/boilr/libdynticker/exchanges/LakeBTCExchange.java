@@ -21,8 +21,8 @@ public class LakeBTCExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public LakeBTCExchange(long experiedPeriod) {
-		super("LakeBTC", experiedPeriod);
+	public LakeBTCExchange(long expiredPeriod) {
+		super("LakeBTC", expiredPeriod);
 	}
 
 	@Override

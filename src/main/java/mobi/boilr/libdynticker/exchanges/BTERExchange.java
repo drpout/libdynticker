@@ -15,8 +15,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class BTERExchange extends Exchange {
 
-	public BTERExchange(long experiedPeriod) {
-		super("BTER", experiedPeriod);
+	public BTERExchange(long expiredPeriod) {
+		super("BTER", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

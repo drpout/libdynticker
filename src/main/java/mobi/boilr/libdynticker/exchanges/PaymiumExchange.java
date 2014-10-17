@@ -20,8 +20,8 @@ public class PaymiumExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 	
-	public PaymiumExchange(long experiedPeriod) {
-		super("Paymium", experiedPeriod);
+	public PaymiumExchange(long expiredPeriod) {
+		super("Paymium", expiredPeriod);
 	}
 
 	@Override

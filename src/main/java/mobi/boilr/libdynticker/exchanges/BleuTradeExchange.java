@@ -21,8 +21,8 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class BleuTradeExchange extends Exchange {
 
-	public BleuTradeExchange(long experiedPeriod) {
-		super("BleuTrade", experiedPeriod);
+	public BleuTradeExchange(long expiredPeriod) {
+		super("BleuTrade", expiredPeriod);
 	}
 
 	@Override

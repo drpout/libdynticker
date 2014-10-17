@@ -24,8 +24,8 @@ public class BitcurexExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitcurexExchange(long experiedPeriod) {
-		super("Bitcurex", experiedPeriod);
+	public BitcurexExchange(long expiredPeriod) {
+		super("Bitcurex", expiredPeriod);
 	}
 
 	@Override

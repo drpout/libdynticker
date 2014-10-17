@@ -16,8 +16,8 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class AtomicTradeExchange extends Exchange {
 
-	public AtomicTradeExchange(long experiedPeriod) {
-		super("Atomic Trade", experiedPeriod);
+	public AtomicTradeExchange(long expiredPeriod) {
+		super("Atomic Trade", expiredPeriod);
 	}
 
 	@Override

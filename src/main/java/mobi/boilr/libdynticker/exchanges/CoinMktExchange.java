@@ -19,8 +19,8 @@ public class CoinMktExchange extends Exchange {
 	public static final long COINMKT_DELAY = 15000;
 	private Random random = new Random();
 
-	public CoinMktExchange(long experiedPeriod) {
-		super("CoinMkt", experiedPeriod);
+	public CoinMktExchange(long expiredPeriod) {
+		super("CoinMkt", expiredPeriod);
 	}
 
 	@Override

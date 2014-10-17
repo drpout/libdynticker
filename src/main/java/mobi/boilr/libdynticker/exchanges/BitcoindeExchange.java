@@ -21,8 +21,8 @@ public class BitcoindeExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitcoindeExchange(long experiedPeriod) {
-		super("Bitcoin.de", experiedPeriod);
+	public BitcoindeExchange(long expiredPeriod) {
+		super("Bitcoin.de", expiredPeriod);
 
 	}
 

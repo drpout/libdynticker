@@ -15,8 +15,8 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CryptonitExchange extends Exchange {
 
-	public CryptonitExchange(long experiedPeriod) {
-		super("Cryptonit", experiedPeriod);
+	public CryptonitExchange(long expiredPeriod) {
+		super("Cryptonit", expiredPeriod);
 	}
 
 	@Override

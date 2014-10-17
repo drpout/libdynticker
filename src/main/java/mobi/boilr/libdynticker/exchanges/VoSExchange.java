@@ -14,8 +14,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class VoSExchange extends Exchange {
 
-	public VoSExchange(long experiedPeriod) {
-		super("VoS", experiedPeriod);
+	public VoSExchange(long expiredPeriod) {
+		super("VoS", expiredPeriod);
 	}
 
 	@Override

@@ -37,8 +37,8 @@ public class OKCoinExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public OKCoinExchange(long experiedPeriod) {
-		super("OKCoin", experiedPeriod);
+	public OKCoinExchange(long expiredPeriod) {
+		super("OKCoin", expiredPeriod);
 	}
 
 	@Override

@@ -26,8 +26,8 @@ public class BullionVaultExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BullionVaultExchange(long experiedPeriod) {
-		super("BullionVault", experiedPeriod);
+	public BullionVaultExchange(long expiredPeriod) {
+		super("BullionVault", expiredPeriod);
 	}
 
 	@Override

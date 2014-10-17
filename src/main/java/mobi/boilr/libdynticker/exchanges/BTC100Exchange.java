@@ -36,8 +36,8 @@ public class BTC100Exchange extends Exchange {
 		PAIRS = Collections.unmodifiableList(pairs);
 	}
 
-	public BTC100Exchange(long experiedPeriod) {
-		super("BTC100", experiedPeriod);
+	public BTC100Exchange(long expiredPeriod) {
+		super("BTC100", expiredPeriod);
 	}
 
 	@Override

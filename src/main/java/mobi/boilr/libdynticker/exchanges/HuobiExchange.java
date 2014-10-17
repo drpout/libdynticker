@@ -21,8 +21,8 @@ public class HuobiExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public HuobiExchange(long experiedPeriod) {
-		super("Huobi", experiedPeriod);
+	public HuobiExchange(long expiredPeriod) {
+		super("Huobi", expiredPeriod);
 	}
 
 	@Override

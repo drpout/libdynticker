@@ -26,8 +26,8 @@ public class E796Exchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public E796Exchange(long experiedPeriod) {
-		super("796 Exchange", experiedPeriod);
+	public E796Exchange(long expiredPeriod) {
+		super("796 Exchange", expiredPeriod);
 	}
 
 	@Override

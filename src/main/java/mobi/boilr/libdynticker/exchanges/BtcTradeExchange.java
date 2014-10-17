@@ -21,8 +21,8 @@ public class BtcTradeExchange extends Exchange {
 		PAIRS = Collections.unmodifiableList(pairs);
 	}
 
-	public BtcTradeExchange(long experiedPeriod) {
-		super("BtcTrade", experiedPeriod);
+	public BtcTradeExchange(long expiredPeriod) {
+		super("BtcTrade", expiredPeriod);
 
 	}
 

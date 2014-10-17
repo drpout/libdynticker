@@ -17,8 +17,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class CavirtexExchange extends Exchange {
 
-	public CavirtexExchange(long experiedPeriod) {
-		super("Cavirtex", experiedPeriod);
+	public CavirtexExchange(long expiredPeriod) {
+		super("Cavirtex", expiredPeriod);
 	}
 
 	@Override

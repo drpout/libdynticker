@@ -23,8 +23,8 @@ public class BitMarketPlExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitMarketPlExchange(long experiedPeriod) {
-		super("BitMarket.pl", experiedPeriod);
+	public BitMarketPlExchange(long expiredPeriod) {
+		super("BitMarket.pl", expiredPeriod);
 	}
 
 	@Override

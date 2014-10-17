@@ -23,8 +23,8 @@ public class ChbtcExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public ChbtcExchange(long experiedPeriod) {
-		super("CHBTC", experiedPeriod);
+	public ChbtcExchange(long expiredPeriod) {
+		super("CHBTC", expiredPeriod);
 	}
 
 	@Override

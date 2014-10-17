@@ -28,8 +28,8 @@ public class CoinswapExchange extends Exchange {
 	private SSLSocketFactory defaultFactory, trustAllCertsFactory;
 	private HostnameVerifier defaultVerifier, allHostsValid;
 
-	public CoinswapExchange(long experiedPeriod) {
-		super("Coin-Swap", experiedPeriod);
+	public CoinswapExchange(long expiredPeriod) {
+		super("Coin-Swap", expiredPeriod);
 		/*
 		 * Fix for self-signed certificate of Coin-Swap API.
 		 * From http://www.rgagnon.com/javadetails/java-fix-certificate-problem-in-HTTPS.html

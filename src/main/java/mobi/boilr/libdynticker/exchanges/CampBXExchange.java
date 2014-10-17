@@ -21,8 +21,8 @@ public class CampBXExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public CampBXExchange(long experiedPeriod) {
-		super("CampBX", experiedPeriod);
+	public CampBXExchange(long expiredPeriod) {
+		super("CampBX", expiredPeriod);
 	}
 
 	@Override

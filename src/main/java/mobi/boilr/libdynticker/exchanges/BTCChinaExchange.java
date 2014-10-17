@@ -14,8 +14,8 @@ import mobi.boilr.libdynticker.core.Pair;
 
 public class BTCChinaExchange extends Exchange {
 
-	public BTCChinaExchange(long experiedPeriod) {
-		super("BTCChina", experiedPeriod);
+	public BTCChinaExchange(long expiredPeriod) {
+		super("BTCChina", expiredPeriod);
 	}
 
 	@Override

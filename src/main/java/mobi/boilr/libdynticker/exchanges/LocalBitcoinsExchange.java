@@ -14,8 +14,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class LocalBitcoinsExchange extends Exchange {
 
-	public LocalBitcoinsExchange(long experiedPeriod) {
-		super("LocalBitcoins", experiedPeriod);
+	public LocalBitcoinsExchange(long expiredPeriod) {
+		super("LocalBitcoins", expiredPeriod);
 	}
 
 	@Override

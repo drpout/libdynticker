@@ -20,8 +20,8 @@ public class BitstampExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitstampExchange(long experiedPeriod) {
-		super("Bitstamp", experiedPeriod);
+	public BitstampExchange(long expiredPeriod) {
+		super("Bitstamp", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

@@ -14,8 +14,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class JustcoinExchange extends Exchange {
 
-	public JustcoinExchange(long experiedPeriod) {
-		super("Justcoin", experiedPeriod);
+	public JustcoinExchange(long expiredPeriod) {
+		super("Justcoin", expiredPeriod);
 		// TODO Auto-generated constructor stub
 	}
 

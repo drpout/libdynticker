@@ -17,8 +17,8 @@ import org.codehaus.jackson.type.TypeReference;
 
 public class CryptoTradeExchange extends Exchange {
 
-	public CryptoTradeExchange(long experiedPeriod) {
-		super("Crypto-Trade", experiedPeriod);
+	public CryptoTradeExchange(long expiredPeriod) {
+		super("Crypto-Trade", expiredPeriod);
 	}
 
 	@Override

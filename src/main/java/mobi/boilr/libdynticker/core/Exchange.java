@@ -13,13 +13,13 @@ import org.reflections.Reflections;
  */
 public abstract class Exchange {
 
-	private long experiedPeriod;
+	private long expiredPeriod;
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
 	private String name;
 
-	public Exchange(String name, long experiedPeriod) {
-		setExperiedPeriod(experiedPeriod);
+	public Exchange(String name, long expiredPeriod) {
+		setexpiredPeriod(expiredPeriod);
 		this.name = name;
 	}
 
@@ -45,7 +45,7 @@ public abstract class Exchange {
 			pairs = getPairsFromAPI();
 			timestamp = new Timestamp(currentTime);
 			return pairs;
-		} else if((currentTime - getTimestamp().getTime()) < getExperiedPeriod()) {
+		} else if((currentTime - getTimestamp().getTime()) < getexpiredPeriod()) {
 			return pairs;
 		} else {
 			// TODO throw a custom exception where there is no internet connection. The exception
@@ -80,17 +80,17 @@ public abstract class Exchange {
 	}
 
 	/**
-	 * @return the experiedPeriod
+	 * @return the expiredPeriod
 	 */
-	public long getExperiedPeriod() {
-		return experiedPeriod;
+	public long getexpiredPeriod() {
+		return expiredPeriod;
 	}
 
 	/**
-	 * @param experiedPeriod the experiedPeriod to set
+	 * @param expiredPeriod the expiredPeriod to set
 	 */
-	public void setExperiedPeriod(long experiedPeriod) {
-		this.experiedPeriod = experiedPeriod;
+	public void setexpiredPeriod(long expiredPeriod) {
+		this.expiredPeriod = expiredPeriod;
 	}
 
 	/**
