@@ -21,7 +21,7 @@ import org.powermock.modules.junit4.PowerMockRunner;
 
 @RunWith(PowerMockRunner.class)
 @PrepareForTest(BitstampExchange.class)
-public class GetPairsFromAPI {
+public class GetPairsFromAPITest {
 	Exchange exchange;
 
 	@Before
