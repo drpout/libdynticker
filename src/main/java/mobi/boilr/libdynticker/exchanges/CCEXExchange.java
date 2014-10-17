@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CCEXExchange extends Exchange {
+public final class CCEXExchange extends Exchange {
 
 	public CCEXExchange(long expiredPeriod) {
 		super("C-CEX", expiredPeriod);

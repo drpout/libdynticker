@@ -15,7 +15,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CoinMktExchange extends Exchange {
+public final class CoinMktExchange extends Exchange {
 	public static final long COINMKT_DELAY = 15000;
 	private Random random = new Random();
 

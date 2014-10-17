@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class BitfinexExchange extends Exchange {
+public final class BitfinexExchange extends Exchange {
 
 	public BitfinexExchange(long expiredPeriod) {
 		super("Bitfinex", expiredPeriod);

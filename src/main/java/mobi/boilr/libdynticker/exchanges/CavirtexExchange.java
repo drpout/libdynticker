@@ -15,7 +15,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CavirtexExchange extends Exchange {
+public final class CavirtexExchange extends Exchange {
 
 	public CavirtexExchange(long expiredPeriod) {
 		super("Cavirtex", expiredPeriod);

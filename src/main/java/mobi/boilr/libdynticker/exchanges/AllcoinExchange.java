@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class AllcoinExchange extends Exchange {
+public final class AllcoinExchange extends Exchange {
 
 	public AllcoinExchange(long expiredPeriod) {
 		super("Allcoin", expiredPeriod);

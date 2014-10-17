@@ -15,7 +15,7 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.MappingJsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CryptsyExchange extends Exchange {
+public final class CryptsyExchange extends Exchange {
 
 	public CryptsyExchange(long expiredPeriod) {
 		super("Cryptsy", expiredPeriod);

@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BtcTradeExchange extends Exchange {
+public final class BtcTradeExchange extends Exchange {
 	private static final List<Pair> PAIRS;
 
 	static {

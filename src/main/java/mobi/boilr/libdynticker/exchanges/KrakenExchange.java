@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class KrakenExchange extends Exchange {
+public final class KrakenExchange extends Exchange {
 
 	public KrakenExchange(long expiredPeriod) {
 		super("Kraken", expiredPeriod);

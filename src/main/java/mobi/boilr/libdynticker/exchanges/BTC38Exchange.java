@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BTC38Exchange extends Exchange {
+public final class BTC38Exchange extends Exchange {
 
 	public BTC38Exchange(long expiredPeriod) {
 		super("BTC38", expiredPeriod);

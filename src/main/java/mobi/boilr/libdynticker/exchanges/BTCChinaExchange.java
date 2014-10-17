@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BTCChinaExchange extends Exchange {
+public final class BTCChinaExchange extends Exchange {
 
 	public BTCChinaExchange(long expiredPeriod) {
 		super("BTCChina", expiredPeriod);

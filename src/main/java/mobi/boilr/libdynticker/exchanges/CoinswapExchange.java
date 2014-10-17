@@ -24,7 +24,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CoinswapExchange extends Exchange {
+public final class CoinswapExchange extends Exchange {
 	private SSLSocketFactory defaultFactory, trustAllCertsFactory;
 	private HostnameVerifier defaultVerifier, allHostsValid;
 

@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class AtomicTradeExchange extends Exchange {
+public final class AtomicTradeExchange extends Exchange {
 
 	public AtomicTradeExchange(long expiredPeriod) {
 		super("Atomic Trade", expiredPeriod);

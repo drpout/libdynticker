@@ -15,7 +15,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class VircurexExchange extends Exchange {
+public final class VircurexExchange extends Exchange {
 
 	public VircurexExchange(long expiredPeriod) {
 		super("Vircurex", expiredPeriod);

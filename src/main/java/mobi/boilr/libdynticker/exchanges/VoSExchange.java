@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class VoSExchange extends Exchange {
+public final class VoSExchange extends Exchange {
 
 	public VoSExchange(long expiredPeriod) {
 		super("VoS", expiredPeriod);

@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BittrexExchange extends Exchange {
+public final class BittrexExchange extends Exchange {
 
 	public BittrexExchange(long expiredPeriod) {
 		super("Bittrex", expiredPeriod);

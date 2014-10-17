@@ -16,7 +16,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CCEDKExchange extends Exchange {
+public final class CCEDKExchange extends Exchange {
 
 	public CCEDKExchange(long expiredPeriod) {
 		super("CCEDK", expiredPeriod);

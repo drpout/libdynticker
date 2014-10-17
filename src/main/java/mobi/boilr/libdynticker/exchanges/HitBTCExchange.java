@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class HitBTCExchange extends Exchange {
+public final class HitBTCExchange extends Exchange {
 
 	public HitBTCExchange(long expiredPeriod) {
 		super("HitBTC", expiredPeriod);
