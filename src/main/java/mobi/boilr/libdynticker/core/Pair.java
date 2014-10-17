@@ -73,10 +73,17 @@ public class Pair implements Serializable{
 		return this.coin + "/" + this.exchange;
 	}
 
+	/**
+	 * @return the market
+	 */
 	public String getMarket() {
 		return market;
 	}
 
+	/**
+	 * @param market
+	 *            the market to set
+	 */
 	public void setMarket(String market) {
 		this.market = market;
 	}
