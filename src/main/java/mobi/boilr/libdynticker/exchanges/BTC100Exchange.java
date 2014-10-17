@@ -14,18 +14,13 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
 public class BTC100Exchange extends Exchange {
+
 	private static final List<Pair> PAIRS;
-
 	private static final Pair BTC_CNY = new Pair("BTC", "CNY");
-
 	private static final String BTC_CNY_ID = "bit";
-
 	private static final Pair LTC_CNY = new Pair("LTC", "CNY");
-
 	private static final String LTC_CNY_ID = "tic";
-
 	private static final Pair DOGE_CNY = new Pair("DOGE", "CNY");
-
 	private static final String DOGE_CNY_ID = "dic";
 
 	static {
@@ -47,8 +42,7 @@ public class BTC100Exchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		JsonNode node = new ObjectMapper().readTree(new URL(
-				"https://www.btc100.com/apidata/getdata.json"));
+		JsonNode node = new ObjectMapper().readTree(new URL("https://www.btc100.com/apidata/getdata.json"));
 		return parseJSON(node, pair);
 	}
 
@@ -58,11 +52,11 @@ public class BTC100Exchange extends Exchange {
 		};
 		List<JsonNode> json = new ObjectMapper().readValue(node, typeRef);
 		String id;
-		if (pair.equals(BTC_CNY))
+		if(pair.equals(BTC_CNY))
 			id = BTC_CNY_ID;
-		else if (pair.equals(LTC_CNY))
+		else if(pair.equals(LTC_CNY))
 			id = LTC_CNY_ID;
-		else if (pair.equals(DOGE_CNY))
+		else if(pair.equals(DOGE_CNY))
 			id = DOGE_CNY_ID;
 		else
 			throw new IOException(pair + " is invalid.");

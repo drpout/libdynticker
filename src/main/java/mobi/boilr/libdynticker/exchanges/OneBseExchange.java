@@ -52,6 +52,11 @@ public class OneBseExchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		return node.get("return").get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("price").getTextValue();
+		String id = pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
+		JsonNode ret = node.get("return");
+		if(ret.has(id))
+			return ret.get(id).get("price").getTextValue();
+		else
+			throw new IOException(pair + " is invalid.");
 	}
 }
