@@ -58,7 +58,7 @@ public class ExchangeTest {
 	public void testSecondGetPairsFromAPIDoesActive() {
 		try {
 			Exchange exchange = Mockito.spy(testExchange);
-			exchange.setexpiredPeriod(-1);
+			exchange.setExpiredPeriod(-1);
 			exchange.getPairs();
 			verify(exchange, Mockito.times(1)).getPairsFromAPI();
 			Assert.assertNotNull(exchange.getTimestamp());
@@ -79,7 +79,7 @@ public class ExchangeTest {
 	public void testSecondGetPairsFromAPIDoesntActive() {
 		try {
 			Exchange exchange = Mockito.spy(testExchange);
-			exchange.setexpiredPeriod(Long.MAX_VALUE);
+			exchange.setExpiredPeriod(Long.MAX_VALUE);
 			exchange.getPairs();
 			verify(exchange, Mockito.times(1)).getPairsFromAPI();
 			Assert.assertNotNull(exchange.getTimestamp());
