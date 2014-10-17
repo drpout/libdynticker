@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CampBXExchange extends Exchange {
+public final class CampBXExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -21,8 +21,8 @@ public class CampBXExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public CampBXExchange(long experiedPeriod) {
-		super("CampBX", experiedPeriod);
+	public CampBXExchange(long expiredPeriod) {
+		super("CampBX", expiredPeriod);
 	}
 
 	@Override

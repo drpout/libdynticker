@@ -16,6 +16,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class CavirtexExchangeTest extends ExchangeTest {
 
 	@Override
@@ -27,19 +29,6 @@ public class CavirtexExchangeTest extends ExchangeTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("BTC", "CAD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cavirtex-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("630.00001", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
 	}
 
 	@Test
@@ -57,6 +46,19 @@ public class CavirtexExchangeTest extends ExchangeTest {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 			Assert.fail();
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("BTC", "CAD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cavirtex-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("630.00001", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

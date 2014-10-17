@@ -13,10 +13,10 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class OneBseExchange extends Exchange {
+public final class OneBseExchange extends Exchange {
 
-	public OneBseExchange(long experiedPeriod) {
-		super("1Bce", experiedPeriod);
+	public OneBseExchange(long expiredPeriod) {
+		super("1Bce", expiredPeriod);
 	}
 
 	@Override

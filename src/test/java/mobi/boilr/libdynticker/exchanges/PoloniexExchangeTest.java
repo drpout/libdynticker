@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class PoloniexExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,20 +30,6 @@ public class PoloniexExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		JsonNode node;
-		try {
-			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
-			Pair pair = new Pair("XMR", "BTC");
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00452783", lastValue);
-		} catch (IOException e) {
-			Assert.fail();
-		}
-
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -53,5 +41,19 @@ public class PoloniexExchangeTest extends ExchangeTest {
 		} catch (IOException e) {
 			Assert.fail();
 		}
+	}
+
+	@Test
+	public void testParseJson() {
+		JsonNode node;
+		try {
+			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
+			Pair pair = new Pair("XMR", "BTC");
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.00452783", lastValue);
+		} catch (IOException e) {
+			Assert.fail();
+		}
+
 	}
 }

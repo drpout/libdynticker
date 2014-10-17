@@ -14,10 +14,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class PeatioExchange extends Exchange {
+public final class PeatioExchange extends Exchange {
 
-	public PeatioExchange(long experiedPeriod) {
-		super("Peatio", experiedPeriod);
+	public PeatioExchange(long expiredPeriod) {
+		super("Peatio", expiredPeriod);
 	}
 
 	@Override

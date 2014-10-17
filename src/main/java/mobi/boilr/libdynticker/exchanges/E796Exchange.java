@@ -14,7 +14,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class E796Exchange extends Exchange {
+public final class E796Exchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -26,8 +26,8 @@ public class E796Exchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public E796Exchange(long experiedPeriod) {
-		super("796 Exchange", experiedPeriod);
+	public E796Exchange(long expiredPeriod) {
+		super("796 Exchange", expiredPeriod);
 	}
 
 	@Override

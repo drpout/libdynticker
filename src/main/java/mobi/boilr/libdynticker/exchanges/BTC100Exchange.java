@@ -13,7 +13,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class BTC100Exchange extends Exchange {
+public final class BTC100Exchange extends Exchange {
 
 	private static final List<Pair> PAIRS;
 	private static final Pair BTC_CNY = new Pair("BTC", "CNY");
@@ -31,8 +31,8 @@ public class BTC100Exchange extends Exchange {
 		PAIRS = Collections.unmodifiableList(pairs);
 	}
 
-	public BTC100Exchange(long experiedPeriod) {
-		super("BTC100", experiedPeriod);
+	public BTC100Exchange(long expiredPeriod) {
+		super("BTC100", expiredPeriod);
 	}
 
 	@Override

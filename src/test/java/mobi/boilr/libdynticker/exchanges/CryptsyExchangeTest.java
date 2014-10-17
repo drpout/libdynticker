@@ -14,7 +14,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class CryptsyExchangeTest extends ExchangeTest {
+
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("No last value")){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
+		}
+	}
 
 	@Override
 	@Before
@@ -41,7 +53,7 @@ public class CryptsyExchangeTest extends ExchangeTest {
 			Assert.fail();
 		}
 	}
-
+	
 	@Test
 	public void testParseJson() {
 		try {
@@ -54,16 +66,6 @@ public class CryptsyExchangeTest extends ExchangeTest {
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
-		}
-	}
-	
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && e.getMessage().contains("No last value")){
-			System.err.println(pair);
-			System.err.println(e);
-		}else{
-			super.handleException(pair, e);
 		}
 	}
 }

@@ -15,7 +15,7 @@ import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class OKCoinExchange extends Exchange {
+public final class OKCoinExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -37,8 +37,8 @@ public class OKCoinExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public OKCoinExchange(long experiedPeriod) {
-		super("OKCoin", experiedPeriod);
+	public OKCoinExchange(long expiredPeriod) {
+		super("OKCoin", expiredPeriod);
 	}
 
 	@Override

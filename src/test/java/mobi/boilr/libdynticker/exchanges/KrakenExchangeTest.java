@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class KrakenExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,19 +30,6 @@ public class KrakenExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("LTC", "XDG");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/kraken-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("37000.00000", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -49,6 +38,19 @@ public class KrakenExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("LTC", "XDG");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/kraken-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("37000.00000", lastValue);
+		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}

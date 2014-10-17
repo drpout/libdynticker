@@ -12,10 +12,10 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class LocalBitcoinsExchange extends Exchange {
+public final class LocalBitcoinsExchange extends Exchange {
 
-	public LocalBitcoinsExchange(long experiedPeriod) {
-		super("LocalBitcoins", experiedPeriod);
+	public LocalBitcoinsExchange(long expiredPeriod) {
+		super("LocalBitcoins", expiredPeriod);
 	}
 
 	@Override

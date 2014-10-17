@@ -2,7 +2,7 @@ package mobi.boilr.libdynticker.core;
 
 import java.io.Serializable;
 
-public class Pair implements Serializable{
+public final class Pair implements Serializable{
 	/**
 	 * 
 	 */
@@ -38,6 +38,11 @@ public class Pair implements Serializable{
 		return ((Pair) o).getCoin().equals(this.coin) && ((Pair) o).getExchange().equals(this.exchange); 
 	}
 
+	@Override
+	public String toString() {
+		return this.coin + "/" + this.exchange;
+	}
+
 	/**
 	 * @return the exchange
 	 */
@@ -68,14 +73,17 @@ public class Pair implements Serializable{
 		this.coin = coin;
 	}
 
-	public String toString() {
-		return this.coin + "/" + this.exchange;
-	}
-
+	/**
+	 * @return the market
+	 */
 	public String getMarket() {
 		return market;
 	}
 
+	/**
+	 * @param market
+	 *            the market to set
+	 */
 	public void setMarket(String market) {
 		this.market = market;
 	}

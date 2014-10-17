@@ -15,10 +15,10 @@ import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.MappingJsonFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CryptsyExchange extends Exchange {
+public final class CryptsyExchange extends Exchange {
 
-	public CryptsyExchange(long experiedPeriod) {
-		super("Cryptsy", experiedPeriod);
+	public CryptsyExchange(long expiredPeriod) {
+		super("Cryptsy", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

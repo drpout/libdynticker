@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class BitcoindeExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,6 +30,18 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 	}
 
 	@Test
+	public void testGetPairs() {
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "EUR");
@@ -36,18 +50,6 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 			Assert.assertEquals("442.9", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetPairs() {
-		List<Pair> pairs;
-		try {
-			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch (IOException e) {
 			Assert.fail();
 		}
 	}

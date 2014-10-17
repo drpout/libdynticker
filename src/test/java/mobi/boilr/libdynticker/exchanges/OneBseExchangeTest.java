@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class OneBseExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,12 +30,13 @@ public class OneBseExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testGetPairs() {
+		List<Pair> pairs;
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/1bse-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("373.4329", lastValue);
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -42,13 +45,12 @@ public class OneBseExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testGetPairs() {
-		List<Pair> pairs;
+	public void testParseJson() {
 		try {
-			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+			Pair pair = new Pair("BTC", "USD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/1bse-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("373.4329", lastValue);
 		}
 		catch(IOException e) {
 			e.printStackTrace();

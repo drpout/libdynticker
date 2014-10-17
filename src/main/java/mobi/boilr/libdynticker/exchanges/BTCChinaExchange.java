@@ -6,16 +6,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-public class BTCChinaExchange extends Exchange {
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
-	public BTCChinaExchange(long experiedPeriod) {
-		super("BTCChina", experiedPeriod);
+public final class BTCChinaExchange extends Exchange {
+
+	public BTCChinaExchange(long expiredPeriod) {
+		super("BTCChina", expiredPeriod);
 	}
 
 	@Override

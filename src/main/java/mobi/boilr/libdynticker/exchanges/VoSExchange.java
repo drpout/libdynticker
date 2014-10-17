@@ -12,10 +12,10 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class VoSExchange extends Exchange {
+public final class VoSExchange extends Exchange {
 
-	public VoSExchange(long experiedPeriod) {
-		super("VoS", experiedPeriod);
+	public VoSExchange(long expiredPeriod) {
+		super("Vault of Satoshi", expiredPeriod);
 	}
 
 	@Override
@@ -46,7 +46,8 @@ public class VoSExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://api.vaultofsatoshi.com//public/recent_transactions?order_currency=" + pair.getCoin().toLowerCase() + "&payment_currency=" + pair.getExchange().toLowerCase() + "&count=1";
+		String url = "https://api.vaultofsatoshi.com//public/recent_transactions?order_currency=" + pair.getCoin().toLowerCase()
+				+ "&payment_currency=" + pair.getExchange().toLowerCase() + "&count=1";
 		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
 		return parseJSON(node, pair);
 	}
@@ -58,10 +59,12 @@ public class VoSExchange extends Exchange {
 			if(elements.hasNext()) {
 				JsonNode next = elements.next();
 				return next.get("price").get("value").getTextValue();
-			} else {
+			}
+			else {
 				throw new IOException("Data for " + pair + " is empty.");
 			}
-		} else {
+		}
+		else {
 			throw new IOException();
 		}
 	}

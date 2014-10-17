@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class MintPalExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,19 +30,6 @@ public class MintPalExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		JsonNode node;
-		try {
-			node = (new ObjectMapper().readTree(new File("src/test/json/mintpal-ticker.json")));
-			Pair pair = new Pair("XMR", "BTC");
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00437000", lastValue);
-		} catch (IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -49,6 +38,19 @@ public class MintPalExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		JsonNode node;
+		try {
+			node = (new ObjectMapper().readTree(new File("src/test/json/mintpal-ticker.json")));
+			Pair pair = new Pair("XMR", "BTC");
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.00437000", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}

@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class VircurexExchangeTest extends ExchangeTest {
 	@Override
 	@Before
@@ -27,18 +29,6 @@ public class VircurexExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("BTC", "EUR");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/vircurex-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("368.00017664", lastValue);
-		} catch (IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -46,6 +36,18 @@ public class VircurexExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "EUR")));
 			Assert.assertTrue(pairs.contains(new Pair("ANC", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("BTC", "EUR");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/vircurex-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("368.00017664", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}

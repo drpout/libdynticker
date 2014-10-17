@@ -15,7 +15,7 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BitcurexExchange extends Exchange {
+public final class BitcurexExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -24,8 +24,8 @@ public class BitcurexExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitcurexExchange(long experiedPeriod) {
-		super("Bitcurex", experiedPeriod);
+	public BitcurexExchange(long expiredPeriod) {
+		super("Bitcurex", expiredPeriod);
 	}
 
 	@Override

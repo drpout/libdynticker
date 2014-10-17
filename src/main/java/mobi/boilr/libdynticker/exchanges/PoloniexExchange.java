@@ -12,10 +12,10 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class PoloniexExchange extends Exchange {
+public final class PoloniexExchange extends Exchange {
 
-	public PoloniexExchange(long experiedPeriod) {
-		super("Poloniex", experiedPeriod);
+	public PoloniexExchange(long expiredPeriod) {
+		super("Poloniex", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

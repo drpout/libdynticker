@@ -14,7 +14,20 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class VoSExchangeTest extends ExchangeTest {
+
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if (e instanceof IOException && e.getMessage().contains("empty")) {
+			System.err.println(pair);
+			System.err.println(e);
+		}
+		else {
+			super.handleException(pair, e);
+		}
+	}
 
 	@Override
 	@Before
@@ -56,17 +69,6 @@ public class VoSExchangeTest extends ExchangeTest {
 		}
 		catch (IOException e) {
 			Assert.fail();
-		}
-	}
-
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if (e instanceof IOException && e.getMessage().contains("empty")) {
-			System.err.println(pair);
-			System.err.println(e);
-		}
-		else {
-			super.handleException(pair, e);
 		}
 	}
 }

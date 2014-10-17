@@ -14,7 +14,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class CoinswapExchangeTest extends ExchangeTest {
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("500")){
+			System.err.println(pair);
+			System.err.println(e);
+		}else{
+			super.handleException(pair, e);
+		}
+	}
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -24,19 +36,6 @@ public class CoinswapExchangeTest extends ExchangeTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("DOGE", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinswap-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00000088", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
 	}
 
 	@Test
@@ -52,13 +51,16 @@ public class CoinswapExchangeTest extends ExchangeTest {
 		}
 	}
 	
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && e.getMessage().contains("500")){
-			System.err.println(pair);
-			System.err.println(e);
-		}else{
-			super.handleException(pair, e);
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("DOGE", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinswap-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.00000088", lastValue);
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 }

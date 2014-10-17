@@ -15,10 +15,10 @@ import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 
-public class CryptoTradeExchange extends Exchange {
+public final class CryptoTradeExchange extends Exchange {
 
-	public CryptoTradeExchange(long experiedPeriod) {
-		super("Crypto-Trade", experiedPeriod);
+	public CryptoTradeExchange(long expiredPeriod) {
+		super("Crypto-Trade", expiredPeriod);
 	}
 
 	@Override

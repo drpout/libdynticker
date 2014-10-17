@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BullionVaultExchange extends Exchange {
+public final class BullionVaultExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -26,8 +26,8 @@ public class BullionVaultExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BullionVaultExchange(long experiedPeriod) {
-		super("BullionVault", experiedPeriod);
+	public BullionVaultExchange(long expiredPeriod) {
+		super("BullionVault", expiredPeriod);
 	}
 
 	@Override

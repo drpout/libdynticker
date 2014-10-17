@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BitcoindeExchange extends Exchange {
+public final class BitcoindeExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -21,8 +21,8 @@ public class BitcoindeExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public BitcoindeExchange(long experiedPeriod) {
-		super("Bitcoin.de", experiedPeriod);
+	public BitcoindeExchange(long expiredPeriod) {
+		super("Bitcoin.de", expiredPeriod);
 
 	}
 

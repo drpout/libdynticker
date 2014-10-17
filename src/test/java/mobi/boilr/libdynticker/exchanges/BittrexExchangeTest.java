@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class BittrexExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,6 +30,20 @@ public class BittrexExchangeTest extends ExchangeTest {
 	}
 
 	@Test
+	public void testGetPairs() {
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		}
+		catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
@@ -38,20 +54,6 @@ public class BittrexExchangeTest extends ExchangeTest {
 		}
 		catch (IOException e) {
 			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testGetPairs() {
-		List<Pair> pairs;
-		try {
-			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		}
-		catch (IOException e) {
 			Assert.fail();
 		}
 	}

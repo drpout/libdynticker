@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class E796ExchangeTest extends ExchangeTest {
 	@Override
 	@Before
@@ -27,18 +29,6 @@ public class E796ExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("BNC BTC Futures (weekly)", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/796-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("325.00", lastValue);
-		} catch (IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -46,6 +36,18 @@ public class E796ExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BNC BTC Futures (weekly)", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("ASICMINER", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
+		} catch (IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("BNC BTC Futures (weekly)", "USD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/796-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("325.00", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}

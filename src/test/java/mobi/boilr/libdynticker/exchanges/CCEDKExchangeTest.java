@@ -14,7 +14,19 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class CCEDKExchangeTest extends ExchangeTest {
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("empty")) {
+			System.err.println(pair);
+			System.err.println(e);
+		} else {
+			super.handleException(pair, e);
+		}
+	}
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
@@ -24,18 +36,6 @@ public class CCEDKExchangeTest extends ExchangeTest {
 	@Override
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("LTC", "BTC", "1");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/ccedk-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.01140000", lastValue);
-		} catch(IOException e) {
-			Assert.fail();
-		}
 	}
 
 	@Test
@@ -51,13 +51,15 @@ public class CCEDKExchangeTest extends ExchangeTest {
 		}
 	}
 
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && e.getMessage().contains("empty")) {
-			System.err.println(pair);
-			System.err.println(e);
-		} else {
-			super.handleException(pair, e);
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("LTC", "BTC", "1");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/ccedk-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.01140000", lastValue);
+		} catch(IOException e) {
+			Assert.fail();
 		}
 	}
 }

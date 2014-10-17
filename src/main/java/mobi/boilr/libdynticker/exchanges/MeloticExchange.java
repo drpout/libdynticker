@@ -16,10 +16,10 @@ import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class MeloticExchange extends Exchange {
+public final class MeloticExchange extends Exchange {
 
-	public MeloticExchange(long experiedPeriod) {
-		super("Melotic", experiedPeriod);
+	public MeloticExchange(long expiredPeriod) {
+		super("Melotic", expiredPeriod);
 	}
 
 	@Override

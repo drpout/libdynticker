@@ -26,16 +26,20 @@ public class CoinMktExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	/*
+	 * CoinMkt requires a 15 s interval between calls to the same API URL.
+	 */
+	@Override
 	@Test
-	public void testParseJson() {
+	public void testGetLastValueWithPairsFromGetPairs() {
 		try {
-			Pair pair = new Pair("DOGE", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinmkt-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("6.6E-7", lastValue);
-		} catch (IOException e) {
+			Thread.sleep(CoinMktExchange.COINMKT_DELAY);
+		}
+		catch(InterruptedException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
+		super.testGetLastValueWithPairsFromGetPairs();
 	}
 
 	@Test
@@ -46,40 +50,22 @@ public class CoinMktExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch (IOException e) {
+		}
+		catch(IOException e) {
 			Assert.fail();
 		}
 	}
 
-	/*
-	 * CoinMkt requires a 15 s interval between calls to the same API URL.
-	 */
-	@Override
 	@Test
-	public void testGetLastValueWithPairsFromGetPairs() {
+	public void testParseJson() {
 		try {
-			Thread.sleep(CoinMktExchange.COINMKT_DELAY);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+			Pair pair = new Pair("DOGE", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinmkt-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("6.6E-7", lastValue);
+		}
+		catch(IOException e) {
 			Assert.fail();
 		}
-		super.testGetLastValueWithPairsFromGetPairs();
-	}
-
-	@Override
-	@Test
-	public void testSecondGetPairsFromAPIDoesntActive() {
-		try {
-			Thread.sleep(CoinMktExchange.COINMKT_DELAY);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-		super.testSecondGetPairsFromAPIDoesntActive();
-	}
-
-	@Override
-	@Test
-	public void testSecondGetPairsFromAPIDoesActive() {
 	}
 }

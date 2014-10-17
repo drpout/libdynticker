@@ -15,6 +15,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class BleuTradeExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,36 +30,6 @@ public class BleuTradeExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
-	public void testGetPairs() {
-		List<Pair> pairs;
-		try {
-			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("CDN", "SWIFT")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch(JsonProcessingException e) {
-			Assert.fail();
-			e.printStackTrace();
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("LTC", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bleutrade-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.01218180", lastValue);
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-	
 	@Override
 	@Test
 	public void testGetLastValueWithPairsFromGetPairs() {
@@ -84,6 +56,36 @@ public class BleuTradeExchangeTest extends ExchangeTest {
 				e.printStackTrace();
 				Assert.fail();
 			}
+		}
+	}
+
+	@Test
+	public void testGetPairs() {
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("CDN", "SWIFT")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch(JsonProcessingException e) {
+			Assert.fail();
+			e.printStackTrace();
+		} catch(IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+	
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("LTC", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bleutrade-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.01218180", lastValue);
+		} catch(IOException e) {
+			e.printStackTrace();
+			Assert.fail();
 		}
 	}
 }

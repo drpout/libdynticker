@@ -12,10 +12,10 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class BTCEExchange extends Exchange {
+public final class BTCEExchange extends Exchange {
 
-	public BTCEExchange(long experiedPeriod) {
-		super("BTC-E", experiedPeriod);
+	public BTCEExchange(long expiredPeriod) {
+		super("BTC-E", expiredPeriod);
 	}
 
 	protected String getTickerURL(Pair pair) {

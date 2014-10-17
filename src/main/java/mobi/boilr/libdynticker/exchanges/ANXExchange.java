@@ -14,7 +14,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class ANXExchange extends Exchange {
+public final class ANXExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -34,8 +34,8 @@ public class ANXExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
-	public ANXExchange(long experiedPeriod) {
-		super("ANX", experiedPeriod);
+	public ANXExchange(long expiredPeriod) {
+		super("ANX", expiredPeriod);
 	}
 
 	@Override

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
-
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-public class PaymiumExchange extends Exchange {
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
+
+public final class PaymiumExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
@@ -20,8 +20,8 @@ public class PaymiumExchange extends Exchange {
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 	
-	public PaymiumExchange(long experiedPeriod) {
-		super("Paymium", experiedPeriod);
+	public PaymiumExchange(long expiredPeriod) {
+		super("Paymium", expiredPeriod);
 	}
 
 	@Override

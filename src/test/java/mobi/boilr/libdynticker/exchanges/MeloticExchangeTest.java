@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class MeloticExchangeTest extends ExchangeTest {
 	@Override
 	@Before
@@ -27,19 +29,6 @@ public class MeloticExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("GOLD", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/melotic-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("3.1", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -47,6 +36,19 @@ public class MeloticExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("GOLD", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("GOLD", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/melotic-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("3.1", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

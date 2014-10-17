@@ -13,8 +13,11 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+//
 
-public class BitStampExchangeTest extends ExchangeTest {
+
+
+public class BitstampExchangeTest extends ExchangeTest {
 
 	@Override
 	@Before
@@ -34,7 +37,8 @@ public class BitStampExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
-		} catch (IOException e) {
+		}
+		catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail(e.toString());
 		}
@@ -48,7 +52,8 @@ public class BitStampExchangeTest extends ExchangeTest {
 			node = (new ObjectMapper().readTree(new File("src/test/json/bitstamp-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("600.15", lastValue);
-		} catch (IOException e) {
+		}
+		catch(IOException e) {
 			Assert.fail();
 		}
 	}

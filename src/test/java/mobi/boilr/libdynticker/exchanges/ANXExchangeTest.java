@@ -27,18 +27,6 @@ public class ANXExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("DOGE", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/anx-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("0.00000078", lastValue);
-		} catch (IOException e) {
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -46,7 +34,21 @@ public class ANXExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "HKD")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch (IOException e) {
+		}
+		catch(IOException e) {
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("DOGE", "BTC");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/anx-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("0.00000078", lastValue);
+		}
+		catch(IOException e) {
 			Assert.fail();
 		}
 	}

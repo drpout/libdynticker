@@ -14,6 +14,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+
+
 public class BullionVaultExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,19 +30,6 @@ public class BullionVaultExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
-		try {
-			Pair pair = new Pair("AUX", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bullionvault-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("41789.44398", lastValue);
-		} catch (IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-	}
-
-	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
@@ -49,6 +38,19 @@ public class BullionVaultExchangeTest extends ExchangeTest {
 			Assert.assertTrue(pairs.contains(new Pair("AUX", "EUR")));
 			Assert.assertTrue(pairs.contains(new Pair("AGX", "AUD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
+
+	@Test
+	public void testParseJson() {
+		try {
+			Pair pair = new Pair("AUX", "USD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bullionvault-ticker.json")));
+			String lastValue = testExchange.parseJSON(node, pair);
+			Assert.assertEquals("41789.44398", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();
