@@ -3,6 +3,7 @@ package mobi.boilr.libdynticker.exchanges;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,9 +23,13 @@ public final class CCEXExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://c-cex.com/t/pairs.json"));
+		URL url = new URL("https://c-cex.com/t/pairs.json");
+		URLConnection uc = url.openConnection();
+		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+		uc.connect();
+		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
 		TypeReference<List<String>> typeRef = new TypeReference<List<String>>() {
 		};
 		List<String> symbols = (new ObjectMapper()).readValue(node.get("pairs"), typeRef);
@@ -40,8 +45,13 @@ public final class CCEXExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
 		// https://c-cex.com/t/btc-usd.json
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://c-cex.com/t/"
-				+ pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + ".json"));
+		URL url = new URL("https://c-cex.com/t/"
+				+ pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + ".json");
+		URLConnection uc = url.openConnection();
+		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+		uc.connect();
+
+		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
 		return parseJSON(node, pair);
 	}
 

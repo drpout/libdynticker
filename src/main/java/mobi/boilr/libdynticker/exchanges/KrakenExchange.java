@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,17 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public final class KrakenExchange extends Exchange {
 
+	private static final List<String> fiat;
+	
+	static{
+		List<String> tempFiat = new ArrayList<String>();
+		tempFiat.add("USD");
+		tempFiat.add("EUR");
+		tempFiat.add("GBP");
+		tempFiat.add("JPY");
+		fiat = Collections.unmodifiableList(tempFiat);
+	}
+		
 	public KrakenExchange(long expiredPeriod) {
 		super("Kraken", expiredPeriod);
 	}
@@ -60,8 +72,8 @@ public final class KrakenExchange extends Exchange {
 	}
 
 	private String pairCode(Pair pair) {
-		String exchangeCode = pair.getExchange().equals("USD") || pair.getExchange().equals("EUR") ? "Z" : "X";
-		String coinCode = pair.getCoin().equals("USD") || pair.getCoin().equals("EUR") ? "Z" : "X";
+		String exchangeCode = fiat.contains(pair.getExchange()) ? "Z" : "X";
+		String coinCode = fiat.contains(pair.getCoin()) ? "Z" : "X";
 		return coinCode + pair.getCoin() + exchangeCode + pair.getExchange();
 	}
 }

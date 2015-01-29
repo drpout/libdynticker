@@ -25,6 +25,10 @@
 		<jdk.version>1.6</jdk.version>
 		<release.description>
 			\- Removed MintPal exchange.
+			\- Fixed CCEXExchange returning 403 http error code.
+			\- Fixed KrakenExchange not recognizing GBP and JPY as fiat.
+			\- Removed Vault of Satoshi exchange.
+			\- Removed Justcoin exchange.
 		</release.description>
 	</properties>
 
