@@ -27,18 +27,19 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CoinMkt](https://coinmkt.com)
 * [Huobi](https://www.huobi.com)
 * [itBit](https://www.itbit.com)
-* [Justcoin](https://justcoin.com)
 * [Kraken](https://www.kraken.com)
 * [LakeBTC](http://lakebtc.com)
 * [LocalBitcoins](https://localbitcoins.com)
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)
+* [OneWorldCoin](https://www.oneworldcoin.com)
 * [Paymium](https://paymium.com)
-* [Peatio](https://peatio.com)
+* [Yunbi](https://yunbi.com)
 
 ### Altcoins
 * [AllCoin](https://www.allcoin.com)
 * [Atomic Trade](https://www.atomic-trade.com)
+* [Bitspark](https://bitspark.io)
 * [Bittrex](https://bittrex.com)
 * [BleuTrade](https://bleutrade.com)
 * [BTC38](http://www.btc38.com)
@@ -50,10 +51,9 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Cryptsy](https://cryptsy.com)
 * [Coin-Swap](https://coin-swap.net)
 * [HitBTC](https://hitbtc.com)
-* [Mintpal](https://mintpal.com)
+* [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
-* [Vault of Satoshi](https://www.vaultofsatoshi.com)
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
@@ -61,7 +61,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Futures, stocks and securities
 * [796 Exchange](https://796.com)
-* [Crypto-Trade](https://crypto-trade.com)
 
 ## Building
  `mvn package` to create a jar.

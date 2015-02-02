@@ -14,8 +14,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class BitcoindeExchangeTest extends ExchangeTest {
 
 	@Override
@@ -47,7 +45,7 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 			Pair pair = new Pair("BTC", "EUR");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bitcoinde-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("442.9", lastValue);
+			Assert.assertEquals("202.95", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

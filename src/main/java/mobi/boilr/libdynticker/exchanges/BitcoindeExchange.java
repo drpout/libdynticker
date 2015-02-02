@@ -11,6 +11,7 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BitcoindeExchange extends Exchange {
@@ -34,8 +35,12 @@ public final class BitcoindeExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		String url = "https://bitcoinapi.de/v1/e5bd463707931bca682879320ceb7516/trades.json";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		try {
+			JsonNode node = (new ObjectMapper()).readTree(new URL(url));
+			return parseJSON(node, pair);
+		} catch(JsonParseException e) {
+			throw new IOException("API call limit reached.");
+		}
 	}
 
 	@Override
@@ -43,12 +48,16 @@ public final class BitcoindeExchange extends Exchange {
 		if(pair.getExchange().equals("EUR") && pair.getCoin().equals("BTC")) {
 			Iterator<JsonNode> elements = node.getElements();
 			if(elements.hasNext()) {
-				return elements.next().get("price").toString();
+				JsonNode lastValueNode = elements.next();
+				while(elements.hasNext()) {
+					lastValueNode = elements.next();
+				}
+				return lastValueNode.get("price").toString();
 			} else {
-				throw new IOException();
+				throw new IOException("Empty trade history.");
 			}
 		} else {
-			throw new IOException("Invalid Pair");
+			throw new IOException("Invalid pair.");
 		}
 	}
 }

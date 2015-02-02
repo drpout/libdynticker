@@ -3,10 +3,8 @@ package mobi.boilr.libdynticker.core;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
-import java.util.Set;
 
 import org.codehaus.jackson.JsonNode;
-import org.reflections.Reflections;
 
 /**
  * Abstract template for Exchange
@@ -49,10 +47,11 @@ public abstract class Exchange {
 			return pairs;
 		}
 		else {
-			// TODO throw a custom exception where there is no internet
-			// connection.
-			// The exception includes the previous list of pairs and the
-			// timestamp.
+			/*
+			 * TODO throw a custom exception where there is no internet
+			 * connection. The exception includes the previous list of pairs and
+			 * the timestamp.
+			 */
 			return pairs = getPairsFromAPI();
 		}
 	}
@@ -75,37 +74,19 @@ public abstract class Exchange {
 
 	public abstract String parseJSON(JsonNode node, Pair pair) throws IOException;
 
-	/**
-	 * @return the timestamp
-	 */
 	protected Timestamp getTimestamp() {
 		return timestamp;
 	}
 
-	/**
-	 * @return the expiredPeriod
-	 */
 	public long getExpiredPeriod() {
 		return expiredPeriod;
 	}
 
-	/**
-	 * @param expiredPeriod the expiredPeriod to set
-	 */
 	public void setExpiredPeriod(long expiredPeriod) {
 		this.expiredPeriod = expiredPeriod;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
-	}
-
-	public static Set<Class<? extends Exchange>> getExchanges() {
-		Reflections reflections = new Reflections("mobi.boilr.libdynticker");
-		Set<Class<? extends Exchange>> exchanges = reflections.getSubTypesOf(Exchange.class);
-		return exchanges;
 	}
 }

@@ -24,11 +24,11 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\- Removed MintPal exchange.
-			\* Fixed CCEXExchange returning 403 http error code.
+			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
+			\* Fixed CCEXExchange returning 403 HTTP error code.
 			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
-			\- Removed Vault of Satoshi exchange.
-			\- Removed Justcoin exchange.
+			\* Fixed BitcoindeExchange reading an old price instead of the last one.
+			\- Removed Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
 		</release.description>
 	</properties>
 
@@ -69,11 +69,6 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>0.9.9</version>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
