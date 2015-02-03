@@ -24,7 +24,9 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
+			\+ Added Coinbase exchange.
 			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
+			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
 			\* Fixed CCEXExchange returning 403 HTTP error code.
 			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.

@@ -22,15 +22,16 @@ public final class ANXExchange extends Exchange {
 		tempPairs.add(new Pair("BTC", "HKD"));
 		tempPairs.add(new Pair("BTC", "EUR"));
 		tempPairs.add(new Pair("BTC", "CAD"));
+		tempPairs.add(new Pair("BTC", "AUD"));
 		tempPairs.add(new Pair("BTC", "SGD"));
 		tempPairs.add(new Pair("BTC", "JPY"));
 		tempPairs.add(new Pair("BTC", "CHF"));
 		tempPairs.add(new Pair("BTC", "GBP"));
 		tempPairs.add(new Pair("BTC", "NZD"));
 		tempPairs.add(new Pair("LTC", "BTC"));
-		tempPairs.add(new Pair("PPC", "BTC"));
-		tempPairs.add(new Pair("NMC", "BTC"));
 		tempPairs.add(new Pair("DOGE", "BTC"));
+		tempPairs.add(new Pair("STR", "BTC"));
+		tempPairs.add(new Pair("XRP", "BTC"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 

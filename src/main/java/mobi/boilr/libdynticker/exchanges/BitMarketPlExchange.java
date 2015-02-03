@@ -19,7 +19,10 @@ public final class BitMarketPlExchange extends Exchange {
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "PLN"));
+		tempPairs.add(new Pair("BTC", "EUR"));
 		tempPairs.add(new Pair("LTC", "PLN"));
+		tempPairs.add(new Pair("LTC", "BTC"));
+		tempPairs.add(new Pair("DOGE", "PLN"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 

@@ -19,19 +19,17 @@ public final class OKCoinExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BTC", "USD"));
-		tempPairs.add(new Pair("LTC", "USD"));
 		tempPairs.add(new Pair("BTC", "CNY"));
 		tempPairs.add(new Pair("LTC", "CNY"));
+		tempPairs.add(new Pair("BTC", "USD"));
+		tempPairs.add(new Pair("LTC", "USD"));
 
 		tempPairs.add(new Pair("BTC Futures (this week)", "USD"));
 		tempPairs.add(new Pair("BTC Futures (next week)", "USD"));
-		tempPairs.add(new Pair("BTC Futures (month)", "USD"));
 		tempPairs.add(new Pair("BTC Futures (quarter)", "USD"));
 
 		tempPairs.add(new Pair("LTC Futures (this week)", "USD"));
 		tempPairs.add(new Pair("LTC Futures (next week)", "USD"));
-		tempPairs.add(new Pair("LTC Futures (month)", "USD"));
 		tempPairs.add(new Pair("LTC Futures (quarter)", "USD"));
 
 		pairs = Collections.unmodifiableList(tempPairs);
@@ -58,10 +56,7 @@ public final class OKCoinExchange extends Exchange {
 				contractTtpe = "this_week";
 			}
 			else if(pair.getCoin().contains("next week")) {
-				contractTtpe = "this_week";
-			}
-			else if(pair.getCoin().contains("month")) {
-				contractTtpe = "this_week";
+				contractTtpe = "next_week";
 			}
 			else if(pair.getCoin().contains("quarter")) {
 				contractTtpe = "quarter";

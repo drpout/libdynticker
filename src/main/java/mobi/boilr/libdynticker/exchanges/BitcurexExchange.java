@@ -21,6 +21,7 @@ public final class BitcurexExchange extends Exchange {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "PLN"));
 		tempPairs.add(new Pair("BTC", "EUR"));
+		tempPairs.add(new Pair("BTC", "USD"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 

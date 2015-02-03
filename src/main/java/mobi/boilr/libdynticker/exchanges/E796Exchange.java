@@ -18,8 +18,11 @@ public final class E796Exchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BNC BTC Futures (weekly)", "USD"));
-		tempPairs.add(new Pair("BNC LTC Futures (weekly)", "USD"));
+		tempPairs.add(new Pair("BTC Dayly Futures", "USD"));
+		tempPairs.add(new Pair("LTC Dayly Futures", "USD"));
+		tempPairs.add(new Pair("BTC Weekly Futures", "USD"));
+		tempPairs.add(new Pair("LTC Weekly Futures", "USD"));
+		tempPairs.add(new Pair("BTC Quarterly Futures", "USD"));
 		tempPairs.add(new Pair("MRI", "BTC"));
 		tempPairs.add(new Pair("ASICMINER", "BTC"));
 		tempPairs.add(new Pair("RSM", "BTC"));
@@ -38,23 +41,37 @@ public final class E796Exchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
-		// BTC: http://api.796.com/v3/futures/ticker.html?type=weekly
-		// LTC: http://api.796.com/v3/futures/ticker.html?type=ltc
-		// MRI: http://api.796.com/v3/stock/ticker.html?type=mri
+		/*
+		 * http://api.796.com/v3/futures/ticker.html?type=btcdaylyfutures
+		 * http://api.796.com/v3/futures/ticker.html?type=ltcdaylyfutures
+		 * http://api.796.com/v3/futures/ticker.html?type=weekly
+		 * http://api.796.com/v3/futures/ticker.html?type=ltc
+		 * http://api.796.com/v3/futures/ticker.html?type=btcquarterlyfutures
+		 * 
+		 * http://api.796.com/v3/stock/ticker.html?type=mri
+		 */
 		if(!pairs.contains(pair))
 			throw new IOException("Invalid pair.");
 		String url = "http://api.796.com/v3/";
 		String coin = pair.getCoin();
+		boolean isFutures = false;
 		if(coin.contains("Futures")) {
 			url += "futures/";
+			isFutures = true;
 		} else {
 			url += "stock/";
 		}
 		url += "ticker.html?type=";
-		if(coin.contains("BTC")) {
-			url += "weekly";
-		} else if(coin.contains("LTC")) {
-			url += "ltc";
+		if(isFutures) {
+			if(coin.contains("Weekly")) {
+				if(coin.contains("BTC")) {
+					url += "weekly";
+				} else if(coin.contains("LTC")) {
+					url += "ltc";
+				}
+			} else {
+				url += coin.toLowerCase().replaceAll("\\s+", "");
+			}
 		} else {
 			url += coin.toLowerCase();
 		}

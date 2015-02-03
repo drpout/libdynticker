@@ -14,13 +14,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
-public class E796ExchangeTest extends ExchangeTest {
+public class CoinbaseExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new E796Exchange(1000);
+		testExchange = new CoinbaseExchange(1000);
 	}
 
 	@Override
@@ -33,9 +31,8 @@ public class E796ExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC Weekly Futures", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("ASICMINER", "BTC")));
-			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
 		}
@@ -44,10 +41,10 @@ public class E796ExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC Weekly Futures", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/796-ticker.json")));
+			Pair pair = new Pair("BTC", "USD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinbase-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("325.00", lastValue);
+			Assert.assertEquals("227.50000000", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}

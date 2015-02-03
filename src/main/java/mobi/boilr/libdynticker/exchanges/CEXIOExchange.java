@@ -48,6 +48,7 @@ public final class CEXIOExchange extends Exchange {
 		tempPairs.add(new Pair("BTC", "EUR"));
 		tempPairs.add(new Pair("LTC", "EUR"));
 		tempPairs.add(new Pair("DOGE", "EUR"));
+		tempPairs.add(new Pair("DRK", "EUR"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
