@@ -52,13 +52,13 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Cryptsy](https://cryptsy.com)
 * [Coin-Swap](https://coin-swap.net)
 * [HitBTC](https://hitbtc.com)
+* [Melotic](https://www.melotic.com)
 * [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
-* [Melotic](https://www.melotic.com)
 
 ### Futures, stocks and securities
 * [796 Exchange](https://796.com)
