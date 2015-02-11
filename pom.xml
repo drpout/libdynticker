@@ -47,7 +47,7 @@
 
 	<licenses>
 		<license>
-			<name>LGPL v3</name>
+			<name>GNU LGPLv3+</name>
 			<url>https://www.gnu.org/licenses/lgpl-3.0.txt</url>
 			<distribution>repo</distribution>
 		</license>
