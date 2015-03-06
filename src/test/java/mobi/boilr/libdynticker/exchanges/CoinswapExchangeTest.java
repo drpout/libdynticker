@@ -43,8 +43,6 @@ public class CoinswapExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "DOGE")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
