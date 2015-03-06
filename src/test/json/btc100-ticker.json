@@ -1,5 +1,1 @@
-[
-{"bit":"2312.330","bit_buy":"2302.000","bit_selling":"2312.800","bit_highe":"2408.650","bit_lowe":"2282.460","bit_volume":"13773.394",
-"tic":"24.440","tic_buy":"24.330","tic_selling":"24.600","tic_highe":"24.910","tic_lowe":"24.340","tic_volume":"19204.362",
-"dic":"0.00158","dic_buy":"0.00156","dic_selling":"0.00160","dic_highe":"0.00164","dic_lowe":"0.00157","dic_volume":"205262023.240"}
-]
+[{"bit":"1699.890","bit_selling":"1701.000","bit_lowe":"1688.010","bit_volume":"9593.916","bit_buy":"1698.000","bit_highe":"1730.990"},{"tic_highe":"12.200","tic_selling":"11.990","tic_buy":"11.960","tic_volume":"15807.278","tic":"11.980","tic_lowe":"11.970"},{"selling":"0.00","coinImg":null,"buy":"0.00","coinname":"bp","coin":"用于积分","volume":"110.000","lowe":"0.00","highe":"0.00","first":"0.00"},{"dic_lowe":"0.00089","dic_buy":"0.00088","dic_volume":"142939903.960","dic_selling":"0.00090","dic":"0.00089","dic_highe":"0.00091"},{"selling":"5.84","coinImg":"images/ybc.png","buy":"5.61","coinname":"ybc","coin":"元宝币","volume":"1246.000","lowe":"5.61","highe":"5.70","first":"5.61"}]

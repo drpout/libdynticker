@@ -57,7 +57,7 @@ public class BTC100ExchangeTest extends ExchangeTest {
 			JsonNode node = (new ObjectMapper().readTree(new File(
 					"src/test/json/btc100-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("24.440", lastValue);
+			Assert.assertEquals("11.980", lastValue);
 		}
 		catch (IOException e) {
 			e.printStackTrace();

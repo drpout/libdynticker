@@ -18,10 +18,13 @@ public final class BTC100Exchange extends Exchange {
 	private static final List<Pair> PAIRS;
 	private static final Pair BTC_CNY = new Pair("BTC", "CNY");
 	private static final String BTC_CNY_ID = "bit";
+	private static final int BTC_CNY_POS = 0;
 	private static final Pair LTC_CNY = new Pair("LTC", "CNY");
 	private static final String LTC_CNY_ID = "tic";
+	private static final int LTC_CNY_POS = 1;
 	private static final Pair DOGE_CNY = new Pair("DOGE", "CNY");
 	private static final String DOGE_CNY_ID = "dic";
+	private static final int DOGE_CNY_POS = 3;
 
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();
@@ -52,15 +55,21 @@ public final class BTC100Exchange extends Exchange {
 		};
 		List<JsonNode> json = new ObjectMapper().readValue(node, typeRef);
 		String id;
-		if(pair.equals(BTC_CNY))
+		int pos;
+		if(pair.equals(BTC_CNY)) {
 			id = BTC_CNY_ID;
-		else if(pair.equals(LTC_CNY))
+			pos = BTC_CNY_POS;
+		}
+		else if(pair.equals(LTC_CNY)) {
 			id = LTC_CNY_ID;
-		else if(pair.equals(DOGE_CNY))
+			pos = LTC_CNY_POS;
+		} else if(pair.equals(DOGE_CNY)) {
 			id = DOGE_CNY_ID;
+			pos = DOGE_CNY_POS;
+		}
 		else
 			throw new IOException(pair + " is invalid.");
 
-		return json.get(0).get(id).getTextValue();
+		return json.get(pos).get(id).getTextValue();
 	}
 }
