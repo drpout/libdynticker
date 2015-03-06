@@ -34,7 +34,6 @@ public class MeloticExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("XMR", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("GOLD", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
