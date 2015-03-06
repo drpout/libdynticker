@@ -1,14 +1,13 @@
 package mobi.boilr.libdynticker.exchanges;
 
-import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.ExchangeTest;
 import mobi.boilr.libdynticker.core.Pair;
 
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -34,7 +33,6 @@ public class HuobiExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "CNY")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
@@ -46,10 +44,16 @@ public class HuobiExchangeTest extends ExchangeTest {
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "CNY");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/huobi-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("3671.05", lastValue);
-		} catch (IOException e) {
+			String file = "src/test/json/detail_btc.js";
+			String data = "";
+			BufferedReader in = new BufferedReader(new FileReader(file));
+			String inputLine;
+			while((inputLine = in.readLine()) != null)
+				data += inputLine;
+			in.close();
+			String lastValue = (((HuobiExchange) testExchange).getLast(data, pair));
+			Assert.assertEquals("1689.7", lastValue);
+		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
