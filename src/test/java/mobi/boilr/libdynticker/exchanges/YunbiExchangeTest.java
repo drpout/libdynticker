@@ -34,7 +34,6 @@ public class YunbiExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();
