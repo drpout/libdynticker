@@ -55,7 +55,12 @@ public final class AllcoinExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get("data").get("trade_price").getTextValue();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode jsonNode = node.get("data").get("trade_price");
+		if(jsonNode == null) {
+			throw new IOException("No market data");
+		} else {
+			return jsonNode.getTextValue();
+		}
 	}
 }
