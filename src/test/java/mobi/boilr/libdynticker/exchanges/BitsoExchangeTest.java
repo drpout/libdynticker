@@ -8,6 +8,7 @@ import mobi.boilr.libdynticker.core.ExchangeTest;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
@@ -16,11 +17,22 @@ import org.junit.Test;
 
 
 
-public class BTC38ExchangeTest extends ExchangeTest {
+public class BitsoExchangeTest extends ExchangeTest {
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if (e instanceof JsonParseException) {
+			System.err.println(pair);
+			System.err.println(e);
+		}
+		else {
+			super.handleException(pair, e);
+		}
+	}
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new BitsoExchange(10000);
+		testExchange = new BTC38Exchange(10000);
 	}
 
 	@Override
@@ -33,7 +45,8 @@ public class BTC38ExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "MXN")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "CNY")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		}
 		catch (IOException e) {
@@ -45,11 +58,11 @@ public class BTC38ExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "NMC");
+			Pair pair = new Pair("LTC", "BTC");
 			JsonNode node = (new ObjectMapper().readTree(new File(
-"src/test/json/bitso-ticker.json")));
+					"src/test/json/btc38-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("3980.00", lastValue);
+			Assert.assertEquals("0.008", lastValue);
 		}
 		catch (IOException e) {
 			e.printStackTrace();
