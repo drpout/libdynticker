@@ -14,27 +14,25 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CEXIOExchangeTest extends ExchangeTest {
+public class YuanbaohuiExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new CEXIOExchange(1000);
+		testExchange = new YuanbaohuiExchange(1000);
 	}
 
 	@Override
 	@After
-	public void tearDown() throws Exception {
-	}
+	public void tearDown() throws Exception {}
 
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("GHS", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("YBC", "CNY")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch (IOException e) {
+		} catch(IOException e) {
 			Assert.fail();
 		}
 	}
@@ -42,12 +40,13 @@ public class CEXIOExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cex.io-ticker.json")));
+			Pair pair = new Pair("YBC", "CNY");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/yuanbaohui-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("372.3233", lastValue);
-		} catch (IOException e) {
+			Assert.assertEquals("5.77", lastValue);
+		} catch(IOException e) {
 			Assert.fail();
 		}
 	}
+
 }
