@@ -36,6 +36,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [OneWorldCoin](https://www.oneworldcoin.com)
 * [Paymium](https://paymium.com)
 * [Thailand Bitcoin Exchange](https://bx.in.th)
+* [VirWox](https://www.virwox.com/)
 * [Yunbi](https://yunbi.com)
 
 ### Altcoins
