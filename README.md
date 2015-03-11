@@ -1,19 +1,19 @@
 # libdynticker
 
-Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.
+Java library to retrieve trading pairs and last value from cryptocurrency, assets and bullion exchanges.
 
 The main goal of libdynticker is to get the traded pairs dynamically. That way it can cope with the highly mutable altcoin exchanges where new pairs are added and removed each week. The result of this is that once a new exchange is added all trading pairs come along immediately.
 
 ## Supported exchanges
 
 ### Bitcoin and altcoins to FIAT
-* [1Bse](https://www.1bse.com/)
 * [ANX](https://anxpro.com)
 * [BitBay](https://bitbay.pl)
 * [Bitcoin.de](https://www.bitcoin.de)
 * [Bitcurex](http://bitcurex.com)
 * [Bitfinex](https://www.bitfinex.com)
 * [BitMarket.pl](https://www.bitmarket.pl)
+* [Bitso](https://bitso.com)
 * [Bitstamp](https://www.bitstamp.net)
 * [BTC100](https://www.btc100.com/)
 * [BtcTrade](https://www.btctrade.com)
@@ -25,7 +25,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CEX.IO](http://cex.io)
 * [CHBTC](https://www.chbtc.com)
 * [Coinbase](https://exchange.coinbase.com)
-* [CoinMkt](https://coinmkt.com)
+* [CoinMate](http://coinmate.io)
 * [Huobi](https://www.huobi.com)
 * [itBit](https://www.itbit.com)
 * [Kraken](https://www.kraken.com)
@@ -35,11 +35,12 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [OKCoin International](https://www.okcoin.com)
 * [OneWorldCoin](https://www.oneworldcoin.com)
 * [Paymium](https://paymium.com)
+* [Thailand Bitcoin Exchange](https://bx.in.th)
 * [Yunbi](https://yunbi.com)
 
 ### Altcoins
 * [AllCoin](https://www.allcoin.com)
-* [Atomic Trade](https://www.atomic-trade.com)
+* [Banx Capital](https://www.banx.io)
 * [Bitspark](https://bitspark.io)
 * [Bittrex](https://bittrex.com)
 * [BleuTrade](https://bleutrade.com)
@@ -56,12 +57,25 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
+* [Yuanbaohui](http://yuanbaohui.com)
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
 
-### Futures, stocks and securities
+### Assets, stocks, futures and securities
 * [796 Exchange](https://796.com)
+* [NXT Asset Exchange](http://wiki.nxtcrypto.org/wiki/Asset_Exchange)
+
+### Removed
+Most are now offline.
+
+* [~~1Bse~~](https://www.1bse.com)
+* [~~Atomic Trade~~](https://www.atomic-trade.com)
+* [~~CoinMkt~~](https://coinmkt.com)
+* [~~Crypto-Trade~~](http://crypto-trade.com)
+* [~~Justcoin~~](https://justcoin.com)
+* [~~Mintpal~~](http://mintpal.com)
+* [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
 ## Building
  `mvn package` to create a jar.

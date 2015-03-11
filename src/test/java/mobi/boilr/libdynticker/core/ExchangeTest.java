@@ -24,7 +24,10 @@ public class ExchangeTest {
 	}
 
 	protected void handleException(Pair pair, Exception e) {
-		System.err.println(pair);
+		String pairToString = pair.toString();
+		if(pair.getMarket() != null)
+			pairToString += " " + pair.getMarket();
+		System.err.println(pairToString);
 		e.printStackTrace();
 		Assert.fail();
 	}
