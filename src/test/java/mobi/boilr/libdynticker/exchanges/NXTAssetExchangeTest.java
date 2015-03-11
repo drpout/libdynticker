@@ -37,33 +37,6 @@ public class NXTAssetExchangeTest extends ExchangeTest {
 		}
 	}
 
-	@Override
-	@Test
-	public void testGetLastValueWithPairsFromGetPairs() {
-		List<Pair> pairs = null;
-		try {
-			pairs = testExchange.getPairs();
-			Assert.assertNotNull(pairs);
-			Assert.assertTrue(pairs.size() > 0);
-		} catch(IOException e) {
-			e.printStackTrace();
-			Assert.fail();
-		}
-
-		int allowedFails = (int) (pairs.size() * 0.1);
-		for(Pair pair : pairs) {
-			try {
-				double lastValue = testExchange.getLastValue(pair);
-				Assert.assertNotNull(lastValue);
-			} catch(Exception e) {
-				System.err.println(pair + " " + pair.getMarket());
-				e.printStackTrace();
-				if(--allowedFails == 0)
-					Assert.fail();
-			}
-		}
-	}
-
 	@Test
 	public void testParseJson() {
 		try {
