@@ -18,11 +18,8 @@ public final class E796Exchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BTC Dayly Futures", "USD"));
-		tempPairs.add(new Pair("LTC Dayly Futures", "USD"));
 		tempPairs.add(new Pair("BTC Weekly Futures", "USD"));
 		tempPairs.add(new Pair("LTC Weekly Futures", "USD"));
-		tempPairs.add(new Pair("BTC Quarterly Futures", "USD"));
 		tempPairs.add(new Pair("MRI", "BTC"));
 		tempPairs.add(new Pair("ASICMINER", "BTC"));
 		tempPairs.add(new Pair("RSM", "BTC"));
@@ -81,6 +78,7 @@ public final class E796Exchange extends Exchange {
 
 	@Override
 	public String parseJSON(JsonNode node, Pair pair) {
+		System.out.println(node.get("ticker").get("last").getTextValue());
 		return node.get("ticker").get("last").getTextValue();
 	}
 
