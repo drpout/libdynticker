@@ -24,13 +24,13 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added Coinbase exchange.
+			\+ Added Coinbase, Bitso, Thailand Bitcoin Exchange, Banx.io, Yuanbaohui, CoinMate, VirWox, Quadriga CS, Digital Securities Exchange, Coinsetter, CryptoFacilities, The Rock Trading and Coinut exchange.
 			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
-			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange and OKCoin pairs.
+			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange, OKCoin and Melotic pairs.
 			\* Fixed CCEXExchange returning 403 HTTP error code.
 			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.
-			\- Removed Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\- Removed Crypto-Trade, Justcoin, MintPal, Vault of Satoshi, Atomic Trade, 1BSE and CoinMKT exchanges.
 		</release.description>
 	</properties>
 
