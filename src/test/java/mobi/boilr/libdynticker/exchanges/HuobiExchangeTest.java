@@ -44,7 +44,7 @@ public class HuobiExchangeTest extends ExchangeTest {
 	public void testParseJson() {
 		try {
 			Pair pair = new Pair("BTC", "CNY");
-			String file = "src/test/json/detail_btc.js";
+			String file = "src/test/json/houbi-ticker.js";
 			String data = "";
 			BufferedReader in = new BufferedReader(new FileReader(file));
 			String inputLine;
