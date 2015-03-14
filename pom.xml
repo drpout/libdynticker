@@ -28,6 +28,7 @@
 			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange, OKCoin and Melotic pairs.
 			\* Fixed CCEXExchange returning 403 HTTP error code.
+			\* Fixed BTC100Exchange to handle new json format.
 			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.
 			\- Removed Crypto-Trade, Justcoin, MintPal, Vault of Satoshi, Atomic Trade, 1BSE and CoinMKT exchanges.
