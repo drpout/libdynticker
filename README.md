@@ -30,6 +30,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Digital Securities Exchange](https://dsx.uk)
 * [Huobi](https://www.huobi.com)
 * [itBit](https://www.itbit.com)
+* [Jubi](http://www.jubi.com)
 * [Kraken](https://www.kraken.com)
 * [LakeBTC](http://lakebtc.com)
 * [LocalBitcoins](https://localbitcoins.com)
