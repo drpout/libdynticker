@@ -14,8 +14,8 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public class BanxExchange extends Exchange {
 
-	public BanxExchange(int i) {
-		super("Banx Capital", i);
+	public BanxExchange(long expiredPeriod) {
+		super("Banx Capital", expiredPeriod);
 	}
 
 	@Override
