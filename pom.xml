@@ -31,7 +31,8 @@
 			\* Fixed BTC100Exchange to handle new json format.
 			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.
-			\* Removed Daily and Quaterly futures removed from 796 Exchange.
+			\* Fixed LakeBTC passing browser like user-agent.
+			\- Removed Daily and Quaterly futures removed from 796 Exchange.
 			\- Removed Crypto-Trade, Justcoin, MintPal, Vault of Satoshi, Atomic Trade, 1BSE and CoinMKT exchanges.
 		</release.description>
 	</properties>
