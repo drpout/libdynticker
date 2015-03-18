@@ -22,19 +22,22 @@ public class CryptoFacilitiesExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-		SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
-		Calendar c = Calendar.getInstance();
-		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-		c.add(Calendar.DATE, 7);
-		String thisWeek = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-		c.add(Calendar.MONTH, 3);
-		String threeMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-		c.add(Calendar.MONTH, 3);
-		String sixMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-		pairs.add(new Pair(thisWeek, "USD"));
-		pairs.add(new Pair(threeMonths, "USD"));
-		pairs.add(new Pair(sixMonths, "USD"));
+//		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
+//		SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
+//		Calendar c = Calendar.getInstance();
+//		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+//		c.add(Calendar.DATE, 7);
+//		String thisWeek = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
+//		c.add(Calendar.MONTH, 3);
+//		String threeMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
+//		c.add(Calendar.MONTH, 3);
+//		String sixMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
+		// pairs.add(new Pair(thisWeek, "USD"));
+		// pairs.add(new Pair(threeMonths, "USD"));
+		// pairs.add(new Pair(sixMonths, "USD"));
+		pairs.add(new Pair("F-XBT:USD-Mar15", "USD"));
+		pairs.add(new Pair("F-XBT:USD-Jun15", "USD"));
+		pairs.add(new Pair("F-XBT:USD-Sep15", "USD"));
 		return pairs;
 	}
 
