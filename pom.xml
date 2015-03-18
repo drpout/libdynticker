@@ -10,6 +10,7 @@
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
 	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
+	<url>https://github.com/andrefbsantos/libdynticker</url>
 	<inceptionYear>2014</inceptionYear>
 
 	<scm>
@@ -24,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added Coinbase, Bitso, Thailand Bitcoin Exchange, Banx.io, Yuanbaohui, CoinMate, VirWox, Quadriga CS, Digital Securities Exchange, Coinsetter, CryptoFacilities, The Rock Trading, Coinut and Jubi exchange.
+			\+ Added Banx.io, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Quadriga CS, Thailand Bitcoin Exchange, The Rock Trading, VirWox and Yuanbaohui exchange.
 			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange, OKCoin and Melotic pairs.
 			\* Fixed CCEXExchange returning 403 HTTP error code.
@@ -33,7 +34,7 @@
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.
 			\* Fixed LakeBTC passing browser like user-agent.
 			\- Removed Daily and Quaterly futures removed from 796 Exchange.
-			\- Removed Crypto-Trade, Justcoin, MintPal, Vault of Satoshi, Atomic Trade, 1BSE and CoinMKT exchanges.
+			\- Removed 1BSE, Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
 		</release.description>
 	</properties>
 
@@ -67,6 +68,10 @@
 			<name>Temporary repository for manual upload to Github releases</name>
 			<url>file://${project.build.directory}/mvn-repo</url>
 		</repository>
+		<snapshotRepository>
+    		<id>ossrh</id>
+    		<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+  		</snapshotRepository>
 	</distributionManagement>
 
 	<dependencies>
@@ -221,6 +226,35 @@
 					</execution>
 				</executions>
 			</plugin>
+	
+	
+			<!--  deploy to maven -->		
+			<plugin>
+		      <groupId>org.sonatype.plugins</groupId>
+		      <artifactId>nexus-staging-maven-plugin</artifactId>
+				<version>1.6.5</version>
+		      <extensions>true</extensions>
+		      <configuration>
+		        <serverId>ossrh</serverId>
+		        <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+		        <autoReleaseAfterClose>true</autoReleaseAfterClose>
+		      </configuration>
+		    </plugin>
+		 
+		    <plugin>
+		      <groupId>org.apache.maven.plugins</groupId>
+		      <artifactId>maven-gpg-plugin</artifactId>
+		      <version>1.5</version>
+		      <executions>
+		        <execution>
+		          <id>sign-artifacts</id>
+		          <phase>verify</phase>
+		          <goals>
+		            <goal>sign</goal>
+		          </goals>
+		        </execution>
+		      </executions>
+		    </plugin>
 		</plugins>
 	</build>
 </project>
