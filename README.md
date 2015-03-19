@@ -83,6 +83,18 @@ Most are now offline.
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
+## Maven
+
+To use the package, you need to use following Maven dependency:
+
+```xml
+<dependency>
+  <groupId>mobi.boilr.libdynticker</groupId>
+  <artifactId>libdynticker</artifactId>
+  <version>0.5.0</version>
+</dependency>
+```
+
 ## Building
  `mvn package` to create a jar.
 
