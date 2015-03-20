@@ -27,6 +27,16 @@ public class BitcoindeExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().equals("API call limit reached.")) {
+			String pairToString = pair.toString();
+			System.err.println(pairToString + " " + e.getMessage());
+		} else {
+			super.handleException(pair, e);
+		}
+	}
+
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
