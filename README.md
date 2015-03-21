@@ -62,6 +62,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
+* [Yobit](http://yobit.net)
 * [Yuanbaohui](http://yuanbaohui.com)
 
 ### Bullion
