@@ -32,7 +32,7 @@ public class BitKonaExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "NIS")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		} catch(IOException e) {
 			e.printStackTrace();
