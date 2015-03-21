@@ -45,7 +45,7 @@ public class CoinutExchangeTest extends ExchangeTest {
 			Pair pair = new Pair("BTC", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinut-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
-			Assert.assertEquals("343.03", lastValue);
+			Assert.assertEquals("284.547685", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}
