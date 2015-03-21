@@ -21,7 +21,7 @@ public final class BitcurexExchange extends Exchange {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "PLN"));
 		tempPairs.add(new Pair("BTC", "EUR"));
-		tempPairs.add(new Pair("BTC", "USD"));
+		tempPairs.add(new Pair("USD", "EUR"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
@@ -47,7 +47,10 @@ public final class BitcurexExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		return node.get(0).get("price").toString();
+	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		if(node.getElements().hasNext())
+			return node.get(0).get("price").toString();
+		else
+			throw new IOException(pair + " not found");
 	}
 }

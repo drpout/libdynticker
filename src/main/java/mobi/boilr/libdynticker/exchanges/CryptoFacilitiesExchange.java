@@ -2,9 +2,7 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
@@ -22,22 +20,9 @@ public class CryptoFacilitiesExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-//		SimpleDateFormat dayFormat = new SimpleDateFormat("dd");
-//		SimpleDateFormat monthFormat = new SimpleDateFormat("MMMM");
-//		Calendar c = Calendar.getInstance();
-//		c.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-//		c.add(Calendar.DATE, 7);
-//		String thisWeek = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-//		c.add(Calendar.MONTH, 3);
-//		String threeMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-//		c.add(Calendar.MONTH, 3);
-//		String sixMonths = "F-XBT:USD-" + monthFormat.format(c.getTime()).substring(0, 3) + dayFormat.format(c.getTime());
-		// pairs.add(new Pair(thisWeek, "USD"));
-		// pairs.add(new Pair(threeMonths, "USD"));
-		// pairs.add(new Pair(sixMonths, "USD"));
-		pairs.add(new Pair("F-XBT:USD-Mar15", "USD"));
 		pairs.add(new Pair("F-XBT:USD-Jun15", "USD"));
 		pairs.add(new Pair("F-XBT:USD-Sep15", "USD"));
+		pairs.add(new Pair("F-XBT:USD-Dec15", "USD"));
 		return pairs;
 	}
 
