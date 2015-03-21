@@ -94,18 +94,18 @@ Most are now offline.
 ## Using this library
 
 ### Gradle
-	```groovy
-	compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
-	```
+```groovy
+compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
+```
 
 ### Maven
-	```xml
-	<dependency>
-	  <groupId>mobi.boilr.libdynticker</groupId>
-	  <artifactId>libdynticker</artifactId>
-	  <version>0.5.0</version>
-	</dependency>
-	```
+```xml
+<dependency>
+  <groupId>mobi.boilr.libdynticker</groupId>
+  <artifactId>libdynticker</artifactId>
+  <version>0.5.0</version>
+</dependency>
+```
 
 ## Building
  `mvn package` to create a jar.
