@@ -14,7 +14,6 @@ import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BtcTradeExchange extends Exchange {
 	private static final List<Pair> PAIRS;
-
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();
 		pairs.add(new Pair("BTC", "CNY"));

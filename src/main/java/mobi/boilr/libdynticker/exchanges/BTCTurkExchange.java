@@ -6,15 +6,16 @@ import java.util.List;
 
 import mobi.boilr.libdynticker.core.Pair;
 
-public class BTCExchangePHExchange extends BTCTraderExchange {
+public class BTCTurkExchange extends BTCTraderExchange {
+
 
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();
-		pairs.add(new Pair("BTC", "PHP"));
+		pairs.add(new Pair("BTC", "TL"));
 		PAIRS = Collections.unmodifiableList(pairs);
 	}
 
-	public BTCExchangePHExchange(long expiredPeriod) {
-		super("BTCExchange", expiredPeriod, "https://btcexchange.ph/");
+	public BTCTurkExchange(long expiredPeriod) {
+		super("BTCTurk", expiredPeriod, "https://www.btcturk.com/");
 	}
 }

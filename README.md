@@ -24,6 +24,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BTCExchange](https://www.btcexchange.ph)
 * [BTCGreece](https://www.btcgreece.com)
 * [BtcTrade](https://www.btctrade.com)
+* [BTCTurk](https://www.btcturk.com)
 * [BTC China](https://btcchina.com)
 * [BTC Markets](https://btcmarkets.net)
 * [BTC-E](https://btc-e.com)

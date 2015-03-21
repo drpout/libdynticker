@@ -1,6 +1,5 @@
 package mobi.boilr.libdynticker.exchanges;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -8,8 +7,6 @@ import java.util.List;
 import mobi.boilr.libdynticker.core.Pair;
 
 public class BTCGreeceExchange extends BTCTraderExchange {
-
-	private static final List<Pair> PAIRS;
 
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();
@@ -21,8 +18,5 @@ public class BTCGreeceExchange extends BTCTraderExchange {
 		super("BTCGreece", expiredPeriod, "https://www.btcgreece.com/");
 	}
 
-	@Override
-	protected List<Pair> getPairsFromAPI() throws IOException {
-		return PAIRS;
-	}
+
 }
