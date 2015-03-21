@@ -9,6 +9,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ### Bitcoin and altcoins to FIAT
 * [ANX](https://anxpro.com)
 * [Basebit](https://www.basebit.com.br)
+* [Bit2c](https://www.bit2c.co.il)
 * [BitBay](https://bitbay.pl)
 * [Bitcoin.de](https://www.bitcoin.de)
 * [Bitcurex](http://bitcurex.com)
@@ -40,7 +41,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [OKCoin International](https://www.okcoin.com)
 * [OneWorldCoin](https://www.oneworldcoin.com)
 * [Paymium](https://paymium.com)
-* [Quadriga](https://www.quadrigacx.com)
+* [QuadrigaCX](https://www.quadrigacx.com)
 * [Thailand Bitcoin Exchange](https://bx.in.th)
 * [VirWox](https://www.virwox.com)
 * [Yunbi](https://yunbi.com)
