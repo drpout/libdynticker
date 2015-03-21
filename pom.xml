@@ -25,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added Banx.io, Bit2c, Basebit, BitKonan, Bitso, Coinbase, CoinMate, Coinsetter, Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Quadriga CS, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit and Yuanbaohui exchange.
+			\+ Added Banx.io, Bit2c, Basebit, BitKonan, Bitso, Coinbase, CoinMate, Coinsetter, Cointrader Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Quadriga CS, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit and Yuanbaohui exchange.
 			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
 			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange, OKCoin and Melotic pairs.
 			\* Fixed CCEXExchange returning 403 HTTP error code.

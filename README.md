@@ -25,6 +25,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BTC-E](https://btc-e.com)
 * [CampBX](http://campbx.com)
 * [CaVirtEx](https://www.cavirtex.com)
+* [Cointrader](https://www.cointrader.net)
 * [CEX.IO](http://cex.io)
 * [CHBTC](https://www.chbtc.com)
 * [Coinbase](https://exchange.coinbase.com)
