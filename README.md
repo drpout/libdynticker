@@ -94,10 +94,14 @@ Most are now offline.
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
-## Maven
+## Using this library
 
-To use the package, you need to use following Maven dependency:
+### Gradle
+```groovy
+compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
+```
 
+### Maven
 ```xml
 <dependency>
   <groupId>mobi.boilr.libdynticker</groupId>
