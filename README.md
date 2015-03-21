@@ -31,6 +31,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CampBX](http://campbx.com)
 * [CaVirtEx](https://www.cavirtex.com)
 * [Cointrader](https://www.cointrader.net)
+* [Cointree](https://www.cointree.com.au)
 * [CEX.IO](http://cex.io)
 * [CHBTC](https://www.chbtc.com)
 * [Coinbase](https://exchange.coinbase.com)
@@ -94,14 +95,10 @@ Most are now offline.
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
-## Using this library
+## Maven
 
-### Gradle
-```groovy
-compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
-```
+To use the package, you need to use following Maven dependency:
 
-### Maven
 ```xml
 <dependency>
   <groupId>mobi.boilr.libdynticker</groupId>

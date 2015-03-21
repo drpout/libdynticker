@@ -14,11 +14,12 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CoinutExchangeTest extends ExchangeTest {
+public class CoinTreeTest extends ExchangeTest {
+
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new CoinutExchange(10000);
+		testExchange = new CoinTreeExchange(10000);
 	}
 
 	@Override
@@ -31,9 +32,9 @@ public class CoinutExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "AUD")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
-		} catch (IOException e) {
+		} catch(IOException e) {
 			e.printStackTrace();
 			Assert.fail();
 		}
@@ -42,11 +43,11 @@ public class CoinutExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseJson() {
 		try {
-			Pair pair = new Pair("BTC", "USD");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/coinut-ticker.json")));
+			Pair pair = new Pair("BTC", "AUD");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cointree-ticker.json")));
 			String lastValue = testExchange.parseJSON(node, pair);
 			Assert.assertEquals("343.03", lastValue);
-		} catch (IOException e) {
+		} catch(IOException e) {
 			Assert.fail();
 		}
 	}
