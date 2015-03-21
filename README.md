@@ -83,17 +83,21 @@ Most are now offline.
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
-## Maven
+## Using this library
 
-To use the package, you need to use following Maven dependency:
+### Gradle
+	```groovy
+	compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
+	```
 
-```xml
-<dependency>
-  <groupId>mobi.boilr.libdynticker</groupId>
-  <artifactId>libdynticker</artifactId>
-  <version>0.5.0</version>
-</dependency>
-```
+### Maven
+	```xml
+	<dependency>
+	  <groupId>mobi.boilr.libdynticker</groupId>
+	  <artifactId>libdynticker</artifactId>
+	  <version>0.5.0</version>
+	</dependency>
+	```
 
 ## Building
  `mvn package` to create a jar.
