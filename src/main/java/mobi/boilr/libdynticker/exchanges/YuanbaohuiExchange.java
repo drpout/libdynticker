@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +10,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class YuanbaohuiExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -45,21 +43,20 @@ public class YuanbaohuiExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		// https://yuanbaohui.com/json/ybc2cny_order?t=0.8060067854962146
 		try {
-			JsonNode node = (new ObjectMapper()).readTree(new URL(
-				"https://yuanbaohui.com/json/"
+			JsonNode node = readJsonFromUrl("https://yuanbaohui.com/json/"
 				+ pair.getCoin().toLowerCase() + "2" + pair.getExchange().toLowerCase()
-				+ "_order?t=0.8060067854962146"));
-			return parseJSON(node, pair);
+				+ "_order?t=0.8060067854962146");
+			return parseTicker(node, pair);
 		} catch(IOException e) {
 			if(e.getMessage().contains("403"))
-				throw new MalformedURLException("Invalid pair.");
+				throw new MalformedURLException("Invalid pair: " + pair);
 			else
 				throw e;
 		}
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("d").getElements().next().get("p").getTextValue();
 	}
 

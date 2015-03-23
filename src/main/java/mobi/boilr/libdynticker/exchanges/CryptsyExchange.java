@@ -21,31 +21,7 @@ public final class CryptsyExchange extends Exchange {
 		super("Cryptsy", expiredPeriod);
 	}
 
-	protected String getTickerURL(Pair pair) {
-		return "http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" + pair.getMarket();
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.get("success").toString().equals("1")) {
-			String lastValue = node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
-			if(lastValue == null) {
-				throw new IOException("No last value for " + pair + ".");
-			} else {
-				return lastValue;
-			}
-		} else {
-			throw new IOException(node.get("error").getTextValue());
-		}
-	}
-
-	@Override
-	protected String getTicker(Pair pair) throws IOException {
-		return parseJSON((new ObjectMapper()).readTree(new URL(getTickerURL(pair))), pair);
-	}
-
 	// http://stackoverflow.com/questions/11507231/android-parsing-json-file-with-a-large-property-with-low-memory-usage
-
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 
@@ -112,5 +88,26 @@ public final class CryptsyExchange extends Exchange {
 		}
 
 		return pairs;
+	}
+	
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" +
+				pair.getMarket());
+		if(node.get("success").toString().equals("1")) {
+			return parseTicker(node, pair);
+		} else {
+			throw new IOException(node.get("error").getTextValue());
+		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		String lastValue = node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
+		if(lastValue == null) {
+			throw new IOException("No last value for " + pair + ".");
+		} else {
+			return lastValue;
+		}
 	}
 }

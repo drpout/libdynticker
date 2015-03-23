@@ -65,18 +65,15 @@ public final class CEXIOExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		URLConnection urlConnection = (new URL("https://cex.io/api/last_price/"
-				+ pair.getCoin() + "/" + pair.getExchange())).openConnection();
-		urlConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		urlConnection.connect();
-		JsonNode node = (new ObjectMapper()).readTree(urlConnection.getInputStream());
+		JsonNode node = readJsonFromUrl("https://cex.io/api/last_price/"
+				+ pair.getCoin() + "/" + pair.getExchange());
 		if(node.has("error"))
 			throw new MalformedURLException(node.get("error").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("lprice").getTextValue();
 	}
 

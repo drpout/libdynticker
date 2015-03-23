@@ -24,10 +24,7 @@ public final class YobitExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		URLConnection uc = new URL("https://yobit.net/api/3/info").openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode elements = (new ObjectMapper()).readTree(uc.getInputStream()).get("pairs");
+		JsonNode elements = readJsonFromUrl("https://yobit.net/api/3/info").get("pairs");
 		Iterator<String> fieldNames = elements.getFieldNames();
 		String[] split;
 		String element;
@@ -42,20 +39,18 @@ public final class YobitExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
-		String url = "https://yobit.net/api/3/ticker/" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
-		URLConnection uc = new URL(url).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.has(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())) {
-			return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase()).get("last").asText();
+		String pairCode = pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
+		JsonNode node = readJsonFromUrl("https://yobit.net/api/3/ticker/" + pairCode);
+		if(node.has(pairCode)) {
+			return parseTicker(node, pair);
 		} else {
 			throw new IOException(node.get("error").asText());
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get(pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase())
+				.get("last").asText();
 	}
 }

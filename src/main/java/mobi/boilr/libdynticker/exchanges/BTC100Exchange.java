@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -45,31 +44,26 @@ public final class BTC100Exchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		JsonNode node = new ObjectMapper().readTree(new URL("https://www.btc100.com/apidata/getdata.json"));
-		return parseJSON(node, pair);
+		if(!PAIRS.contains(pair)) {
+			throw new IOException("Invalid pair: " + pair);
+		}
+		JsonNode node = readJsonFromUrl("https://www.btc100.com/apidata/getdata.json");
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		TypeReference<List<JsonNode>> typeRef = new TypeReference<List<JsonNode>>() {
-		};
-		List<JsonNode> json = new ObjectMapper().readValue(node, typeRef);
-		String id;
-		int pos;
-		if(pair.equals(BTC_CNY)) {
-			id = BTC_CNY_ID;
-			pos = BTC_CNY_POS;
-		}
-		else if(pair.equals(LTC_CNY)) {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		TypeReference<List<JsonNode>> typeRef = new TypeReference<List<JsonNode>>() {};
+		List<JsonNode> nodes = new ObjectMapper().readValue(node, typeRef);
+		String id = BTC_CNY_ID;
+		int pos = BTC_CNY_POS;
+		if(pair.equals(LTC_CNY)) {
 			id = LTC_CNY_ID;
 			pos = LTC_CNY_POS;
 		} else if(pair.equals(DOGE_CNY)) {
 			id = DOGE_CNY_ID;
 			pos = DOGE_CNY_POS;
 		}
-		else
-			throw new IOException(pair + " is invalid.");
-
-		return json.get(pos).get(id).getTextValue();
+		return nodes.get(pos).get(id).getTextValue();
 	}
 }

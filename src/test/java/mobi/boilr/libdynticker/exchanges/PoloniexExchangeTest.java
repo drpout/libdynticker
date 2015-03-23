@@ -44,12 +44,12 @@ public class PoloniexExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		JsonNode node;
 		try {
 			node = (new ObjectMapper().readTree(new File("src/test/json/poloniex-ticker.json")));
 			Pair pair = new Pair("XMR", "BTC");
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("0.00452783", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

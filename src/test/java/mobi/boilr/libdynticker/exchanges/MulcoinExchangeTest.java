@@ -40,11 +40,11 @@ public class MulcoinExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("LTC", "BTC");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/mulcoin-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("0.00899", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

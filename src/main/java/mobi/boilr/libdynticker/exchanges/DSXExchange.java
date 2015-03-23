@@ -1,6 +1,7 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -37,23 +38,23 @@ public class DSXExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		HttpsURLConnection uc = (HttpsURLConnection) new URL("https://dsx.uk/api/ticker/" + pair.getCoin().toLowerCase()
-			+ pair.getExchange().toLowerCase()
-			+ "?mode=DEMO").openConnection();
+		HttpsURLConnection uc = (HttpsURLConnection) buildConnection("https://dsx.uk/api/ticker/" +
+				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase() + "?mode=DEMO");
 		uc.setRequestProperty("Cookie", "_gat=1; _ym_visorc_27507645=w; i18next=en; _ga=GA1.2.1040986257.1426094211; __zlcmid=TheUiZvEtgPvNe");
 		uc.setRequestMethod("POST");
 		uc.connect();
 		JsonNode node = new ObjectMapper().readTree(uc.getInputStream());
-		return parseJSON(node, pair);
+		if(node.has(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase())) {
+			return parseTicker(node, pair);
+		} else {
+			throw new MalformedURLException();
+		}
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.has(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase())) {
-			return node.get(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase()).get("last").asText();
-		} else {
-			throw new IOException();
-		}
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get(pair.getCoin().toLowerCase() +
+				pair.getExchange().toLowerCase()).get("last").asText();
 	}
 
 }

@@ -20,9 +20,8 @@ public class CoinutExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
-		String url = "https://coinut.com/api/assets";
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
+		JsonNode node = readJsonFromUrl("https://coinut.com/api/assets");
 		Iterator<JsonNode> elements = node.getElements();
 		while(elements.hasNext()){
 			String key = elements.next().asText();
@@ -33,17 +32,17 @@ public class CoinutExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://coinut.com/api/tick/" + pair.getCoin() + pair.getExchange();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://coinut.com/api/tick/" +
+				pair.getCoin() + pair.getExchange());
 		if(node.has("error")) {
 			throw new IOException(node.get("error").asText());
 		} else {
-			return node.get("tick").asText();
+			return parseTicker(node, pair);
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("tick").asText();
 	}
 }

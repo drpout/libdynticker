@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +25,7 @@ public final class BitfinexExchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		TypeReference<List<String>> typeRef = new TypeReference<List<String>>() {
 		};
-		List<String> symbols = (new ObjectMapper()).readValue(new URL("https://api.bitfinex.com/v1/symbols"), typeRef);
+		List<String> symbols = (new ObjectMapper()).readValue(readJsonFromUrl("https://api.bitfinex.com/v1/symbols"), typeRef);
 		String coin, exchange;
 		for(String sym : symbols) {
 			sym = sym.toUpperCase();
@@ -40,15 +39,15 @@ public final class BitfinexExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, IOException {
 		// https://api.bitfinex.com/v1/pubticker/BTCUSD
-		String address = "https://api.bitfinex.com/v1/pubticker/" + pair.getCoin() + pair.getExchange();
-		JsonNode node = (new ObjectMapper()).readTree(new URL(address));
+		JsonNode node = readJsonFromUrl("https://api.bitfinex.com/v1/pubticker/" +
+				pair.getCoin() + pair.getExchange());
 		if(node.has("message"))
 			throw new MalformedURLException(node.get("message").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("last_price").getTextValue();
 	}
 

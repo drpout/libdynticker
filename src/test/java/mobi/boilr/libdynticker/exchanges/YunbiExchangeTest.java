@@ -41,11 +41,11 @@ public class YunbiExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("DOGE", "CNY");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/yunbi-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("0.001503", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

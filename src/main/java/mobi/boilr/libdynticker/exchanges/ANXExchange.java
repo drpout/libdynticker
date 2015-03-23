@@ -47,18 +47,15 @@ public final class ANXExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		// https://anxpro.com/api/2/DOGEBTC/money/ticker
-		URLConnection urlConnection = (new URL("https://anxpro.com/api/2/"
-				+ pair.getCoin() + pair.getExchange() + "/money/ticker")).openConnection();
-		urlConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		urlConnection.connect();
-		JsonNode node = (new ObjectMapper()).readTree(urlConnection.getInputStream());
+		JsonNode node = readJsonFromUrl("https://anxpro.com/api/2/"
+				+ pair.getCoin() + pair.getExchange() + "/money/ticker");
 		if(node.has("error"))
 			throw new MalformedURLException(node.get("result").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("data").get("last").get("value").getTextValue();
 	}
 

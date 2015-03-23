@@ -1,8 +1,8 @@
 # libdynticker
 
-Java library to retrieve trading pairs and last value from cryptocurrency, assets and bullion exchanges.
+Java library to retrieve trading pairs and last value from Bitcoin, cryptocurrencies, cryptoassets and derivatives exchanges.
 
-The main goal of libdynticker is to get the traded pairs dynamically. That way it can cope with the highly mutable altcoin exchanges where new pairs are added and removed each week. The result of this is that once a new exchange is added all trading pairs come along immediately.
+The main goal of libdynticker is to get the traded pairs dynamically. That way it can cope with the highly mutable altcoin exchanges, where new pairs are added and removed each week.
 
 ## Supported exchanges
 
@@ -67,7 +67,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Coins-E](http://coins-e.com)
 * [Cryptonit](https://cryptonit.net)
 * [Cryptsy](https://cryptsy.com)
-* [Coin-Swap](https://coin-swap.net)
 * [HitBTC](https://hitbtc.com)
 * [Melotic](https://www.melotic.com)
 * [Mulcoin](https://www.mulcoin.com)
@@ -90,15 +89,20 @@ Most are now offline.
 * [~~1Bse~~](https://www.1bse.com)
 * [~~Atomic Trade~~](https://www.atomic-trade.com)
 * [~~CoinMkt~~](https://coinmkt.com)
+* [~~Coin-Swap~~](https://coin-swap.net)
 * [~~Crypto-Trade~~](http://crypto-trade.com)
 * [~~Justcoin~~](https://justcoin.com)
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
-## Maven
+## Using this library
 
-To use the package, you need to use following Maven dependency:
+### Gradle
+```groovy
+compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
+```
 
+### Maven
 ```xml
 <dependency>
   <groupId>mobi.boilr.libdynticker</groupId>

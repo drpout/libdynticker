@@ -33,17 +33,15 @@ public class CoinTreeExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		if(PAIRS.contains(pair)) {
-			String url = "https://www.cointree.com.au/api/price/" + pair.getCoin() + "/" + pair.getExchange();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-		} else {
-			throw new IOException(pair + " not found");
-		}
+		if(!PAIRS.contains(pair))
+			throw new IOException("Invalid pair: " + pair);
+		JsonNode node = readJsonFromUrl("https://www.cointree.com.au/api/price/" +
+				pair.getCoin() + "/" + pair.getExchange());
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("Spot").asText();
 	}
 }

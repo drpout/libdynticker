@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -47,8 +46,8 @@ public final class OKCoinExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair))
-			throw new IOException("Invalid pair.");
-		String url = "";
+			throw new IOException("Invalid pair: " + pair);
+		String url = "https://www.okcoin.com/api/";
 
 		if(pair.getCoin().contains("Futures")) {
 			String contractTtpe = null;
@@ -64,31 +63,32 @@ public final class OKCoinExchange extends Exchange {
 			else {
 				throw new IOException();
 			}
-			url = "https://www.okcoin.com/api/future_ticker.do?symbol=" + pair.getCoin().substring(0, 3).toLowerCase() + "_"
+			url += "future_ticker.do?symbol=" + pair.getCoin().substring(0, 3).toLowerCase() + "_"
 					+ pair.getExchange().toLowerCase() + "&" + "contractType=" + contractTtpe;
-			JsonNode node = new ObjectMapper().readTree(new URL(url));
+			JsonNode node = readJsonFromUrl(url);
 			return parseJSONFuture(node, pair);
 		}
 		else if(pair.getExchange().equals("USD")) {
 			// https://www.okcoin.com/api/ticker.do?symbol=ltc_usd&ok=1
-			url = "https://www.okcoin.com/api/ticker.do?symbol=" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase() + "&ok=1";
+			url += "ticker.do?symbol=" + pair.getCoin().toLowerCase() + "_" +
+					pair.getExchange().toLowerCase() + "&ok=1";
 		}
 		else if(pair.getExchange().equals("CNY")) {
-			url = "https://www.okcoin.cn/api/ticker.do?symbol=" + pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
+			url = "https://www.okcoin.cn/api/ticker.do?symbol=" +
+					pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 		}
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl(url);
+		return parseTicker(node, pair);
 	}
 
 	protected String parseJSONFuture(JsonNode node, Pair pair) throws JsonParseException, JsonMappingException, IOException {
-		TypeReference<JsonNode[]> typeReference = new TypeReference<JsonNode[]>() {
-		};
+		TypeReference<JsonNode[]> typeReference = new TypeReference<JsonNode[]>() {};
 		JsonNode[] values = new ObjectMapper().readValue(node.get("ticker"), typeReference);
 		return values[0].get("last").toString();
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("ticker").get("last").getTextValue();
 	}
 }

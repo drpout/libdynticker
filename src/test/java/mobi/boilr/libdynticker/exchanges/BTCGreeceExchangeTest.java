@@ -40,11 +40,11 @@ public class BTCGreeceExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "AUD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/btcgreece-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("243.53", lastValue);
 		} catch(IOException e) {
 			Assert.fail();

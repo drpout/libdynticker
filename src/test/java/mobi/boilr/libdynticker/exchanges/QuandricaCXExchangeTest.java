@@ -42,11 +42,11 @@ public class QuandricaCXExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "CAD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/quadrigacx-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("375.16", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

@@ -33,16 +33,15 @@ public class CoinMateExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		// https://coinmate.io/api/ticker?currencyPair=BTC_USD
-		JsonNode node = (new ObjectMapper()).readTree(new URL(
-			"https://coinmate.io/api/ticker?currencyPair="
-			+ pair.getCoin() + "_" + pair.getExchange()));
+		JsonNode node = readJsonFromUrl("https://coinmate.io/api/ticker?currencyPair="
+			+ pair.getCoin() + "_" + pair.getExchange());
 		if(node.get("error").getBooleanValue())
 			throw new MalformedURLException(node.get("errorMessage").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("data").get("last").asText();
 	}
 

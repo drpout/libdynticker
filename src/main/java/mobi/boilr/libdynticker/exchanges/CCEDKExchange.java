@@ -27,7 +27,7 @@ public final class CCEDKExchange extends Exchange {
 	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		long currentSeconds = System.currentTimeMillis() / 1000;
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/currency/list?nonce=" + currentSeconds));
+		JsonNode node = readJsonFromUrl("https://www.ccedk.com/api/v1/currency/list?nonce=" + currentSeconds);
 		if(node.get("errors").isBoolean() && !node.get("errors").getBooleanValue()) {
 			Map<String, String> currencies = new HashMap<String, String>();
 			Iterator<JsonNode> elements = node.get("response").get("entities").getElements();
@@ -35,7 +35,7 @@ public final class CCEDKExchange extends Exchange {
 				element = elements.next();
 				currencies.put(element.get("currency_id").getTextValue(), element.get("iso").getTextValue());
 			}
-			node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/pair/list?nonce=" + currentSeconds));
+			node = readJsonFromUrl("https://www.ccedk.com/api/v1/pair/list?nonce=" + currentSeconds);
 			if(node.get("errors").isBoolean() && !node.get("errors").getBooleanValue()) {
 				elements = node.get("response").get("entities").getElements();
 				for(JsonNode element; elements.hasNext();) {
@@ -53,15 +53,15 @@ public final class CCEDKExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
 		long currentSeconds = System.currentTimeMillis() / 1000;
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/trade/list?nonce="
-				+ currentSeconds + "&pair_id=" + pair.getMarket()));
+		JsonNode node = readJsonFromUrl("https://www.ccedk.com/api/v1/trade/list?nonce="
+				+ currentSeconds + "&pair_id=" + pair.getMarket());
 		if(node.get("errors").isObject())
 			throw new MalformedURLException(node.get("errors").toString());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		node = node.get("response").get("entities");
 		if(node.isBoolean())
 			throw new IOException("Data for " + pair + " is empty.");

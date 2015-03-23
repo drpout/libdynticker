@@ -42,11 +42,11 @@ public class CointraderExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cointrader-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("261.00", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

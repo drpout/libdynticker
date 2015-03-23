@@ -48,11 +48,11 @@ public class LocalBitcoinsExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "SEK");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/localbitcoins-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("4175.95", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

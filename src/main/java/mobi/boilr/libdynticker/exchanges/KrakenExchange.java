@@ -1,8 +1,7 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -12,7 +11,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class KrakenExchange extends Exchange {
 
@@ -34,13 +32,7 @@ public final class KrakenExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		URL url = new URL("https://api.kraken.com/0/public/AssetPairs");
-		URLConnection uc = url.openConnection();
-
-		// Mask call as if it was made by a browser
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream()).get("result");
+		JsonNode node = readJsonFromUrl("https://api.kraken.com/0/public/AssetPairs").get("result");
 		Iterator<String> fieldNames = node.getFieldNames();
 		String coin, exchange;
 		for (JsonNode jsonNode; fieldNames.hasNext();) {
@@ -54,21 +46,17 @@ public final class KrakenExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://api.kraken.com/0/public/Ticker?pair=" + this.pairCode(pair);
-		URLConnection uc = (new URL(url)).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
-		return this.parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl("https://api.kraken.com/0/public/Ticker?pair=" + pairCode(pair));
+		if(node.get("error").getElements().hasNext()) {
+			throw new MalformedURLException(node.get("error").getElements().next().getTextValue());
+		} else {
+			return parseTicker(node, pair);
+		}
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(!node.get("error").getElements().hasNext()) {
-			return node.get("result").get(this.pairCode(pair)).get("c").getElements().next().getTextValue();
-		} else {
-			throw new IOException(node.get("error").getElements().next().getTextValue());
-		}
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("result").get(pairCode(pair)).get("c").getElements().next().getTextValue();
 	}
 
 	private String pairCode(Pair pair) {

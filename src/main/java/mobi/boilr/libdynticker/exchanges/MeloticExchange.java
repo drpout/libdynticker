@@ -1,10 +1,8 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -26,12 +24,10 @@ public final class MeloticExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
 			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		URL url = new URL("https://www.melotic.com/api/markets");
-		HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+		HttpURLConnection urlConnection = (HttpURLConnection) buildConnection("https://www.melotic.com/api/markets");
 		urlConnection.setRequestProperty("Accept", "*/*");
 		urlConnection.connect();
-		InputStream is = urlConnection.getInputStream();
-		JsonNode elements = (new ObjectMapper()).readTree(is);
+		JsonNode elements = (new ObjectMapper()).readTree(urlConnection.getInputStream());
 		Iterator<String> fieldNames = elements.getFieldNames();
 		for(String[] split; fieldNames.hasNext();) {
 			split = fieldNames.next().toUpperCase().split("-");
@@ -44,18 +40,18 @@ public final class MeloticExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
 		// http://www.melotic.com/api/markets/gold-btc/ticker
-		HttpURLConnection urlConnection = (HttpURLConnection) (new URL("https://www.melotic.com/api/markets/"
-				+ pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + "/ticker")).openConnection();
+		HttpURLConnection urlConnection = (HttpURLConnection) buildConnection("https://www.melotic.com/api/markets/" + pair.getCoin().toLowerCase()
+			+ "-" + pair.getExchange().toLowerCase() + "/ticker");
 		urlConnection.setRequestProperty("Accept", "*/*");
 		urlConnection.connect();
 		JsonNode node = (new ObjectMapper()).readTree(urlConnection.getInputStream());
 		if(node.has("message"))
 			throw new MalformedURLException(node.get("message").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("latest_price").toString();
 	}
 }

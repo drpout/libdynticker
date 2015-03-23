@@ -24,12 +24,8 @@ public final class CavirtexExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
 			IOException {
-		String url = "https://www.cavirtex.com/api2/ticker.json";
 		List<Pair> pairs = new ArrayList<Pair>();
-		URLConnection uc = (new URL(url)).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
+		JsonNode node = readJsonFromUrl("https://www.cavirtex.com/api2/ticker.json");
 		if(node.get("status").getTextValue().equals("ok")) {
 			Iterator<String> pairCode = node.get("ticker").getFieldNames();
 			for(String next; pairCode.hasNext();) {
@@ -45,20 +41,17 @@ public final class CavirtexExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
-		String url = "https://www.cavirtex.com/api2/ticker.json?currencypair=" + pair.getCoin() + pair.getExchange();
-		URLConnection uc = (new URL(url)).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
+		JsonNode node = readJsonFromUrl("https://www.cavirtex.com/api2/ticker.json?currencypair=" +
+			pair.getCoin() + pair.getExchange());
 		if(node.get("status").getTextValue().equals("ok")) {
-			return this.parseJSON(node, pair);
+			return this.parseTicker(node, pair);
 		} else {
 			throw new IOException(node.get("message").getTextValue());
 		}
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("ticker").get(pair.getCoin() + pair.getExchange()).get("last").toString();
 	}
 }

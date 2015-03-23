@@ -41,11 +41,11 @@ public class CryptoFacilitiesExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("F-XBT:USD-Mar15", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cryptofacilities-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("295.4", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +9,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class LocalBitcoinsExchange extends Exchange {
 
@@ -20,8 +18,7 @@ public final class LocalBitcoinsExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
-		String url = "https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
+		JsonNode node = readJsonFromUrl("https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/");
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<String> exchanges = node.getFieldNames();
 		while(exchanges.hasNext()) {
@@ -33,17 +30,16 @@ public final class LocalBitcoinsExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/");
 		if(node.has(pair.getExchange().toUpperCase())) {
-			return node.get(pair.getExchange()).get("rates").get("last").getTextValue();
+			return parseTicker(node, pair);
 		} else {
 			throw new IOException();
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get(pair.getExchange()).get("rates").get("last").getTextValue();
 	}
 }

@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +9,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BitMaszynaExchange extends Exchange {
 	
@@ -34,17 +32,17 @@ public final class BitMaszynaExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		if(PAIRS.contains(pair)) {
-			String url = "https://bitmaszyna.pl/api/" + pair.getCoin() + pair.getExchange() + "/ticker.json";
-			JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-			return parseJSON(node, pair);
-		} else {
-			throw new IOException(pair + " not found");
+		if(!PAIRS.contains(pair)) {
+			throw new IOException("Invalid pair: " + pair);
 		}
+		// https://bitmaszyna.pl/api/BTCPLN/ticker.json
+		JsonNode node = readJsonFromUrl("https://bitmaszyna.pl/api/" +
+				pair.getCoin() + pair.getExchange() + "/ticker.json");
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("last").asText();
 	}
 }

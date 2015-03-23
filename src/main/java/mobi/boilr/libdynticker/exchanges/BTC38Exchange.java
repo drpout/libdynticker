@@ -24,13 +24,8 @@ public final class BTC38Exchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		String[] exchanges = { "cny", "btc" };
 		String addr = "http://api.btc38.com/v1/ticker.php?c=all&mk_type=";
-
 		for(String exch : exchanges) {
-			URL url = new URL(addr + exch);
-			URLConnection uc = url.openConnection();
-			uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-			uc.connect();
-			JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
+			JsonNode node = readJsonFromUrl(addr + exch);
 			Iterator<String> coins = node.getFieldNames();
 			for(String coin; coins.hasNext();) {
 				coin = coins.next();
@@ -44,21 +39,15 @@ public final class BTC38Exchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String addr = "http://api.btc38.com/v1/ticker.php?c=" + pair.getCoin() + "&mk_type=" + pair.getExchange();
-		URL url = new URL(addr);
-		URLConnection uc = url.openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = (new ObjectMapper()).readTree(uc.getInputStream());
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl("http://api.btc38.com/v1/ticker.php?c=" + 
+				pair.getCoin() + "&mk_type=" + pair.getExchange());
+		if(!node.has("ticker") || !node.get("ticker").isObject())
+			throw new IOException("No data for pair " + pair + ".");
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.has("ticker") && node.get("ticker").isObject()) {
-			return node.get("ticker").get("last").toString();
-		} else {
-			throw new IOException("No data for pair " + pair + ".");
-		}
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("ticker").get("last").toString();
 	}
 }

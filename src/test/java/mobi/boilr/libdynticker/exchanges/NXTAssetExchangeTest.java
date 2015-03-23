@@ -38,11 +38,11 @@ public class NXTAssetExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("mgwBTC", "NXT", "17554243582654188572");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/nxtassetexchange-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals(".00019755", lastValue);
 		} catch(IOException e) {
 			Assert.fail();

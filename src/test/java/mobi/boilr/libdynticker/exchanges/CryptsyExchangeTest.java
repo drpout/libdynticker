@@ -55,13 +55,13 @@ public class CryptsyExchangeTest extends ExchangeTest {
 	}
 	
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
 			JsonNode node;
 
 			node = (new ObjectMapper().readTree(new File("src/test/json/cryptsy-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("586.00000004", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

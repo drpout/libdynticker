@@ -45,11 +45,11 @@ public class HitBTCExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "EUR");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/hitbtc-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("431.05", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

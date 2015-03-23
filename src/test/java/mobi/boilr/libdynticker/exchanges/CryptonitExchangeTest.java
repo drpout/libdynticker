@@ -46,11 +46,11 @@ public class CryptonitExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "DOGE");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cryptonit-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("401.781", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
