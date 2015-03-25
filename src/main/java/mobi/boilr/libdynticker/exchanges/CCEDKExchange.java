@@ -26,7 +26,7 @@ public final class CCEDKExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
 	IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		long currentSeconds = System.currentTimeMillis() / 1000;
+		long currentSeconds = System.currentTimeMillis() / 1000 - 10;
 		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/currency/list?nonce=" + currentSeconds));
 		if(node.get("errors").isBoolean() && !node.get("errors").getBooleanValue()) {
 			Map<String, String> currencies = new HashMap<String, String>();
@@ -52,7 +52,7 @@ public final class CCEDKExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
-		long currentSeconds = System.currentTimeMillis() / 1000;
+		long currentSeconds = System.currentTimeMillis() / 1000 - 10;
 		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/trade/list?nonce="
 				+ currentSeconds + "&pair_id=" + pair.getMarket()));
 		if(node.get("errors").isObject())
