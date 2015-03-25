@@ -17,5 +17,5 @@ then
 			"bug"
 		]
 	}'\
-	https://api.github.com/repos/andrefbsantos/libdynticker/issues
+	https://api.github.com/repos/drpout/libdynticker/issues
 fi

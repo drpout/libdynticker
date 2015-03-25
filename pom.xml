@@ -10,13 +10,13 @@
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
 	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
-	<url>https://github.com/andrefbsantos/libdynticker</url>
+	<url>https://github.com/drpout/libdynticker</url>
 	<inceptionYear>2014</inceptionYear>
 
 	<scm>
-		<url>https://github.com/andrefbsantos/libdynticker</url>
-		<connection>scm:git:https://github.com/andrefbsantos/libdynticker.git</connection>
-		<developerConnection>scm:git:https://github.com/andrefbsantos/libdynticker.git</developerConnection>
+		<url>https://github.com/drpout/libdynticker</url>
+		<connection>scm:git:https://github.com/drpout/libdynticker.git</connection>
+		<developerConnection>scm:git:https://github.com/drpout/libdynticker.git</developerConnection>
 		<tag>HEAD</tag>
 	</scm>
 
@@ -59,7 +59,7 @@
 
 	<issueManagement>
 		<system>GitHub</system>
-		<url>https://github.com/andrefbsantos/libdynticker/issues</url>
+		<url>https://github.com/drpout/libdynticker/issues</url>
 	</issueManagement>
 
 	<distributionManagement>
