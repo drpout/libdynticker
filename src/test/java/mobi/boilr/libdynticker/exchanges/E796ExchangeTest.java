@@ -42,11 +42,11 @@ public class E796ExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC Weekly Futures", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/796-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("325.00", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

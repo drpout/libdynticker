@@ -3,7 +3,7 @@ package mobi.boilr.libdynticker.exchanges;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -20,7 +20,6 @@ public final class HuobiExchange extends Exchange {
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "CNY"));
-		// tempPairs.add(new Pair("LTC", "CNY"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
@@ -36,10 +35,12 @@ public final class HuobiExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair))
-			throw new IOException("Invalid pair.");
+			throw new IOException("Invalid pair: " + pair);
 		String url = "https://api.huobi.com/staticmarket/detail_btc.js";
 		String data = "";
-		BufferedReader in = new BufferedReader(new InputStreamReader(new URL(url).openStream()));
+		URLConnection urlConnection = buildConnection(url);
+		urlConnection.connect();
+		BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 		String inputLine;
 		while((inputLine = in.readLine()) != null)
 			data += inputLine;
@@ -57,7 +58,7 @@ public final class HuobiExchange extends Exchange {
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return null;
 	}
 }

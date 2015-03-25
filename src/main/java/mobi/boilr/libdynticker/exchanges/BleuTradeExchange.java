@@ -1,6 +1,3 @@
-/**
- *
- */
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
@@ -15,10 +12,6 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-/**
- * @author andre
- *
- */
 public final class BleuTradeExchange extends Exchange {
 
 	public BleuTradeExchange(long expiredPeriod) {
@@ -26,24 +19,9 @@ public final class BleuTradeExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://bleutrade.com/api/v2/public/getticker?market=" + pair.getExchange() + "_" + pair.getCoin();
-		return parseJSON((new ObjectMapper()).readTree(new URL(url)), pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.get("success").getTextValue().equals("true")) {
-			return node.get("result").getElements().next().get("Last").getTextValue();
-		} else {
-			throw new IOException(node.get("message").getTextValue());
-		}
-	}
-
-	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		Iterator<JsonNode> elements = (new ObjectMapper()).readTree(new URL("https://bleutrade.com/api/v2/public/getmarkets")).get("result").getElements();
+		Iterator<JsonNode> elements = readJsonFromUrl("https://bleutrade.com/api/v2/public/getmarkets").get("result").getElements();
 		JsonNode element;
 		String coin, exchange;
 		boolean isActive;
@@ -57,5 +35,21 @@ public final class BleuTradeExchange extends Exchange {
 			}
 		}
 		return pairs;
+	}
+
+	@Override
+	protected String getTicker(Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://bleutrade.com/api/v2/public/getticker?market=" +
+				pair.getExchange() + "_" + pair.getCoin());
+		if(node.get("success").getTextValue().equals("true")) {
+			return parseTicker(node, pair);
+		} else {
+			throw new IOException(node.get("message").getTextValue());
+		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("result").getElements().next().get("Last").getTextValue();
 	}
 }

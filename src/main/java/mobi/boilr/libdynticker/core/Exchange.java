@@ -1,10 +1,14 @@
 package mobi.boilr.libdynticker.core;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.map.ObjectMapper;
 
 /**
  * Abstract template for Exchange
@@ -15,6 +19,7 @@ public abstract class Exchange {
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
 	private String name;
+	private static final int CONN_TIMEOUT = 4000;
 
 	public Exchange(String name, long expiredPeriod) {
 		setExpiredPeriod(expiredPeriod);
@@ -72,7 +77,25 @@ public abstract class Exchange {
 	 */
 	protected abstract String getTicker(Pair pair) throws IOException;
 
-	public abstract String parseJSON(JsonNode node, Pair pair) throws IOException;
+	protected JsonNode readJsonFromUrl(String url) throws IOException {
+		URLConnection urlConnection = buildConnection(url);
+		urlConnection.connect();
+		return (new ObjectMapper()).readTree(urlConnection.getInputStream());
+	}
+
+	protected URLConnection buildConnection(String url) throws IOException, MalformedURLException {
+		URLConnection urlConnection = (new URL(url)).openConnection();
+		/*
+		 * Some exchanges return an HTTP 403 error (Forbidden) when you try to
+		 * access the API with an undefined User-Agent.
+		 */
+		urlConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+		urlConnection.setConnectTimeout(CONN_TIMEOUT);
+		urlConnection.setReadTimeout(CONN_TIMEOUT);
+		return urlConnection;
+	}
+
+	public abstract String parseTicker(JsonNode node, Pair pair) throws IOException;
 
 	protected Timestamp getTimestamp() {
 		return timestamp;

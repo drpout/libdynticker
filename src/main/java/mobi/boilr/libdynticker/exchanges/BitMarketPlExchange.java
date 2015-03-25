@@ -38,14 +38,17 @@ public final class BitMarketPlExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
+		if(!pairs.contains(pair)) {
+			throw new IOException("Invalid pair: " + pair);
+		}
 		// https://www.bitmarket.pl/json/BTCPLN/ticker.json
-		String url = "https://www.bitmarket.pl/json/" + pair.getCoin() + pair.getExchange() + "/ticker.json";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl("https://www.bitmarket.pl/json/" +
+				pair.getCoin() + pair.getExchange() + "/ticker.json");
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("last").toString();
 	}
 

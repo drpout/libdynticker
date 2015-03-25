@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +9,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class BitKonanExchange extends Exchange {
 	private static final List<Pair> PAIRS;
@@ -35,18 +33,21 @@ public class BitKonanExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = null;
+		// https://bitkonan.com/api/ticker
+		String url = "https://bitkonan.com/api/";
 		if(pair.equals(BTCUSD)) {
-			url="https://bitkonan.com/api/ticker";
+			url += "ticker";
 		} else if(pair.equals(LTCUSD)) {
-			url="https://bitkonan.com/api/ltc_ticker";
+			url += "ltc_ticker";
+		} else {
+			throw new IOException("Invalid pair: " + pair);
 		}
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl(url);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("last").asText();
 	}
 

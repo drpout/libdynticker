@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +9,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public class TBEExchange extends Exchange {
 
@@ -20,11 +18,9 @@ public class TBEExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
-		String url = "https://bx.in.th/api/pairing/";
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
+		JsonNode node = readJsonFromUrl("https://bx.in.th/api/pairing/");
 		Iterator<String> fieldNames = node.getFieldNames();
-		
 		while(fieldNames.hasNext()) {
 			String id = fieldNames.next();
 			pairs.add(new Pair(node.get(id).get("secondary_currency").asText(), 
@@ -36,19 +32,18 @@ public class TBEExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		if(pair.getMarket() == null) {
-			throw new IOException("Invalid Market.");
+			throw new IOException("Invalid market.");
 		}
-		String url = "https://bx.in.th/api/";
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://bx.in.th/api/");
 		if(node.has(pair.getMarket())) {
-			return node.get(pair.getMarket()).get("last_price").asText();
+			return parseTicker(node, pair);
 		} else {
 			throw new IOException("Market " + pair.getMarket() + " not found.");
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get(pair.getMarket()).get("last_price").asText();
 	}
 }

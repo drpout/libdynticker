@@ -35,18 +35,15 @@ public final class BTCMarketsExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		// https://api.btcmarkets.net/market/BTC/AUD/tick
-		URLConnection urlConnection = (new URL("https://api.btcmarkets.net/market/"
-				+ pair.getCoin() + "/" + pair.getExchange() + "/tick")).openConnection();
-		urlConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		urlConnection.connect();
-		JsonNode node = (new ObjectMapper()).readTree(urlConnection.getInputStream());
+		JsonNode node = readJsonFromUrl("https://api.btcmarkets.net/market/"
+				+ pair.getCoin() + "/" + pair.getExchange() + "/tick");
 		if(node.has("success"))
 			throw new MalformedURLException(node.get("errorMessage").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("lastPrice").toString();
 	}
 

@@ -23,9 +23,8 @@ public final class AllcoinExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode elements = (new ObjectMapper()).readTree(new URL("https://www.allcoin.com/api2/pairs")).get("data");
+		JsonNode elements = readJsonFromUrl("https://www.allcoin.com/api2/pairs").get("data");
 		Iterator<String> fieldNames = elements.getFieldNames();
-
 		String[] split;
 		String element;
 		while(fieldNames.hasNext()) {
@@ -45,17 +44,17 @@ public final class AllcoinExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
 		// https://www.allcoin.com/api2/pair/LTC_BTC
-		String url = "https://www.allcoin.com/api2/pair/" + pair.getCoin() + "_" + pair.getExchange();
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
+		JsonNode node = readJsonFromUrl("https://www.allcoin.com/api2/pair/" +
+				pair.getCoin() + "_" + pair.getExchange());
 		if(node.get("code").getIntValue() > 0) {
-			return parseJSON(node, pair);
+			return parseTicker(node, pair);
 		} else {
 			throw new MalformedURLException(node.get("data").getTextValue());
 		}
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		JsonNode jsonNode = node.get("data").get("trade_price");
 		if(jsonNode == null) {
 			throw new IOException("No market data");

@@ -41,7 +41,7 @@ public class HuobiExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "CNY");
 			String file = "src/test/json/houbi-ticker.js";

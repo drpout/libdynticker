@@ -43,11 +43,11 @@ public class PaymiumExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "EUR");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/paymium-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("313.99", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

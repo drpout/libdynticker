@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +11,6 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class E796Exchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -39,16 +37,13 @@ public final class E796Exchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
 		/*
-		 * http://api.796.com/v3/futures/ticker.html?type=btcdaylyfutures
-		 * http://api.796.com/v3/futures/ticker.html?type=ltcdaylyfutures
 		 * http://api.796.com/v3/futures/ticker.html?type=weekly
 		 * http://api.796.com/v3/futures/ticker.html?type=ltc
-		 * http://api.796.com/v3/futures/ticker.html?type=btcquarterlyfutures
 		 * 
 		 * http://api.796.com/v3/stock/ticker.html?type=mri
 		 */
 		if(!pairs.contains(pair))
-			throw new IOException("Invalid pair.");
+			throw new IOException("Invalid pair: " + pair);
 		String url = "http://api.796.com/v3/";
 		String coin = pair.getCoin();
 		boolean isFutures = false;
@@ -60,25 +55,20 @@ public final class E796Exchange extends Exchange {
 		}
 		url += "ticker.html?type=";
 		if(isFutures) {
-			if(coin.contains("Weekly")) {
-				if(coin.contains("BTC")) {
-					url += "weekly";
-				} else if(coin.contains("LTC")) {
-					url += "ltc";
-				}
-			} else {
-				url += coin.toLowerCase().replaceAll("\\s+", "");
+			if(coin.contains("BTC")) {
+				url += "weekly";
+			} else if(coin.contains("LTC")) {
+				url += "ltc";
 			}
 		} else {
 			url += coin.toLowerCase();
 		}
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl(url);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
-		System.out.println(node.get("ticker").get("last").getTextValue());
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("ticker").get("last").getTextValue();
 	}
 

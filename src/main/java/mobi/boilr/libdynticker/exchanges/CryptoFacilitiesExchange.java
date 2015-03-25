@@ -28,18 +28,18 @@ public class CryptoFacilitiesExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://www.cryptofacilities.com/derivatives/api/ticker?tradeable=" + pair.getCoin() + "&unit=" + pair.getExchange();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://www.cryptofacilities.com/derivatives/api/ticker?tradeable=" +
+				pair.getCoin() + "&unit=" + pair.getExchange());
 		if(node.get("result").asText().equals("error")) {
 			throw new IOException();
 		} else {
-			return node.get("last").asText();
+			return parseTicker(node, pair);
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("last").asText();
 	}
 
 }

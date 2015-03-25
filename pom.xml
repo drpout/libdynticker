@@ -34,7 +34,7 @@
 			\* Fixed BitcoindeExchange reading an old price instead of the last one.
 			\* Fixed LakeBTC passing browser like user-agent.
 			\- Removed Daily and Quaterly futures removed from 796 Exchange.
-			\- Removed 1BSE, Atomic Trade, CoinMkt, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\- Removed 1BSE, Atomic Trade, CoinMkt, Coin-Swap, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
 		</release.description>
 	</properties>
 

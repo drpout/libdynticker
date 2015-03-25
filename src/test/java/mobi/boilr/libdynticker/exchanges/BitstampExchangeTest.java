@@ -45,12 +45,12 @@ public class BitstampExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "USD");
 			JsonNode node;
 			node = (new ObjectMapper().readTree(new File("src/test/json/bitstamp-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("600.15", lastValue);
 		}
 		catch(IOException e) {

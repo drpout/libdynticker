@@ -24,7 +24,7 @@ public final class CoinsEExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
 			IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.coins-e.com/api/v2/markets/list/"));
+		JsonNode node = readJsonFromUrl("https://www.coins-e.com/api/v2/markets/list/");
 		if(!node.get("status").getBooleanValue()) {
 			throw new IOException(node.get("message").getTextValue());
 		}
@@ -42,16 +42,16 @@ public final class CoinsEExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 	IOException {
 		// https://www.coins-e.com/api/v2/market/DRK_BTC/trades/
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.coins-e.com/api/v2/market/"
-				+ pair.getCoin() + "_" + pair.getExchange() + "/trades/"));
+		JsonNode node = readJsonFromUrl("https://www.coins-e.com/api/v2/market/"
+				+ pair.getCoin() + "_" + pair.getExchange() + "/trades/");
 		if(!node.get("status").getBooleanValue()) {
 			throw new IOException(node.get("message").getTextValue());
 		}
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		node = node.get("trades");
 		if(!node.getElements().hasNext())
 			throw new IOException("Trades for " + pair + " are empty.");

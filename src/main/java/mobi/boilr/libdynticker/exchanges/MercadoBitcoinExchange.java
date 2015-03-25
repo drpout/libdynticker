@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +11,6 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class MercadoBitcoinExchange extends Exchange {
 
@@ -38,23 +36,21 @@ public final class MercadoBitcoinExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException, IOException {
-		String url = null;
-		if(pair.equals(BTCBRL)) {
-			url = "https://www.mercadobitcoin.net/api/ticker/";
-		} else if(pair.equals(LTCBRL)) {
-			url = "https://www.mercadobitcoin.net/api/ticker_litecoin/";
+		String url = "https://www.mercadobitcoin.net/api/";
+		if(pair.equals(BTCBRL))
+			url += "ticker/";
+		else if(pair.equals(LTCBRL))
+			url += "ticker_litecoin/";
+		JsonNode node = readJsonFromUrl(url);
+		if(node.has("ticker")) {
+			return parseTicker(node, pair);
+		} else {
+			throw new IOException("No market data.");
 		}
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.has("ticker")) {
-			String value = node.get("ticker").get("last").asText();
-			return value;
-		} else {
-			throw new IOException("No market data");
-		}
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("ticker").get("last").asText();
 	}
 }

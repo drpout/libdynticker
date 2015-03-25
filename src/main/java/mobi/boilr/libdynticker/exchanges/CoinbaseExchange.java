@@ -22,7 +22,7 @@ public class CoinbaseExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://api.exchange.coinbase.com/products"));
+		JsonNode node = readJsonFromUrl("https://api.exchange.coinbase.com/products");
 		if(node.has("message"))
 			throw new MalformedURLException(node.get("message").getTextValue());
 		Iterator<JsonNode> elements = node.getElements();
@@ -36,15 +36,15 @@ public class CoinbaseExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		// https://api.exchange.coinbase.com/products/BTC-USD/ticker
-		String url = "https://api.exchange.coinbase.com/products/" + pair.getCoin() + "-" + pair.getExchange() + "/ticker";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
+		JsonNode node = readJsonFromUrl("https://api.exchange.coinbase.com/products/" +
+				pair.getCoin() + "-" + pair.getExchange() + "/ticker");
 		if(node.has("message"))
 			throw new MalformedURLException(node.get("message").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("price").getTextValue();
 	}
 

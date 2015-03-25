@@ -21,8 +21,7 @@ public final class BTCChinaExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		String url = "https://data.btcchina.com/data/ticker?market=all";
-		Iterator<String> fieldNames = (new ObjectMapper()).readTree(new URL(url)).getFieldNames();
+		Iterator<String> fieldNames = readJsonFromUrl("https://data.btcchina.com/data/ticker?market=all").getFieldNames();
 		while (fieldNames.hasNext()) {
 			String next = fieldNames.next();
 			String[] split = next.split("_");
@@ -36,12 +35,14 @@ public final class BTCChinaExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://data.btcchina.com/data/ticker?market=" + pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase();
-		return this.parseJSON((new ObjectMapper()).readTree(new URL(url)), pair);
+		// https://data.btcchina.com/data/ticker?market=btccny
+		String url = "https://data.btcchina.com/data/ticker?market=" +
+				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase();
+		return this.parseTicker(readJsonFromUrl(url), pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("ticker").get("last").getTextValue();
 	}
 

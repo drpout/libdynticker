@@ -51,11 +51,11 @@ public class VirWoxExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("EUR", "SSL");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/virwox-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("256.3", lastValue);
 		}
 		catch(IOException e) {

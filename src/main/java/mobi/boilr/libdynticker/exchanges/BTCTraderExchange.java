@@ -1,22 +1,20 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public abstract class BTCTraderExchange extends Exchange {
 	protected static List<Pair> PAIRS;
-	protected String api;
+	protected String domain;
 
-	public BTCTraderExchange(String name, long expiredPeriod, String api) {
+	public BTCTraderExchange(String name, long expiredPeriod, String domain) {
 		super(name, expiredPeriod);
-		this.api = api;
+		this.domain = domain;
 	}
 
 	@Override
@@ -26,17 +24,15 @@ public abstract class BTCTraderExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		if(getPairs().contains(pair)) {
-		String url = api + "api/ticker/";
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-		} else {
-			throw new IOException(pair + " not found");
+		if(!PAIRS.contains(pair)) {
+			throw new IOException("Invalid pair: " + pair);
 		}
+		JsonNode node = readJsonFromUrl(domain + "api/ticker/");
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("last").asText();
 	}
 }

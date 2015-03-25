@@ -42,11 +42,11 @@ public class TBEExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("THB", "BTC", "1");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/tbe-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("8730", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

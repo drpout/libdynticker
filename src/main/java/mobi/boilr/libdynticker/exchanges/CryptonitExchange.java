@@ -22,13 +22,9 @@ public final class CryptonitExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		String addr = "http://cryptonit.net/apiv2/rest/public/pairs.json";
-		URLConnection uc = new URL(addr).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		TypeReference<List<String[]>> typeReference = new TypeReference<List<String[]>>() {
-		};
-		List<String[]> elements = new ObjectMapper().readValue(uc.getInputStream(), typeReference);
+		TypeReference<List<String[]>> typeReference = new TypeReference<List<String[]>>() {};
+		List<String[]> elements = new ObjectMapper().readValue(
+				readJsonFromUrl("http://cryptonit.net/apiv2/rest/public/pairs.json"), typeReference);
 		for(String[] node : elements) {
 			pairs.add(new Pair(node[1], node[0]));
 		}
@@ -37,22 +33,18 @@ public final class CryptonitExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String addr = "https://cryptonit.net/apiv2/rest/public/ccorder.json?bid_currency=" + pair.getExchange() + "&ask_currency=" + pair.getCoin()
-				+ "&rate=1";
-		URLConnection uc = new URL(addr).openConnection();
-		uc.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
-		uc.connect();
-		JsonNode node = new ObjectMapper().readTree(uc.getInputStream());
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://cryptonit.net/apiv2/rest/public/ccorder.json?bid_currency=" +
+				pair.getExchange() + "&ask_currency=" + pair.getCoin() + "&rate=1");
 		String last = node.get(0).getTextValue();
 		if(last.equals("currency pair not available"))
 			throw new IOException(last);
 		else
-			return last;
+			return parseTicker(node, pair);
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get(0).getTextValue();
 	}
 
 }

@@ -41,11 +41,11 @@ public class MercadoBitcoinExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "BRL");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/mercadobitcoin-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("882.93758", lastValue);
 		}
 		catch(IOException e) {

@@ -53,11 +53,11 @@ public class CavirtexExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "CAD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cavirtex-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("630.00001", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

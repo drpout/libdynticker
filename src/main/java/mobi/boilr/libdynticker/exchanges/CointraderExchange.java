@@ -33,17 +33,18 @@ public class CointraderExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "https://www.cointrader.net/api4/stats/daily/" + pair.getCoin() + pair.getExchange();
-		JsonNode node = new ObjectMapper().readTree(new URL(url));
-		return parseJSON(node, pair);
-	}
-
-	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
+		JsonNode node = readJsonFromUrl("https://www.cointrader.net/api4/stats/daily/" +
+				pair.getCoin() + pair.getExchange());
 		if(node.get("success").asText().equals("false")) {
 			throw new IOException(node.get("message").asText());
 		}else{
-			return node.get("data").get(pair.getCoin().toUpperCase() + pair.getExchange().toUpperCase()).get("lastTradePrice").asText();
+			return parseTicker(node, pair);
 		}
+	}
+
+	@Override
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("data").get(pair.getCoin().toUpperCase() + pair.getExchange().toUpperCase())
+					.get("lastTradePrice").asText();
 	}
 }

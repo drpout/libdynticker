@@ -37,16 +37,15 @@ public final class ItBitExchange extends Exchange {
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
 			IOException {
 		// https://api.itbit.com/v1/markets/XBTUSD/ticker
-		String url = "https://api.itbit.com/v1/markets/" + pair.getCoin() + pair.getExchange() + "/ticker";
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		// TODO Check for error
+		JsonNode node = readJsonFromUrl("https://api.itbit.com/v1/markets/" +
+				pair.getCoin() + pair.getExchange() + "/ticker");
 		if(node.has("error"))
 			throw new MalformedURLException(node.get("error").get("message").getTextValue());
-		return parseJSON(node, pair);
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("lastPrice").getTextValue();
 	}
 

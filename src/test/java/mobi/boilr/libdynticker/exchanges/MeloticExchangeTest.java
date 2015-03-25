@@ -42,11 +42,11 @@ public class MeloticExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("GOLD", "BTC");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/melotic-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("3.1", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();

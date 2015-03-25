@@ -1,7 +1,7 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,7 +10,6 @@ import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BasebitExchange extends Exchange {
 
@@ -21,7 +20,7 @@ public final class BasebitExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		Iterator<JsonNode> elements = new ObjectMapper().readTree(new URL("http://www.basebit.com.br/listpairs")).getElements();
+		Iterator<JsonNode> elements = readJsonFromUrl("http://www.basebit.com.br/listpairs").getElements();
 		while(elements.hasNext()) {
 			JsonNode next = elements.next();
 			String[] split = next.asText().split("_");
@@ -32,17 +31,16 @@ public final class BasebitExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		String url = "http://www.basebit.com.br/quote-" + pair.getCoin() + "_" + pair.getExchange();
-		JsonNode node = (new ObjectMapper()).readTree(new URL(url));
-		return parseJSON(node, pair);
+		JsonNode node = readJsonFromUrl("http://www.basebit.com.br/quote-" +
+				pair.getCoin() + "_" + pair.getExchange());
+		if(node.get("result").asText().equals("null")) {
+			throw new MalformedURLException(node.get("errorMessage").getTextValue());
+		}
+		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseJSON(JsonNode node, Pair pair) throws IOException {
-		if(node.get("errorMessage").asText().equals("null")) {
-			return node.get("result").get("last").asText();
-		} else {
-			throw new IOException(pair + " not found");
-		}
+	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+		return node.get("result").get("last").asText();
 	}
 }

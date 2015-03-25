@@ -40,11 +40,11 @@ public class OneWorldCoinExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "RUB");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/oneworldcoin-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("17800.0", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

@@ -42,11 +42,11 @@ public class BitBayExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "PLN");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bitbay-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("1353", lastValue);
 		} catch (IOException e) {
 			Assert.fail();

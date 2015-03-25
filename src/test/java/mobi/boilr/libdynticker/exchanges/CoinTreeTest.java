@@ -41,11 +41,11 @@ public class CoinTreeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "AUD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cointree-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("343.03", lastValue);
 		} catch(IOException e) {
 			Assert.fail();

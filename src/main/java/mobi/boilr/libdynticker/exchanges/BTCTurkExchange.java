@@ -8,7 +8,6 @@ import mobi.boilr.libdynticker.core.Pair;
 
 public class BTCTurkExchange extends BTCTraderExchange {
 
-
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();
 		pairs.add(new Pair("BTC", "TL"));

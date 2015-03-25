@@ -41,11 +41,11 @@ public class Bit2CExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("BTC", "NIS");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bit2c-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("1050.0", lastValue);
 		} catch(IOException e) {
 			e.printStackTrace();

@@ -41,11 +41,11 @@ public class JubiExchangeTest extends ExchangeTest {
 	}
 
 	@Test
-	public void testParseJson() {
+	public void testParseTicker() {
 		try {
 			Pair pair = new Pair("SAK", "BTC");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/jubi-ticker.json")));
-			String lastValue = testExchange.parseJSON(node, pair);
+			String lastValue = testExchange.parseTicker(node, pair);
 			Assert.assertEquals("0.2434", lastValue);
 		}
 		catch(IOException e) {
