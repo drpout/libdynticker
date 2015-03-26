@@ -19,7 +19,7 @@ public abstract class Exchange {
 	private List<Pair> pairs;
 	private Timestamp timestamp = null;
 	private String name;
-	private static final int CONN_TIMEOUT = 4000;
+	private static final int CONN_TIMEOUT = 8000;
 
 	public Exchange(String name, long expiredPeriod) {
 		setExpiredPeriod(expiredPeriod);
