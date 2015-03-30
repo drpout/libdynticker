@@ -11,7 +11,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CryptoFacilitiesExchange extends Exchange {
+public final class CryptoFacilitiesExchange extends Exchange {
 
 	public CryptoFacilitiesExchange(long expiredPeriod) {
 		super("Crypto Facilities", expiredPeriod);

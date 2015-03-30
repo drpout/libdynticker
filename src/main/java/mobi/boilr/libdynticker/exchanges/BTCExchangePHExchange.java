@@ -6,7 +6,7 @@ import java.util.List;
 
 import mobi.boilr.libdynticker.core.Pair;
 
-public class BTCExchangePHExchange extends BTCTraderExchange {
+public final class BTCExchangePHExchange extends BTCTraderExchange {
 
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();

@@ -15,7 +15,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class DSXExchange extends Exchange {
+public final class DSXExchange extends Exchange {
 	private static final List<Pair> PAIRS;
 	static {
 		List<Pair> pairs = new ArrayList<Pair>();

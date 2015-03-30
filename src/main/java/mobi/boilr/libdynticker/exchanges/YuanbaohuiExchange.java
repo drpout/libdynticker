@@ -11,7 +11,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class YuanbaohuiExchange extends Exchange {
+public final class YuanbaohuiExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();

@@ -10,7 +10,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class BitKonanExchange extends Exchange {
+public final class BitKonanExchange extends Exchange {
 	private static final List<Pair> PAIRS;
 	private static final Pair LTCUSD = new Pair("LTC", "BTC");
 	private static final Pair BTCUSD = new Pair("BTC", "USD");

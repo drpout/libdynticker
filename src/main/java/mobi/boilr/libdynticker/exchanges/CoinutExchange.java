@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class CoinutExchange extends Exchange {
+public final class CoinutExchange extends Exchange {
 
 	public CoinutExchange(long expiredPeriod) {
 		super("Coinut", expiredPeriod);

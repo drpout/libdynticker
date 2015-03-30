@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class QuadrigaCXExchange extends Exchange {
+public final class QuadrigaCXExchange extends Exchange {
 	public final static List<Pair> PAIRS;
 
 	static {

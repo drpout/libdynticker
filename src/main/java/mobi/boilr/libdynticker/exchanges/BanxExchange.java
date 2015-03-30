@@ -10,7 +10,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class BanxExchange extends Exchange {
+public final class BanxExchange extends Exchange {
 
 	public BanxExchange(long expiredPeriod) {
 		super("Banx Capital", expiredPeriod);

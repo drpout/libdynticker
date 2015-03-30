@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class TheRockTradingExchange extends Exchange {
+public final class TheRockTradingExchange extends Exchange {
 
 	public TheRockTradingExchange(long expiredPeriod) {
 		super("The Rock Trading", expiredPeriod);

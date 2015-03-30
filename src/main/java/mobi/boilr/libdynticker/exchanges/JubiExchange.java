@@ -11,7 +11,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class JubiExchange extends Exchange {
+public final class JubiExchange extends Exchange {
 
 	public JubiExchange(long expiredPeriod) {
 		super("Jubi", expiredPeriod);

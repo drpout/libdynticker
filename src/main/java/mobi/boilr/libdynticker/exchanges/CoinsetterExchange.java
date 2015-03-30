@@ -10,7 +10,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class CoinsetterExchange extends Exchange {
+public final class CoinsetterExchange extends Exchange {
 	private final static List<Pair> PAIRS;
 
 	static {

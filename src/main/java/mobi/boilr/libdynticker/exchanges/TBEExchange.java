@@ -10,7 +10,7 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 
-public class TBEExchange extends Exchange {
+public final class TBEExchange extends Exchange {
 
 	public TBEExchange(long expiredPeriod) {
 		super("Thailand Bitcoin Exchange", expiredPeriod);

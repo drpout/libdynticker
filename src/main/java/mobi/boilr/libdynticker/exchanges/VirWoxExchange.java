@@ -12,7 +12,7 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
-public class VirWoxExchange extends Exchange {
+public final class VirWoxExchange extends Exchange {
 
 	public VirWoxExchange(long expiredPeriod) {
 		super("VirWox", expiredPeriod);
