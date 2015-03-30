@@ -14,7 +14,7 @@ then
 		"title":"'"$TITLE"' failed automatic tests", 
 		"body":"'"$BODY"'",
 		"labels" : [
-			"bug"
+			{"name":"bug"}
 		]
 	}'\
 	https://api.github.com/repos/drpout/libdynticker/issues
