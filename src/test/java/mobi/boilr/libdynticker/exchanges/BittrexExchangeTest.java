@@ -19,6 +19,16 @@ import org.junit.Test;
 public class BittrexExchangeTest extends ExchangeTest {
 
 	@Override
+	protected void handleException(Pair pair, Exception e) {
+		if(e instanceof IOException && e.getMessage().contains("No market data")) {
+			System.err.println(pair);
+			System.err.println(e);
+		} else {
+			super.handleException(pair, e);
+		}
+	}
+
+	@Override
 	@Before
 	public void setUp() throws Exception {
 		testExchange = new BittrexExchange(10000);
@@ -29,6 +39,7 @@ public class BittrexExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
@@ -36,6 +47,7 @@ public class BittrexExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("NBT", "BTC")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		}
 		catch (IOException e) {
