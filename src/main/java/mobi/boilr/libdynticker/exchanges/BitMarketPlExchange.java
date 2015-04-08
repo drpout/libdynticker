@@ -2,7 +2,6 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -12,7 +11,6 @@ import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BitMarketPlExchange extends Exchange {
 	private static final List<Pair> pairs;

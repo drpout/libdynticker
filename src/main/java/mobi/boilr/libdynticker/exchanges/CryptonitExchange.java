@@ -1,8 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 

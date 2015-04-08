@@ -1,7 +1,11 @@
 package mobi.boilr.libdynticker.core;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.List;
+
+import mobi.boilr.libdynticker.core.exception.APICallLimitReachedException;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.junit.After;
 import org.junit.Assert;
@@ -23,15 +27,6 @@ public class ExchangeTest {
 
 	}
 
-	protected void handleException(Pair pair, Exception e) {
-		String pairToString = pair.toString();
-		if(pair.getMarket() != null)
-			pairToString += " " + pair.getMarket();
-		System.err.println(pairToString);
-		e.printStackTrace();
-		Assert.fail();
-	}
-
 	@Test
 	public void testGetLastValueWithPairsFromGetPairs() {
 		List<Pair> pairs = null;
@@ -49,15 +44,25 @@ public class ExchangeTest {
 			try {
 				double lastValue = testExchange.getLastValue(pair);
 				Assert.assertNotNull(lastValue);
+			} 
+			catch(SocketTimeoutException e) {
+				System.err.println(e.getMessage());
+			}
+			catch(APICallLimitReachedException e) {
+				System.err.println(e.getMessage());
+			}
+			catch(NoMarketDataException e) {
+				System.err.println(e.getMessage());
 			}
 			catch(Exception e) {
-				handleException(pair, e);
+				e.printStackTrace();
+				Assert.fail();
 			}
 		}
 	}
 
 	@Test(expected = IOException.class)
-	public void testInvalidPair() throws IOException {
+	public void testInvalidPair() throws IOException, NumberFormatException, NoMarketDataException {
 		testExchange.getLastValue(new Pair("InvalidCoin", "InvalidExchange"));
 	}
 }

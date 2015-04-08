@@ -1,16 +1,15 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class VirWoxExchange extends Exchange {
 
@@ -45,7 +44,7 @@ public final class VirWoxExchange extends Exchange {
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		JsonNode data = node.get("result").get("data");
 		if(data.asText().equals("null")) {
-			throw new IOException("No avaliable trades");
+			throw new NoMarketDataException(pair);
 		} else {
 			Iterator<JsonNode> elements = data.getElements();
 			JsonNode last = null;

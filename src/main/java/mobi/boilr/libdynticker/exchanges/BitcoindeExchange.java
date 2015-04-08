@@ -8,6 +8,7 @@ import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.APICallLimitReachedException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParseException;
@@ -39,7 +40,7 @@ public final class BitcoindeExchange extends Exchange {
 			JsonNode node = readJsonFromUrl("https://bitcoinapi.de/v1/e5bd463707931bca682879320ceb7516/trades.json");
 			return parseTicker(node, pair);
 		} catch(JsonParseException e) {
-			throw new IOException("API call limit reached.");
+			throw new APICallLimitReachedException();
 		}
 	}
 

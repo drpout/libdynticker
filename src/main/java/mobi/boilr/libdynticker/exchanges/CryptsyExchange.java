@@ -7,13 +7,13 @@ import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonFactory;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonToken;
 import org.codehaus.jackson.map.MappingJsonFactory;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class CryptsyExchange extends Exchange {
 
@@ -91,7 +91,7 @@ public final class CryptsyExchange extends Exchange {
 	}
 	
 	@Override
-	protected String getTicker(Pair pair) throws IOException {
+	protected String getTicker(Pair pair) throws IOException, NoMarketDataException {
 		JsonNode node = readJsonFromUrl("http://pubapi.cryptsy.com/api.php?method=singlemarketdata&marketid=" +
 				pair.getMarket());
 		if(node.get("success").toString().equals("1")) {
@@ -102,10 +102,10 @@ public final class CryptsyExchange extends Exchange {
 	}
 
 	@Override
-	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException, NoMarketDataException {
 		String lastValue = node.get("return").get("markets").getElements().next().get("lasttradeprice").getTextValue();
 		if(lastValue == null) {
-			throw new IOException("No last value for " + pair + ".");
+			throw new NoMarketDataException(pair);
 		} else {
 			return lastValue;
 		}

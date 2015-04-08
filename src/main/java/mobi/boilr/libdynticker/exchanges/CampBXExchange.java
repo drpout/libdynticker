@@ -39,5 +39,4 @@ public final class CampBXExchange extends Exchange {
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		return node.get("Last Trade").getTextValue();
 	}
-
 }

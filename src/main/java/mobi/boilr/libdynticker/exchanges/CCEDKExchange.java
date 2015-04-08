@@ -11,6 +11,7 @@ import java.util.Map;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
@@ -51,20 +52,20 @@ public final class CCEDKExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+ IOException, NoMarketDataException {
 		long currentSeconds = System.currentTimeMillis() / 1000;
-		JsonNode node = (new ObjectMapper()).readTree(new URL("https://www.ccedk.com/api/v1/trade/list?nonce="
-				+ currentSeconds + "&pair_id=" + pair.getMarket()));
+		String url = "https://www.ccedk.com/api/v1/trade/list?nonce=" + currentSeconds + "&pair_id=" + pair.getMarket();
+		JsonNode node = readJsonFromUrl(url);
 		if(node.get("errors").isObject())
 			throw new MalformedURLException(node.get("errors").toString());
 		return parseTicker(node, pair);
 	}
 
 	@Override
-	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) throws IOException, NoMarketDataException {
 		node = node.get("response").get("entities");
 		if(node.isBoolean())
-			throw new IOException("Data for " + pair + " is empty.");
+			throw new NoMarketDataException(pair);
 		return node.get(0).get("price").getTextValue();
 	}
 

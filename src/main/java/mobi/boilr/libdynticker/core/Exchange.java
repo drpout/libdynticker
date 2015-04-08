@@ -7,6 +7,8 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.List;
 
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
+
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 
@@ -35,8 +37,9 @@ public abstract class Exchange {
 	 * is not enough to represent 8 decimal places.
 	 * @throws NumberFormatException
 	 * @throws IOException
+	 * @throws NoMarketDataException
 	 */
-	public double getLastValue(Pair pair) throws NumberFormatException, IOException {
+	public double getLastValue(Pair pair) throws NumberFormatException, IOException, NoMarketDataException {
 		double lastValue = Double.parseDouble(getTicker(pair));
 		return lastValue;
 	}
@@ -74,8 +77,9 @@ public abstract class Exchange {
 	 * @param pair
 	 * @return Json with ticker information
 	 * @throws IOException
+	 * @throws NoMarketDataException
 	 */
-	protected abstract String getTicker(Pair pair) throws IOException;
+	protected abstract String getTicker(Pair pair) throws IOException, NoMarketDataException;
 
 	protected JsonNode readJsonFromUrl(String url) throws IOException {
 		URLConnection urlConnection = buildConnection(url);
@@ -95,7 +99,7 @@ public abstract class Exchange {
 		return urlConnection;
 	}
 
-	public abstract String parseTicker(JsonNode node, Pair pair) throws IOException;
+	public abstract String parseTicker(JsonNode node, Pair pair) throws IOException, NoMarketDataException;
 
 	protected Timestamp getTimestamp() {
 		return timestamp;

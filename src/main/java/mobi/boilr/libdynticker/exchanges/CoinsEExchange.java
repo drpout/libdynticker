@@ -2,17 +2,16 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class CoinsEExchange extends Exchange {
 
@@ -40,7 +39,7 @@ public final class CoinsEExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	IOException, NoMarketDataException {
 		// https://www.coins-e.com/api/v2/market/DRK_BTC/trades/
 		JsonNode node = readJsonFromUrl("https://www.coins-e.com/api/v2/market/"
 				+ pair.getCoin() + "_" + pair.getExchange() + "/trades/");
@@ -53,9 +52,9 @@ public final class CoinsEExchange extends Exchange {
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		node = node.get("trades");
-		if(!node.getElements().hasNext())
-			throw new IOException("Trades for " + pair + " are empty.");
+		if(!node.getElements().hasNext()) {
+			throw new NoMarketDataException(pair);
+		}
 		return node.get(0).get("rate").getTextValue();
 	}
-
 }

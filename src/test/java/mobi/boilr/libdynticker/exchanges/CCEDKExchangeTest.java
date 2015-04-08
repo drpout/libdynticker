@@ -15,15 +15,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CCEDKExchangeTest extends ExchangeTest {
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && e.getMessage().contains("empty")) {
-			System.err.println(pair);
-			System.err.println(e);
-		} else {
-			super.handleException(pair, e);
-		}
-	}
 
 	@Override
 	@Before

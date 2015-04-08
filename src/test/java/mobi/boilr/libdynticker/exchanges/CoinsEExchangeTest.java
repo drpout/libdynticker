@@ -17,15 +17,6 @@ import org.junit.Test;
 
 
 public class CoinsEExchangeTest extends ExchangeTest {
-	@Override
-	protected void handleException(Pair pair, Exception e) {
-		if(e instanceof IOException && (e.getMessage().contains("empty") || e.getMessage().contains("500"))) {
-			System.err.println(pair);
-			System.err.println(e);
-		} else {
-			super.handleException(pair, e);
-		}
-	}
 
 	@Override
 	@Before

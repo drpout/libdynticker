@@ -8,6 +8,7 @@ import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.JsonProcessingException;
@@ -38,13 +39,10 @@ public final class BittrexExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+			IOException, NoMarketDataException {
 		JsonNode node = readJsonFromUrl("https://bittrex.com/api/v1.1/public/getticker?market=" +
 			pair.getExchange() + "-" + pair.getCoin());
 		if(node.get("success").getBooleanValue()) {
-			if(node.get("result").get("Last").asText().equals("null")) {
-				throw new IOException("No market data for " + pair);
-			}
 			return parseTicker(node, pair);
 		} else {
 			throw new MalformedURLException(node.get("message").getTextValue());
@@ -53,6 +51,10 @@ public final class BittrexExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("result").get("Last").toString();
+		String last = node.get("result").get("Last").asText();
+		if(last.equals("null")) {
+			throw new NoMarketDataException(pair);
+		}
+		return last;
 	}
 }

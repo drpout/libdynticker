@@ -1,17 +1,15 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
 
 public final class BTC38Exchange extends Exchange {
 
@@ -38,11 +36,11 @@ public final class BTC38Exchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws IOException {
+	protected String getTicker(Pair pair) throws IOException, NoMarketDataException {
 		JsonNode node = readJsonFromUrl("http://api.btc38.com/v1/ticker.php?c=" + 
 				pair.getCoin() + "&mk_type=" + pair.getExchange());
 		if(!node.has("ticker") || !node.get("ticker").isObject())
-			throw new IOException("No data for pair " + pair + ".");
+			throw new NoMarketDataException(pair);
 		return parseTicker(node, pair);
 	}
 
