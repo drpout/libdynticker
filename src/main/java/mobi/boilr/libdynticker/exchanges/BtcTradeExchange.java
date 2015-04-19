@@ -33,7 +33,7 @@ public final class BtcTradeExchange extends Exchange {
 		if(!PAIRS.contains(pair)) {
 			throw new IOException("Invalid pair: " + pair);
 		}
-		JsonNode node = readJsonFromUrl("https://www.btctrade.com/api/ticker/");
+		JsonNode node = readJsonFromUrl("http://www.btctrade.com/api/ticker/");
 		return parseTicker(node, pair);
 	}
 

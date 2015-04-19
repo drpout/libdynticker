@@ -33,7 +33,7 @@ public class ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertNotNull(pairs);
-			Assert.assertTrue(pairs.size() > 0);
+			Assert.assertFalse(pairs.isEmpty());
 		}
 		catch(IOException e) {
 			e.printStackTrace();
