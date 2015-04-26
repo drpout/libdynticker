@@ -32,7 +32,6 @@ public class CCEDKExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch(IOException e) {
