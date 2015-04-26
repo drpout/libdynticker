@@ -22,6 +22,7 @@ public abstract class Exchange {
 	private Timestamp timestamp = null;
 	private String name;
 	private static final int CONN_TIMEOUT = 8000;
+	private ObjectMapper mapper = new ObjectMapper();
 
 	public Exchange(String name, long expiredPeriod) {
 		setExpiredPeriod(expiredPeriod);
@@ -84,7 +85,7 @@ public abstract class Exchange {
 	protected JsonNode readJsonFromUrl(String url) throws IOException {
 		URLConnection urlConnection = buildConnection(url);
 		urlConnection.connect();
-		return (new ObjectMapper()).readTree(urlConnection.getInputStream());
+		return mapper.readTree(urlConnection.getInputStream());
 	}
 
 	protected URLConnection buildConnection(String url) throws IOException, MalformedURLException {
