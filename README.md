@@ -68,7 +68,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Cryptonit](https://cryptonit.net)
 * [Cryptsy](https://cryptsy.com)
 * [HitBTC](https://hitbtc.com)
-* [Melotic](https://www.melotic.com)
 * [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
@@ -92,6 +91,7 @@ Most are now offline.
 * [~~Coin-Swap~~](https://coin-swap.net)
 * [~~Crypto-Trade~~](http://crypto-trade.com)
 * [~~Justcoin~~](https://justcoin.com)
+* [~~Melotic~~](https://www.melotic.com)
 * [~~Mintpal~~](http://mintpal.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
