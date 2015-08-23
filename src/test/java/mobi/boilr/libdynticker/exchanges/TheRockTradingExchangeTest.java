@@ -14,8 +14,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class TheRockTradingExchangeTest extends ExchangeTest {
 	@Override
 	@Before
@@ -47,7 +45,7 @@ public class TheRockTradingExchangeTest extends ExchangeTest {
 			Pair pair = new Pair("BTC", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/therocktrading-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("292.55", lastValue);
+			Assert.assertEquals("232.68", lastValue);
 		} catch (IOException e) {
 			Assert.fail();
 		}

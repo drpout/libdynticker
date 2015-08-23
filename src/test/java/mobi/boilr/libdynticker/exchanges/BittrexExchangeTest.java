@@ -14,8 +14,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
-
 public class BittrexExchangeTest extends ExchangeTest {
 
 	@Override
@@ -28,7 +26,6 @@ public class BittrexExchangeTest extends ExchangeTest {
 	@After
 	public void tearDown() throws Exception {
 	}
-
 
 	@Test
 	public void testGetPairs() {

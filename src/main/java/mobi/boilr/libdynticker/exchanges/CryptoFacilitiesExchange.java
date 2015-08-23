@@ -18,9 +18,9 @@ public final class CryptoFacilitiesExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		pairs.add(new Pair("F-XBT:USD-Jun15", "USD"));
 		pairs.add(new Pair("F-XBT:USD-Sep15", "USD"));
 		pairs.add(new Pair("F-XBT:USD-Dec15", "USD"));
+		pairs.add(new Pair("F-XBT:USD-Mar16", "USD"));
 		return pairs;
 	}
 

@@ -65,4 +65,17 @@ public class ExchangeTest {
 	public void testInvalidPair() throws IOException, NumberFormatException, NoMarketDataException {
 		testExchange.getLastValue(new Pair("InvalidCoin", "InvalidExchange"));
 	}
+	
+	@Test
+	public void testGetPairs() {
+		List<Pair> pairs;
+		try {
+			pairs = testExchange.getPairs();
+			Assert.assertTrue(pairs != null);
+			Assert.assertFalse(pairs.isEmpty());
+		} catch(IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+	}
 }

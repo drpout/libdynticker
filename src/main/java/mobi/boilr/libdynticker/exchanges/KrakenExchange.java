@@ -21,6 +21,7 @@ public final class KrakenExchange extends Exchange {
 		tempFiat.add("USD");
 		tempFiat.add("EUR");
 		tempFiat.add("GBP");
+		tempFiat.add("CAD");
 		tempFiat.add("JPY");
 		fiat = Collections.unmodifiableList(tempFiat);
 	}

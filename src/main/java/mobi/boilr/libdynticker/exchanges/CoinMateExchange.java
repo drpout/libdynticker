@@ -15,7 +15,7 @@ public final class CoinMateExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BTC", "USD"));
+		tempPairs.add(new Pair("BTC", "EUR"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 

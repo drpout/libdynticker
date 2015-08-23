@@ -18,10 +18,9 @@ public final class BittrexExchange extends Exchange {
 	public BittrexExchange(long expiredPeriod) {
 		super("Bittrex", expiredPeriod);
 	}
-	
+
 	@Override
-	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-			IOException {
+	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException, IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<JsonNode> elements = readJsonFromUrl("https://bittrex.com/api/v1.1/public/getmarkets").get("result").getElements();
 		JsonNode element;
@@ -38,16 +37,18 @@ public final class BittrexExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException, NoMarketDataException {
+	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException, IOException, NoMarketDataException {
 		JsonNode node = readJsonFromUrl("https://bittrex.com/api/v1.1/public/getticker?market=" +
-			pair.getExchange() + "-" + pair.getCoin());
+				pair.getExchange() + "-" + pair.getCoin());
 		if(node.get("success").getBooleanValue()) {
-			return parseTicker(node, pair);
-		} else {
-			throw new MalformedURLException(node.get("message").getTextValue());
+			if(node.get("result").asText().equals("null"))
+					throw new NoMarketDataException(pair);
+				else
+					return parseTicker(node, pair);
+			} else {
+				throw new MalformedURLException(node.get("message").getTextValue());
+			}
 		}
-	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
@@ -56,5 +57,5 @@ public final class BittrexExchange extends Exchange {
 			throw new NoMarketDataException(pair);
 		}
 		return last;
+		}
 	}
-}
