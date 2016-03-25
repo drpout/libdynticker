@@ -6,7 +6,7 @@
 
 	<groupId>mobi.boilr.libdynticker</groupId>
 	<artifactId>libdynticker</artifactId>
-	<version>0.5.0</version>
+	<version>0.6.0</version>
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
 	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
@@ -25,16 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added Banx.io, Basebit, Bit2c, Bitex.la, BitKonan, BitMaszyna, Bitso, BTCExchange, BTCGreece, BTCTurk, Coinbase, CoinMate, Coinsetter, Cointrader, CoinTree Coinut, CryptoFacilities, Digital Securities Exchange, Jubi, Mercado Bitcoin, Quadriga CX, Thailand Bitcoin Exchange, The Rock Trading, VirWox, Yobit and Yuanbaohui exchange.
-			\+ Added all working Peatio based exchanges: Bitspark, OneWorldCoin, Mulcoin and Yunbi.
-			\* Updated ANX, Bitcurex, BitMarket.pl, CEX.IO, 796 Exchange, OKCoin and Melotic pairs.
-			\* Fixed CCEXExchange returning 403 HTTP error code.
-			\* Fixed BTC100Exchange to handle new json format.
-			\* Fixed KrakenExchange not recognizing GBP and JPY as fiat.
-			\* Fixed BitcoindeExchange reading an old price instead of the last one.
-			\* Fixed LakeBTC passing browser like user-agent.
-			\- Removed Daily and Quaterly futures removed from 796 Exchange.
-			\- Removed 1BSE, Atomic Trade, CoinMkt, Coin-Swap, Crypto-Trade, Justcoin, MintPal and Vault of Satoshi exchanges.
+			\+ Added BitMEX.
 		</release.description>
 	</properties>
 

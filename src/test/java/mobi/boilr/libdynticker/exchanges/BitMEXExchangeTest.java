@@ -47,7 +47,7 @@ public class BitMEXExchangeTest extends ExchangeTest {
   public void testParseTicker() {
     try {
       Pair pair = new Pair("XBT", "USD", "XBT24H");
-      JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/BitMEX-ticker.json")));
+      JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/bitmex-ticker.json")));
       String lastValue = testExchange.parseTicker(node, pair);
       Assert.assertEquals("416.47", lastValue);
     }
