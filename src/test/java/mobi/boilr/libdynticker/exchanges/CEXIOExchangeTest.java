@@ -32,7 +32,7 @@ public class CEXIOExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "USD")));
-			Assert.assertTrue(pairs.contains(new Pair("GHS", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "RUB")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			Assert.fail();

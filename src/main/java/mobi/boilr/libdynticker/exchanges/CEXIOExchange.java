@@ -3,7 +3,6 @@ package mobi.boilr.libdynticker.exchanges;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import mobi.boilr.libdynticker.core.Exchange;
@@ -12,41 +11,15 @@ import mobi.boilr.libdynticker.core.Pair;
 import org.codehaus.jackson.JsonNode;
 
 public final class CEXIOExchange extends Exchange {
-	private static final List<Pair> pairs;
+	private static final String markets;
+	
 	static {
-		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BTC", "USD"));
-		tempPairs.add(new Pair("GHS", "USD"));
-		tempPairs.add(new Pair("LTC", "USD"));
-		tempPairs.add(new Pair("DOGE", "USD"));
-		tempPairs.add(new Pair("DRK", "USD"));
-		tempPairs.add(new Pair("GHS", "BTC"));
-		tempPairs.add(new Pair("LTC", "BTC"));
-		tempPairs.add(new Pair("DOGE", "BTC"));
-		tempPairs.add(new Pair("DRK", "BTC"));
-		tempPairs.add(new Pair("NMC", "BTC"));
-		tempPairs.add(new Pair("IXC", "BTC"));
-		tempPairs.add(new Pair("POT", "BTC"));
-		tempPairs.add(new Pair("ANC", "BTC"));
-		tempPairs.add(new Pair("MEC", "BTC"));
-		tempPairs.add(new Pair("WDC", "BTC"));
-		tempPairs.add(new Pair("FTC", "BTC"));
-		tempPairs.add(new Pair("DGB", "BTC"));
-		tempPairs.add(new Pair("USDE", "BTC"));
-		tempPairs.add(new Pair("MYR", "BTC"));
-		tempPairs.add(new Pair("AUR", "BTC"));
-		tempPairs.add(new Pair("GHS", "LTC"));
-		tempPairs.add(new Pair("DOGE", "LTC"));
-		tempPairs.add(new Pair("DRK", "LTC"));
-		tempPairs.add(new Pair("MEC", "LTC"));
-		tempPairs.add(new Pair("WDC", "LTC"));
-		tempPairs.add(new Pair("ANC", "LTC"));
-		tempPairs.add(new Pair("FTC", "LTC"));
-		tempPairs.add(new Pair("BTC", "EUR"));
-		tempPairs.add(new Pair("LTC", "EUR"));
-		tempPairs.add(new Pair("DOGE", "EUR"));
-		tempPairs.add(new Pair("DRK", "EUR"));
-		pairs = Collections.unmodifiableList(tempPairs);
+		final String[] marketList = {"USD", "EUR", "RUB", "BTC", "LTC"};
+		String tempMarkets = "";
+		for(String market : marketList){
+			tempMarkets += market + "/";
+		}
+		markets = tempMarkets;
 	}
 
 	public CEXIOExchange(long expiredPeriod) {
@@ -55,9 +28,20 @@ public final class CEXIOExchange extends Exchange {
 
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
-		// Waiting for
-		// https://support.cex.io/hc/communities/public/questions/203516116--API-Add-method-to-retrieve-list-of-traded-pairs
-		return pairs;
+		// TODO check if https://cex.io/api/currency_limit is available
+		// https://cex.io/api/currency_limit is specified in the api, but not responding
+		// this is a better alternative when it is working, searching for markets is unreliable
+		JsonNode node = readJsonFromUrl("https://cex.io/api/tickers/" + markets);
+		if(node.get("ok").asText().equals("ok")){
+			List<Pair> pairs = new ArrayList<Pair>();
+			for(JsonNode n : node.get("data")){
+				String[] split = n.get("pair").asText().split(":");
+				pairs.add(new Pair(split[0], split[1]));
+			}
+			return pairs;
+		} else {
+			throw new MalformedURLException(node.get("error").asText());
+		}
 	}
 
 	@Override
