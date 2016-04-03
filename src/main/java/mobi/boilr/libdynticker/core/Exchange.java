@@ -94,7 +94,7 @@ public abstract class Exchange {
 		 * Some exchanges return an HTTP 403 error (Forbidden) when you try to
 		 * access the API with an undefined User-Agent.
 		 */
-		urlConnection.addRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)");
+		urlConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
 		urlConnection.setConnectTimeout(CONN_TIMEOUT);
 		urlConnection.setReadTimeout(CONN_TIMEOUT);
 		return urlConnection;
