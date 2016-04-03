@@ -37,10 +37,9 @@ public final class DSXExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		HttpsURLConnection uc = (HttpsURLConnection) buildConnection("https://dsx.uk/api/ticker/" +
-				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase() + "?mode=DEMO");
-		uc.setRequestProperty("Cookie", "_gat=1; _ym_visorc_27507645=w; i18next=en; _ga=GA1.2.1040986257.1426094211; __zlcmid=TheUiZvEtgPvNe");
-		uc.setRequestMethod("POST");
+		HttpsURLConnection uc = (HttpsURLConnection) buildConnection("https://dsx.uk/mapi/ticker/" +
+				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase());
+		uc.setRequestMethod("GET");
 		uc.connect();
 		JsonNode node = new ObjectMapper().readTree(uc.getInputStream());
 		if(node.has(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase())) {
