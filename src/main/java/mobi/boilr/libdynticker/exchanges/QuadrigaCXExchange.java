@@ -17,7 +17,8 @@ public final class QuadrigaCXExchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		pairs.add(new Pair("BTC", "CAD"));
 		pairs.add(new Pair("BTC", "USD"));
-		pairs.add(new Pair("BTC", "XAU"));
+		pairs.add(new Pair("ETH", "BTC"));
+		pairs.add(new Pair("ETH", "CAD"));
 		PAIRS = Collections.unmodifiableList(pairs);
 	}
 
