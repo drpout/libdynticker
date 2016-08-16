@@ -14,11 +14,11 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class OneExTadeExchangeTest extends ExchangeTest {
+public class OneExTradeExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new OneExTadeExchange(1000);
+		testExchange = new OneExTradeExchange(1000);
 	}
 
 	@Override

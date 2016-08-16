@@ -25,7 +25,8 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added BitMEX.
+			\+ Added 1Ex.Trade, BitMEX, Coinsquare and EmpoEX.
+			\- Removed Basebit, Bitspark, Carvitrex, Coinsetter, Cointrader, Cryptsy, OneWorldCoin,  
 		</release.description>
 	</properties>
 
@@ -36,7 +37,7 @@
 		</developer>
 		<developer>
 			<name>David Ludovino</name>
-			<email>david.ludovino@gmail.com</email>
+			<email>dllud@riseup.net</email>
 		</developer>
 	</developers>
 

@@ -13,7 +13,7 @@ import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 import org.codehaus.jackson.JsonNode;
 
-public class OneExTadeExchange extends Exchange {
+public class OneExTradeExchange extends Exchange {
 	private static final List<Pair> pairs;
 	
 	static {
@@ -52,7 +52,7 @@ public class OneExTadeExchange extends Exchange {
 	}
 	
 	
-	public OneExTadeExchange( long expiredPeriod) {
+	public OneExTradeExchange( long expiredPeriod) {
 		super("1Ex.Trade", expiredPeriod);
 	}
 
