@@ -4,9 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.ExchangeTest;
-import mobi.boilr.libdynticker.core.Pair;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
@@ -14,7 +11,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-
+import mobi.boilr.libdynticker.core.ExchangeTest;
+import mobi.boilr.libdynticker.core.Pair;
 
 public class CryptoFacilitiesExchangeTest extends ExchangeTest {
 	@Override
@@ -28,11 +26,15 @@ public class CryptoFacilitiesExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Override
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
+			Assert.assertNotEquals(0, pairs.size());
+			Assert.assertTrue(pairs.contains(new Pair("F-XBT:USD-JUN17", "USD")));
+			Assert.assertTrue(pairs.contains(new Pair("CF-BPI", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -43,10 +45,10 @@ public class CryptoFacilitiesExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseTicker() {
 		try {
-			Pair pair = new Pair("F-XBT:USD-Mar15", "USD");
+			Pair pair = new Pair("F-XBT:USD-JUN17", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/cryptofacilities-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("295.4", lastValue);
+			Assert.assertEquals("671.73", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

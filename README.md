@@ -74,6 +74,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Assets and Derivatives (Futures and Options)
 * [796 Exchange](https://796.com)
+* [CryptoFacilities](https://www.cryptofacilities.com)
 * [BitMEX](https://bitmex.com)
 * [Coinut](https://coinut.com)
 * [NXT Asset Exchange](http://wiki.nxtcrypto.org/wiki/Asset_Exchange)
