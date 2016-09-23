@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class CampBXExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -31,7 +31,7 @@ public final class CampBXExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair))
 			throw new IOException("Invalid pair.");
-		JsonNode node = readJsonFromUrl("http://campbx.com/api/xticker.php");
+		JsonNode node = readJsonFromUrl("https://campbx.com/api/xticker.php");
 		return parseTicker(node, pair);
 	}
 
