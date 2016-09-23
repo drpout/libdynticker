@@ -73,7 +73,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [BullionVault](https://www.bullionvault.com)
 
 ### Assets and Derivatives (Futures and Options)
-* [796 Exchange](https://796.com)
 * [CryptoFacilities](https://www.cryptofacilities.com)
 * [BitMEX](https://bitmex.com)
 * [Coinut](https://coinut.com)
@@ -82,6 +81,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ### Removed
 Most are now offline.
 
+* [~~796 Exchange~~](https://796.com)
 * [~~1Bse~~](https://www.1bse.com)
 * [~~Atomic Trade~~](https://www.atomic-trade.com)
 * [~~Banx Capital~~](https://www.banx.io)

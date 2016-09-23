@@ -27,7 +27,7 @@
 		<release.description>
 			\+ Added 1Ex.Trade, BitMEX, Coinsquare and EmpoEX.
 			\* Fixed AllCoin and CryptoFacilities.
-			\- Removed Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy and OneWorldCoin.  
+			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy and OneWorldCoin.  
 		</release.description>
 	</properties>
 
