@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.ExchangeTest;
-import mobi.boilr.libdynticker.core.Pair;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import mobi.boilr.libdynticker.core.ExchangeTest;
+import mobi.boilr.libdynticker.core.Pair;
 
 public class NXTAssetExchangeTest extends ExchangeTest {
 	@Override
@@ -25,12 +25,13 @@ public class NXTAssetExchangeTest extends ExchangeTest {
 	@After
 	public void tearDown() throws Exception {}
 
+	@Override
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("mgwBTC", "NXT")));
+			Assert.assertTrue(pairs.contains(new Pair("nXtGenGHS", "NXT")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "NXT")));
 		} catch(IOException e) {
 			Assert.fail();

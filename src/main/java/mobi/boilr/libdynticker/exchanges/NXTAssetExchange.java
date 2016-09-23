@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-import org.codehaus.jackson.JsonNode;
-
 public final class NXTAssetExchange extends Exchange {
-	private static final String peer = "https://verification.secureae.com/nxt?requestType=";
+	private static final String peer = "http://humanoide.thican.net:7876/nxt?requestType=";
 	
 	public NXTAssetExchange(long expiredPeriod) {
 		super("NXT Asset Exchange", expiredPeriod);
