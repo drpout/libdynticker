@@ -52,7 +52,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Quadriga CX](https://www.quadrigacx.com)
 * [Thailand Bitcoin Exchange](https://bx.in.th)
 * [VirWox](https://www.virwox.com)
-* [Yunbi](https://yunbi.com)
 
 ### Altcoins
 * [Bittrex](https://bittrex.com)
@@ -101,6 +100,7 @@ Most are now offline.
 * [~~Melotic~~](https://www.melotic.com)
 * [~~Mintpal~~](http://mintpal.com)
 * [~~OneWorldCoin~~](https://www.oneworldcoin.com)
+* [~~Yunbi~~](https://yunbi.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
 
 ## Using this library
