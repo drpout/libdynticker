@@ -4,14 +4,14 @@ import java.io.IOException;
 import java.net.SocketTimeoutException;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.exception.APICallLimitReachedException;
-import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
-
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+
+import mobi.boilr.libdynticker.core.exception.APICallLimitReachedException;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 @Ignore
 public class ExchangeTest {
@@ -56,6 +56,7 @@ public class ExchangeTest {
 			}
 			catch(Exception e) {
 				e.printStackTrace();
+				System.err.println(pair);
 				Assert.fail();
 			}
 		}

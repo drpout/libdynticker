@@ -18,27 +18,24 @@ public class OneExTradeExchange extends Exchange {
 	
 	static {
 		List<String> markets = Arrays.asList(new String[] { 
-				"USD", 
-				"EUR", 
-				"CHF", 
-				"GBP", 
-				"CAD", 
-				"AUD", 
-				"1EX", 
-				"BLK", 
-				"BTA", 
-				"BTC", 
-				"DASH", 
-				"DOGE", 
-				"EMC", 
-				"FRK", 
-				"NZD", 
-				"PPC", 
-				"SWIFT", 
-				"TX", 
-				"VTC", 
-				"LTC", 
-				"WBB"});
+			"1EX",
+			"AUD",
+			"BLK",
+			"BTA",
+			"BTC",
+			"CAD",
+			"CHF",
+			"DASH",
+			"DOGE",
+			"EMC",
+			"EUR",
+			"FRK",
+			"LTC",
+			"RADS",
+			"SWIFT",
+			"TX",
+			"USD",
+			"WBB"});
 		Collections.sort(markets);
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		for(String coin : markets){
