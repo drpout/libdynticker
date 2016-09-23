@@ -4,15 +4,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.ExchangeTest;
-import mobi.boilr.libdynticker.core.Pair;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import mobi.boilr.libdynticker.core.ExchangeTest;
+import mobi.boilr.libdynticker.core.Pair;
 
 public class AllcoinExchangeTest extends ExchangeTest {
 
@@ -27,12 +27,13 @@ public class AllcoinExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Override
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("DOGE", "BTC")));
+			Assert.assertTrue(pairs.contains(new Pair("DOGE", "USD")));
 			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
 		}
 		catch(IOException e) {
@@ -43,10 +44,10 @@ public class AllcoinExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseTicker() {
 		try {
-			Pair pair = new Pair("LTC", "BTC");
+			Pair pair = new Pair("YBC", "USD");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/allcoin-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("0.01250000", lastValue);
+			Assert.assertEquals("1.9", lastValue);
 		}
 		catch(IOException e) {
 			e.printStackTrace();

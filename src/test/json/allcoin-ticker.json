@@ -1,1 +1,11 @@
-{"code":1,"data":{"min_24h_price":"0.01180003","min_24h_time":"1406827219","max_24h_price":"0.01290000","max_24h_time":"1406804094","trade_price":"0.01250000","change_24h":"-0.0762","volume_24h_LTC":"5.95796125","volume_24h_BTC":"0.07268179","avg_24h":"0.01219910","type":"LTC","exchange":"BTC","type_volume":"5.95796125","exchange_volume":"0.07268179","top_bid":"0.01190001","top_ask":"0.01250000","name":"LiteCoin","status":"1","wallet_status":"1"}}
+{
+  "date": "1474650696",
+  "ticker": {
+    "buy": 1.70,
+    "high": 1.90,
+    "last": 1.90,
+    "low": 1.90,
+    "sell": 0.00,
+    "vol": 0.00000000
+  }
+}
