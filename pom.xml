@@ -25,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added 1Ex.Trade, BitMEX, Coinsquare, EmpoEX and GDAX.
+			\+ Added 1Ex.Trade, BitMEX, Coinsquare, EmpoEX, GDAX and Quoine.
 			\* Fixed AllCoin, CampBX, CryptoFacilities and NXT Asset Exchange.
 			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin and Yunbi.  
 		</release.description>
