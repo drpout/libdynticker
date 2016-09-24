@@ -7,10 +7,10 @@ import java.net.URLConnection;
 import java.sql.Timestamp;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
+
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 /**
  * Abstract template for Exchange
@@ -95,6 +95,8 @@ public abstract class Exchange {
 		 * access the API with an undefined User-Agent.
 		 */
 		urlConnection.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+		// Others return HTTP 406 (Not Acceptable) when Accept is undefined.
+		urlConnection.addRequestProperty("Accept", "*/*");
 		urlConnection.setConnectTimeout(CONN_TIMEOUT);
 		urlConnection.setReadTimeout(CONN_TIMEOUT);
 		return urlConnection;

@@ -53,6 +53,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Paymium](https://paymium.com)
 * [Quadriga CX](https://www.quadrigacx.com)
 * [Quoine](https://www.quoine.com)
+* [SURBTC](https://www.surbtc.com)
 * [Thailand Bitcoin Exchange](https://bx.in.th)
 * [VirWox](https://www.virwox.com)
 
