@@ -39,6 +39,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [CoinMate](http://coinmate.io)
 * [Coinsquare](https://coinsquare.io)
 * [Cointree](https://www.cointree.com.au)
+* [CRXzone](https://www.crxzone.com)
 * [Digital Securities Exchange](https://dsx.uk)
 * [Gatecoin](https://www.gatecoin.com)
 * [GDAX](https://www.gdax.com)
