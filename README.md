@@ -14,6 +14,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [ANX](https://anxpro.com)
 * [Bit2c](https://www.bit2c.co.il)
 * [BitBay](https://bitbay.pl)
+* [Bitcoins Norway](https://bitcoinsnorway.com)
 * [Bitcoin.de](https://www.bitcoin.de)
 * [Bitcurex](http://bitcurex.com)
 * [Bitex.la](https://bitex.la)

@@ -1,6 +1,8 @@
 package mobi.boilr.libdynticker.core;
 
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -86,6 +88,21 @@ public abstract class Exchange {
 		URLConnection urlConnection = buildConnection(url);
 		urlConnection.connect();
 		return mapper.readTree(urlConnection.getInputStream());
+	}
+
+	protected JsonNode readJsonFromUrl(String url, String postData) throws IOException {
+		HttpURLConnection conn = (HttpURLConnection) buildConnection(url);
+		conn.setDoOutput(true);
+		conn.setDoInput(true);
+		conn.setRequestMethod("POST");
+		conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		conn.setRequestProperty("Content-Length", "" + Integer.toString(postData.getBytes().length));
+		conn.setUseCaches(false);
+		DataOutputStream wr = new DataOutputStream(conn.getOutputStream());
+		wr.writeBytes(postData);
+		wr.flush();
+		wr.close();
+		return mapper.readTree(conn.getInputStream());
 	}
 
 	protected URLConnection buildConnection(String url) throws IOException, MalformedURLException {
