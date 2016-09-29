@@ -89,6 +89,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)
+* [Vaultoro](https://www.vaultoro.com)
 
 ### Assets and Derivatives (Futures and Options)
 * [CryptoFacilities](https://www.cryptofacilities.com)
