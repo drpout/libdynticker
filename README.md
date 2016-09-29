@@ -9,6 +9,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 ## Supported exchanges
 
 ### Bitcoin and altcoins to FIAT
+* [1BTCXE](https://1btcxe.com)
 * [1Ex.Trade](https://1ex.trade)
 * [AllCoin](https://www.allcoin.com)
 * [ANX](https://anxpro.com)
