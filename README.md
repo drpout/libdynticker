@@ -46,6 +46,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [ChileBit](https://chilebit.net)
 * [Coinage](https://coinage.ph)
 * [Coinbase](https://exchange.coinbase.com)
+* [Coincheck](https://coincheck.com/exchange)
 * [Coinfloor](https://www.coinfloor.co.uk/exchange)
 * [CoinMate](http://coinmate.io)
 * [Coinplug](https://www.coinplug.com)
