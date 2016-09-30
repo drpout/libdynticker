@@ -1,25 +1,22 @@
 package mobi.boilr.libdynticker.exchanges;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+
+import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class HuobiExchange extends Exchange {
 	private static final List<Pair> pairs;
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "CNY"));
+		tempPairs.add(new Pair("LTC", "CNY"));
+		tempPairs.add(new Pair("BTC", "USD"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
@@ -36,29 +33,22 @@ public final class HuobiExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair))
 			throw new IOException("Invalid pair: " + pair);
-		String url = "https://api.huobi.com/staticmarket/detail_btc.js";
-		String data = "";
-		URLConnection urlConnection = buildConnection(url);
-		urlConnection.connect();
-		BufferedReader in = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-		String inputLine;
-		while((inputLine = in.readLine()) != null)
-			data += inputLine;
-		in.close();
-		return getLast(data, pair);
-	}
-
-	protected String getLast(String data, Pair pair) throws IOException {
-		Pattern pattern = Pattern.compile("\"p_new\":([0-9.]+),");
-		Matcher matcher = pattern.matcher(data);
-		if(matcher.find()) {
-			return matcher.group(1);
-		}
-		throw new IOException("No last value for " + pair);
+		JsonNode node;
+		if(pair.getExchange().equals("CNY"))
+			// http://api.huobi.com/staticmarket/detail_btc_json.js
+			node = readJsonFromUrl(
+					"http://api.huobi.com/staticmarket/detail_" + pair.getCoin().toLowerCase() + "_json.js");
+		else
+			node = readJsonFromUrl(
+					"http://api.huobi.com/usdmarket/detail_" + pair.getCoin().toLowerCase() + "_json.js");
+		if(node.has("error"))
+			throw new IOException(node.get("error").asText());
+		else
+			return parseTicker(node, pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return null;
+		return node.get("p_new").asText();
 	}
 }
