@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.fyb;
 
 public final class FYBSGExchange extends FYBExchange {
 

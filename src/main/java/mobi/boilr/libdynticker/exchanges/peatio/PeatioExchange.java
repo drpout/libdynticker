@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.peatio;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

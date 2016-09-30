@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.blinktrade;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,20 +10,14 @@ import org.codehaus.jackson.JsonNode;
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 
-public final class ChileBitExchange extends Exchange {
-	private static final List<Pair> pairs;
-	static {
-		List<Pair> tempPairs = new ArrayList<Pair>();
-		tempPairs.add(new Pair("BTC", "VEF"));
-		tempPairs.add(new Pair("BTC", "BRL"));
-		tempPairs.add(new Pair("BTC", "PKR"));
-		tempPairs.add(new Pair("BTC", "CLP"));
-		tempPairs.add(new Pair("BTC", "VND"));
-		pairs = Collections.unmodifiableList(tempPairs);
-	}
+public abstract class BlinkTradeExchange extends Exchange {
+	private List<Pair> pairs;
 
-	public ChileBitExchange(long expiredPeriod) {
-		super("ChileBit", expiredPeriod);
+	public BlinkTradeExchange(String name, long expiredPeriod, String quoteCurrency) {
+		super(name, expiredPeriod);
+		List<Pair> tempPairs = new ArrayList<Pair>();
+		tempPairs.add(new Pair("BTC", quoteCurrency));
+		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
 	@Override
@@ -42,7 +36,7 @@ public final class ChileBitExchange extends Exchange {
 	}
 
 	@Override
-	public String parseTicker(JsonNode node, Pair pair) throws IOException {
+	public String parseTicker(JsonNode node, Pair pair) {
 		return node.get("last").asText();
 	}
 

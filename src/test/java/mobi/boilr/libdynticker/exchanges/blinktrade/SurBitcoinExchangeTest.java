@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.blinktrade;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,11 +14,11 @@ import org.junit.Test;
 import mobi.boilr.libdynticker.core.ExchangeTest;
 import mobi.boilr.libdynticker.core.Pair;
 
-public class FYBSEExchangeTest extends ExchangeTest {
+public class SurBitcoinExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new FYBSEExchange(10000);
+		testExchange = new SurBitcoinExchange(10000);
 	}
 
 	@Override
@@ -33,7 +33,7 @@ public class FYBSEExchangeTest extends ExchangeTest {
 		try {
 			pairs = testExchange.getPairs();
 			Assert.assertNotEquals(0, pairs.size());
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "SEK")));
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "VEF")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -44,10 +44,10 @@ public class FYBSEExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseTicker() {
 		try {
-			Pair pair = new Pair("BTC", "SEK");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/fybse-ticker.json")));
+			Pair pair = new Pair("BTC", "VEF");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/surbitcoin-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("5390.88", lastValue);
+			Assert.assertEquals("710000.0", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

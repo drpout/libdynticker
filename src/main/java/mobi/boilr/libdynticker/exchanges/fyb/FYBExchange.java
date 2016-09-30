@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.fyb;
 
 import java.io.IOException;
 import java.util.ArrayList;

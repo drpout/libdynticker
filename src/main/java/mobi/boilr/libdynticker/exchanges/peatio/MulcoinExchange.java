@@ -1,4 +1,4 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.peatio;
 
 public final class MulcoinExchange extends PeatioExchange {
 

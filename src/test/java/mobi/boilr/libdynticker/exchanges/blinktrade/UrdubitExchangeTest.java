@@ -1,11 +1,8 @@
-package mobi.boilr.libdynticker.exchanges;
+package mobi.boilr.libdynticker.exchanges.blinktrade;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import mobi.boilr.libdynticker.core.ExchangeTest;
-import mobi.boilr.libdynticker.core.Pair;
 
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
@@ -14,11 +11,14 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class MulcoinExchangeTest extends ExchangeTest {
+import mobi.boilr.libdynticker.core.ExchangeTest;
+import mobi.boilr.libdynticker.core.Pair;
+
+public class UrdubitExchangeTest extends ExchangeTest {
 	@Override
 	@Before
 	public void setUp() throws Exception {
-		testExchange = new MulcoinExchange(1000);
+		testExchange = new UrdubitExchange(10000);
 	}
 
 	@Override
@@ -26,15 +26,17 @@ public class MulcoinExchangeTest extends ExchangeTest {
 	public void tearDown() throws Exception {
 	}
 
+	@Override
 	@Test
 	public void testGetPairs() {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("LTC", "BTC")));
-			Assert.assertTrue(pairs.contains(new Pair("DRK", "BTC")));
-			Assert.assertFalse(pairs.contains(new Pair("InvalidCoin", "BTC")));
+			Assert.assertNotEquals(0, pairs.size());
+			Assert.assertTrue(pairs.contains(new Pair("BTC", "PKR")));
+			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}
@@ -42,11 +44,12 @@ public class MulcoinExchangeTest extends ExchangeTest {
 	@Test
 	public void testParseTicker() {
 		try {
-			Pair pair = new Pair("LTC", "BTC");
-			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/mulcoin-ticker.json")));
+			Pair pair = new Pair("BTC", "PKR");
+			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/urdubit-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("0.00899", lastValue);
+			Assert.assertEquals("62246.0", lastValue);
 		} catch (IOException e) {
+			e.printStackTrace();
 			Assert.fail();
 		}
 	}
