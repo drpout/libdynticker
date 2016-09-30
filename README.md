@@ -59,6 +59,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [GDAX](https://www.gdax.com)
 * [Huobi](https://www.huobi.com)
 * [Ice3x](https://ice3x.co.za)
+* [Indacoin](https://indacoin.com/inner)
 * [Independent Reserve](https://www.independentreserve.com)
 * [itBit](https://www.itbit.com)
 * [Korbit](https://www.korbit.co.kr)
