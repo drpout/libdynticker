@@ -25,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
+			\+ Added 1BTCXE, 1Ex.Trade, BitcoinToYou, Bitcoins Norway, bitFlyer, BitMEX, Bitt, BitVC, BitX, BL3P, BTCBOX, BTCXIndia, ChileBit, Coinage, Coinfloor, Coinplug, CoinsBank, Coinsecure, Coinsquare, CRXzone, EmpoEX, FOXBIT, FYB-SE, FYB-SG, Gatecoin, GDAX, Ice3x, Indacoin, Independent Reserve, Korbit, Quoine, SurBitcoin, SURBTC, Urdubit, Vaultoro, VBTC, Zaif and Zyado.
 			\* Fixed AllCoin, CampBX, CryptoFacilities, Huobi and NXT Asset Exchange.
 			\- Removed 796 Exchange, Banx Capital, Basebit, Bitspark, Carvitrex, CleverCoin, Coinsetter, Cointrader, Coins-E, Cryptsy, Jubi, OneWorldCoin and Yunbi.  
 		</release.description>
