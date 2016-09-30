@@ -69,6 +69,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Kraken](https://www.kraken.com)
 * [LakeBTC](http://lakebtc.com)
 * [LocalBitcoins](https://localbitcoins.com)
+* [Loyalbit](https://www.loyalbit.com)
 * [Mercado Bitcoin](https://www.mercadobitcoin.com.br)
 * [OKCoin](https://www.okcoin.cn)
 * [OKCoin International](https://www.okcoin.com)
