@@ -143,7 +143,7 @@ Most are now offline.
 
 ### Gradle
 ```groovy
-compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
+compile 'mobi.boilr.libdynticker:libdynticker:0.6.0'
 ```
 
 ### Maven
@@ -151,7 +151,7 @@ compile 'mobi.boilr.libdynticker:libdynticker:0.5.0'
 <dependency>
   <groupId>mobi.boilr.libdynticker</groupId>
   <artifactId>libdynticker</artifactId>
-  <version>0.5.0</version>
+  <version>0.6.0</version>
 </dependency>
 ```
 
