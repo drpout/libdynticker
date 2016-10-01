@@ -15,6 +15,7 @@ public final class BitcoinToYouExchange extends Exchange {
 	static {
 		List<Pair> tempPairs = new ArrayList<Pair>();
 		tempPairs.add(new Pair("BTC", "BRL"));
+		tempPairs.add(new Pair("LTC", "BRL"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
@@ -31,7 +32,11 @@ public final class BitcoinToYouExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair))
 			throw new IOException("Invalid pair: " + pair);
-		return parseTicker(readJsonFromUrl("https://www.bitcointoyou.com/API/ticker.aspx"), pair);
+		String url = "https://www.bitcointoyou.com/API/ticker";
+		if(pair.getCoin().equals("LTC"))
+			url += "_litecoin";
+		url += ".aspx";
+		return parseTicker(readJsonFromUrl(url), pair);
 	}
 
 	@Override

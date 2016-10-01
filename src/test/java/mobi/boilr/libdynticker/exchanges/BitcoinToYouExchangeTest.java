@@ -34,6 +34,7 @@ public class BitcoinToYouExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertNotEquals(0, pairs.size());
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "BRL")));
+			Assert.assertTrue(pairs.contains(new Pair("LTC", "BRL")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
