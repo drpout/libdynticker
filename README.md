@@ -143,13 +143,13 @@ Most are now offline.
 
 ### Gradle
 ```groovy
-compile 'mobi.boilr.libdynticker:libdynticker:0.6.0'
+compile 'mobi.boilr:libdynticker:0.6.0'
 ```
 
 ### Maven
 ```xml
 <dependency>
-  <groupId>mobi.boilr.libdynticker</groupId>
+  <groupId>mobi.boilr</groupId>
   <artifactId>libdynticker</artifactId>
   <version>0.6.0</version>
 </dependency>

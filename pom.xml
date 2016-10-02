@@ -4,7 +4,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>mobi.boilr.libdynticker</groupId>
+	<groupId>mobi.boilr</groupId>
 	<artifactId>libdynticker</artifactId>
 	<version>0.6.0</version>
 	<packaging>jar</packaging>
