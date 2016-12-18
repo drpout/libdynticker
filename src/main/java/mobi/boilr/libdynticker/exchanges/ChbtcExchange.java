@@ -1,16 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 public final class ChbtcExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -31,8 +29,7 @@ public final class ChbtcExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		// BTC: http://api.chbtc.com/data/ticker
 		// LTC: http://api.chbtc.com/data/ltc/ticker
 		if(!pairs.contains(pair))
@@ -47,7 +44,7 @@ public final class ChbtcExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("ticker").get("last").getTextValue();
+		return node.get("ticker").get("last").asText();
 	}
 
 }

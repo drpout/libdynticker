@@ -32,7 +32,7 @@ public final class BitstampExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("last").getTextValue();
+		return node.get("last").asText();
 	}
 
 	@Override

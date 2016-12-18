@@ -34,7 +34,7 @@ public final class BTCEExchange extends Exchange {
 		if(node.has(pairCode)) {
 			return parseTicker(node, pair);
 		} else {
-			throw new IOException(node.get("error").getTextValue());
+			throw new IOException(node.get("error").asText());
 		}
 	}
 
@@ -42,6 +42,6 @@ public final class BTCEExchange extends Exchange {
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
 		String pairCode = pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
-		return node.get(pairCode).get("last").toString();
+		return node.get(pairCode).get("last").asText();
 	}
 }

@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class BitBayExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -45,7 +45,7 @@ public final class BitBayExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("last").toString();
+		return node.get("last").asText();
 	}
 
 }

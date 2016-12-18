@@ -1,16 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 public final class BitMarketPlExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -34,8 +32,7 @@ public final class BitMarketPlExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		if(!pairs.contains(pair)) {
 			throw new IOException("Invalid pair: " + pair);
 		}
@@ -47,7 +44,7 @@ public final class BitMarketPlExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("last").toString();
+		return node.get("last").asText();
 	}
 
 }

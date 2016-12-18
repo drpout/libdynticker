@@ -2,13 +2,12 @@ package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class HitBTCExchange extends Exchange {
 
@@ -19,16 +18,18 @@ public final class HitBTCExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		Iterator<JsonNode> elements = readJsonFromUrl("https://api.hitbtc.com/api/1/public/symbols")
-				.get("symbols").getElements();
-		for(String textValue; elements.hasNext();) {
-			textValue = elements.next().get("symbol").getTextValue();
-			if(textValue.length() == 6) {
-				pairs.add(new Pair(textValue.substring(0, 3),
-						textValue.substring(3, 6)));
-			} else if(textValue.startsWith("DOGE")) {
-				pairs.add(new Pair(textValue.substring(0, 4),
-						textValue.substring(4, 7)));
+		JsonNode node = readJsonFromUrl("https://api.hitbtc.com/api/1/public/symbols");
+		if(node.has("message"))
+			throw new IOException(node.get("message").asText());
+		else {
+			String symName;
+			for(JsonNode sym : node.get("symbols")) {
+				symName = sym.get("symbol").asText();
+				if(symName.length() == 6) {
+					pairs.add(new Pair(symName.substring(0, 3), symName.substring(3, 6)));
+				} else if(symName.startsWith("DOGE")) {
+					pairs.add(new Pair(symName.substring(0, 4), symName.substring(4, 7)));
+				}
 			}
 		}
 		return pairs;
@@ -40,7 +41,7 @@ public final class HitBTCExchange extends Exchange {
 		JsonNode node = readJsonFromUrl("https://api.hitbtc.com/api/1/public/" +
 				pair.getCoin() + pair.getExchange() + "/ticker");
 		if(node.has("message")) {
-			throw new IOException(node.get("message").getTextValue());
+			throw new IOException(node.get("message").asText());
 		} else {
 			return parseTicker(node, pair);
 		}
@@ -48,7 +49,7 @@ public final class HitBTCExchange extends Exchange {
 	
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("last").getTextValue();
+		return node.get("last").asText();
 	}
 
 }

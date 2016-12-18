@@ -8,6 +8,7 @@ import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class QuoineExchange extends Exchange {
 
@@ -31,7 +32,7 @@ public final class QuoineExchange extends Exchange {
 		if(node.has("last_traded_price"))
 			return parseTicker(node, pair);
 		else
-			throw new IOException();
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override

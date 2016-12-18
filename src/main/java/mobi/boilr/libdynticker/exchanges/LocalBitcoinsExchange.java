@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class LocalBitcoinsExchange extends Exchange {
 
@@ -31,15 +32,14 @@ public final class LocalBitcoinsExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		JsonNode node = readJsonFromUrl("https://localbitcoins.com/bitcoinaverage/ticker-all-currencies/");
-		if(node.has(pair.getExchange().toUpperCase())) {
+		if(node.has(pair.getExchange().toUpperCase()))
 			return parseTicker(node, pair);
-		} else {
-			throw new IOException();
-		}
+		else
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get(pair.getExchange()).get("rates").get("last").getTextValue();
+		return node.get(pair.getExchange()).get("rates").get("last").asText();
 	}
 }

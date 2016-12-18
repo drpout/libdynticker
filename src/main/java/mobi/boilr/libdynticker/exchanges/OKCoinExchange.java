@@ -69,11 +69,11 @@ public final class OKCoinExchange extends Exchange {
 	protected String parseJSONFuture(JsonNode node, Pair pair) throws JsonParseException, JsonMappingException, IOException {
 		TypeReference<JsonNode[]> typeReference = new TypeReference<JsonNode[]>() {};
 		JsonNode[] values = new ObjectMapper().readValue(node.get("ticker"), typeReference);
-		return values[0].get("last").toString();
+		return values[0].get("last").asText();
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("ticker").get("last").getTextValue();
+		return node.get("ticker").get("last").asText();
 	}
 }

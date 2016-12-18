@@ -1,16 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 public final class YobitExchange extends Exchange {
 
@@ -34,8 +32,7 @@ public final class YobitExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		String pairCode = pair.getCoin().toLowerCase() + "_" + pair.getExchange().toLowerCase();
 		JsonNode node = readJsonFromUrl("https://yobit.net/api/3/ticker/" + pairCode);
 		if(node.has(pairCode)) {

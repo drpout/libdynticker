@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class VirWoxExchange extends Exchange {
 
@@ -21,10 +21,12 @@ public final class VirWoxExchange extends Exchange {
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		JsonNode node = readJsonFromUrl("http://api.virwox.com/api/json.php?method=getInstruments");
-		Iterator<JsonNode> elements = node.get("result").getElements();
-		while(elements.hasNext()) {
-			JsonNode next = elements.next();
-			pairs.add(new Pair(next.get("longCurrency").asText(), next.get("shortCurrency").asText()));
+		JsonNode result = node.get("result");
+		if(result.asText().equals("null"))
+			throw new IOException(node.get("error").asText());
+		else {
+			for(JsonNode inst : result)
+				pairs.add(new Pair(inst.get("longCurrency").asText(), inst.get("shortCurrency").asText()));
 		}
 		return pairs;
 	}
@@ -33,11 +35,11 @@ public final class VirWoxExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		JsonNode node = readJsonFromUrl("http://api.virwox.com/api/json.php?method=getRawTradeData&instrument=" +
 				pair + "&timespan=172800");
-		if(node.get("result").get("errorCode").asText().equals("OK")) {
+		String errorCode = node.get("result").get("errorCode").asText();
+		if(errorCode.equals("OK"))
 			return parseTicker(node, pair);
-		} else {
-			throw new IOException(node.get("result").get("errorCode").asText());
-		}
+		else
+			throw new IOException(errorCode);
 	}
 
 	@Override

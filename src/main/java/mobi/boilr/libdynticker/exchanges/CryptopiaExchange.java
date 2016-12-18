@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public final class CryptopiaExchange extends Exchange {
 		if(node.get("Message").isNull())
 			return parseTicker(node, pair);
 		else
-			throw new MalformedURLException(node.get("Message").asText());
+			throw new IOException(node.get("Message").asText());
 	}
 
 	@Override

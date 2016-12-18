@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+import org.codehaus.jackson.JsonParseException;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.core.exception.APICallLimitReachedException;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonParseException;
 
 public final class BitcoindeExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -52,7 +52,7 @@ public final class BitcoindeExchange extends Exchange {
 			while(elements.hasNext()) {
 				lastValueNode = elements.next();
 			}
-			return lastValueNode.get("price").toString();
+			return lastValueNode.get("price").asText();
 		} else {
 			throw new IOException("Empty trade history.");
 		}

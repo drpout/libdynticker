@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class BTCChinaExchange extends Exchange {
 
@@ -21,12 +21,10 @@ public final class BTCChinaExchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		Iterator<String> fieldNames = readJsonFromUrl("https://data.btcchina.com/data/ticker?market=all").getFieldNames();
 		while (fieldNames.hasNext()) {
-			String next = fieldNames.next();
-			String[] split = next.split("_");
+			String[] split = fieldNames.next().split("_");
 			String coin = split[1].substring(0, 3).toUpperCase();
 			String exchange = split[1].substring(3, 6).toUpperCase();
-			Pair pair = new Pair(coin, exchange);
-			pairs.add(pair);
+			pairs.add(new Pair(coin, exchange));
 		}
 		return pairs;
 	}
@@ -41,7 +39,7 @@ public final class BTCChinaExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("ticker").get("last").getTextValue();
+		return node.get("ticker").get("last").asText();
 	}
 
 }

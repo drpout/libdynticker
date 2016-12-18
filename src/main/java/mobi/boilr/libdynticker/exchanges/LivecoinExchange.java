@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +22,7 @@ public final class LivecoinExchange extends Exchange {
 		List<Pair> pairs = new ArrayList<Pair>();
 		JsonNode node = readJsonFromUrl(API_URL);
 		if(node.has("success"))
-			throw new MalformedURLException(node.get("errorMessage").asText());
+			throw new IOException(node.get("errorMessage").asText());
 		else {
 			for(JsonNode ticker : node) {
 				String[] split = ticker.get("symbol").asText().split("/");
@@ -38,7 +37,7 @@ public final class LivecoinExchange extends Exchange {
 		// https://api.livecoin.net/exchange/ticker?currencyPair=BTC/USD
 		JsonNode node = readJsonFromUrl(API_URL + "?currencyPair=" + pair.getCoin() + "/" + pair.getExchange());
 		if(node.has("success"))
-			throw new MalformedURLException(node.get("errorMessage").asText());
+			throw new IOException(node.get("errorMessage").asText());
 		else
 			return parseTicker(node, pair);
 	}

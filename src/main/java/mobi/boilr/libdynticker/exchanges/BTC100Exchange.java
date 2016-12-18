@@ -64,6 +64,6 @@ public final class BTC100Exchange extends Exchange {
 			id = DOGE_CNY_ID;
 			pos = DOGE_CNY_POS;
 		}
-		return nodes.get(pos).get(id).getTextValue();
+		return nodes.get(pos).get(id).asText();
 	}
 }

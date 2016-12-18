@@ -1,16 +1,13 @@
 package mobi.boilr.libdynticker.exchanges.peatio;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 public abstract class PeatioExchange extends Exchange {
 	private String domain;
@@ -21,31 +18,30 @@ public abstract class PeatioExchange extends Exchange {
 	}
 
 	@Override
-	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		Iterator<JsonNode> elements = readJsonFromUrl("https://" + domain + "/api/v2/markets.json").getElements();
-		for(String[] pairSplit; elements.hasNext();) {
-			pairSplit = elements.next().get("name").getTextValue().split("/");
+		JsonNode node = readJsonFromUrl("https://" + domain + "/api/v2/markets.json");
+		String[] pairSplit;
+		for(JsonNode pair : node) {
+			pairSplit = pair.get("name").asText().split("/");
 			pairs.add(new Pair(pairSplit[0], pairSplit[1]));
 		}
 		return pairs;
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		// https://domain.xxx/api/v2/tickers/dogcny.json
 		JsonNode node = readJsonFromUrl("https://" + domain + "/api/v2/tickers/" +
 				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase() + ".json");
 		if(node.has("error"))
-			throw new MalformedURLException(node.get("error").get("message").getTextValue());
+			throw new IOException(node.get("error").get("message").asText());
 		return parseTicker(node, pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("ticker").get("last").getTextValue();
+		return node.get("ticker").get("last").asText();
 	}
 
 }

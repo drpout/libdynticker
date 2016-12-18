@@ -1,14 +1,13 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class CEXIOExchange extends Exchange {
 	private static final String markets;
@@ -40,7 +39,7 @@ public final class CEXIOExchange extends Exchange {
 			}
 			return pairs;
 		} else {
-			throw new MalformedURLException(node.get("error").asText());
+			throw new IOException(node.get("error").asText());
 		}
 	}
 
@@ -49,13 +48,13 @@ public final class CEXIOExchange extends Exchange {
 		JsonNode node = readJsonFromUrl("https://cex.io/api/last_price/"
 				+ pair.getCoin() + "/" + pair.getExchange());
 		if(node.has("error"))
-			throw new MalformedURLException(node.get("error").getTextValue());
+			throw new IOException(node.get("error").asText());
 		return parseTicker(node, pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("lprice").getTextValue();
+		return node.get("lprice").asText();
 	}
 
 }

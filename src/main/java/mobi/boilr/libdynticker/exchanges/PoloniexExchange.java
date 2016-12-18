@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class PoloniexExchange extends Exchange {
 	private static final String API_URL = "https://poloniex.com/public?command=returnTicker";
@@ -34,13 +35,13 @@ public final class PoloniexExchange extends Exchange {
 		if(node.has(pair.getExchange() + "_" + pair.getCoin())) {
 			return parseTicker(node, pair);
 		} else {
-			throw new IOException("Invalid pair: " + pair);
+			throw new NoMarketDataException(pair);
 		}
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").getTextValue();
+		return node.get(pair.getExchange() + "_" + pair.getCoin()).get("last").asText();
 	}
 
 }

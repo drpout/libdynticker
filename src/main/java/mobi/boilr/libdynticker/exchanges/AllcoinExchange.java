@@ -1,16 +1,13 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class AllcoinExchange extends Exchange {
 
@@ -28,13 +25,12 @@ public final class AllcoinExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException, NoMarketDataException {
+	protected String getTicker(Pair pair) throws IOException {
 		// https://api.allcoin.com/api/v1/ticker?symbol=LTC_USD
 		JsonNode node = readJsonFromUrl("https://api.allcoin.com/api/v1/ticker?symbol=" +
 				pair.getCoin() + "_" + pair.getExchange());
 		if(node.has("error_code")) {
-			throw new MalformedURLException(node.get("error_code").getTextValue());
+			throw new IOException(node.get("error_code").asText());
 		} else {
 			return parseTicker(node, pair);
 		}

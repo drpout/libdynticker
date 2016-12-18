@@ -1,17 +1,16 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
 import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
-
-import org.codehaus.jackson.JsonNode;
 
 public class OneExTradeExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -65,7 +64,7 @@ public class OneExTradeExchange extends Exchange {
 		if(node.has("errors")){
 			for(JsonNode n : node.get("errors")){
 				if(n.has("message")){
-					throw new MalformedURLException(n.get("message").asText());
+					throw new IOException(n.get("message").asText());
 				}
 			}
 			throw new NoMarketDataException(pair);

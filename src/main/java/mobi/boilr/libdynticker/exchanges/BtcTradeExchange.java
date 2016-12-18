@@ -39,6 +39,6 @@ public final class BtcTradeExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("last").toString();
+		return node.get("last").asText();
 	}
 }

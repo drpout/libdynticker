@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class TheRockTradingExchange extends Exchange {
 
@@ -36,7 +37,7 @@ public final class TheRockTradingExchange extends Exchange {
 		if(node.has("last")){
 			return parseTicker(node, pair);
 		} else {
-			throw new IOException();
+			throw new NoMarketDataException(pair);
 		}
 	}
 

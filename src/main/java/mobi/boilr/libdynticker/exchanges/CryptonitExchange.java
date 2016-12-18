@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
-
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+
+import mobi.boilr.libdynticker.core.Exchange;
+import mobi.boilr.libdynticker.core.Pair;
 
 public final class CryptonitExchange extends Exchange {
 
@@ -33,7 +33,7 @@ public final class CryptonitExchange extends Exchange {
 	protected String getTicker(Pair pair) throws IOException {
 		JsonNode node = readJsonFromUrl("https://cryptonit.net/apiv2/rest/public/ccorder.json?bid_currency=" +
 				pair.getExchange() + "&ask_currency=" + pair.getCoin() + "&rate=1");
-		String last = node.get(0).getTextValue();
+		String last = node.get(0).asText();
 		if(last.equals("currency pair not available"))
 			throw new IOException(last);
 		else
@@ -42,7 +42,7 @@ public final class CryptonitExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get(0).getTextValue();
+		return node.get(0).asText();
 	}
 
 }

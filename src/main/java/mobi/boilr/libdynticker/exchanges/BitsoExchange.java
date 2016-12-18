@@ -35,7 +35,7 @@ public final class BitsoExchange extends Exchange {
 		JsonNode node = readJsonFromUrl("https://api.bitso.com/v2/ticker?book=" +
 				pair.getCoin() + "_" + pair.getExchange());
 		if(node.has("error"))
-			throw new IOException(node.get("error").get("message").getTextValue());
+			throw new IOException(node.get("error").get("message").asText());
 		return parseTicker(node, pair);
 	}
 

@@ -1,15 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class ANXExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -47,13 +46,13 @@ public final class ANXExchange extends Exchange {
 		JsonNode node = readJsonFromUrl("https://anxpro.com/api/2/"
 				+ pair.getCoin() + pair.getExchange() + "/money/ticker");
 		if(node.has("error"))
-			throw new MalformedURLException(node.get("result").getTextValue());
+			throw new IOException(node.get("result").asText());
 		return parseTicker(node, pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("data").get("last").get("value").getTextValue();
+		return node.get("data").get("last").get("value").asText();
 	}
 
 }

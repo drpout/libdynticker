@@ -1,16 +1,15 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class MercadoBitcoinExchange extends Exchange {
 
@@ -35,18 +34,17 @@ public final class MercadoBitcoinExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException, IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		String url = "https://www.mercadobitcoin.net/api/";
 		if(pair.equals(BTCBRL))
 			url += "ticker/";
 		else if(pair.equals(LTCBRL))
 			url += "ticker_litecoin/";
 		JsonNode node = readJsonFromUrl(url);
-		if(node.has("ticker")) {
+		if(node.has("ticker"))
 			return parseTicker(node, pair);
-		} else {
-			throw new IOException("No market data.");
-		}
+		else
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override

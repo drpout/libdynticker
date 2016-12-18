@@ -1,15 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class CoinMateExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -34,7 +33,7 @@ public final class CoinMateExchange extends Exchange {
 		JsonNode node = readJsonFromUrl("https://coinmate.io/api/ticker?currencyPair="
 			+ pair.getCoin() + "_" + pair.getExchange());
 		if(node.get("error").getBooleanValue())
-			throw new MalformedURLException(node.get("errorMessage").getTextValue());
+			throw new IOException(node.get("errorMessage").asText());
 		return parseTicker(node, pair);
 	}
 

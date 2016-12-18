@@ -1,16 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
+
+import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
 
 public final class KrakenExchange extends Exchange {
 
@@ -33,14 +31,12 @@ public final class KrakenExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = readJsonFromUrl("https://api.kraken.com/0/public/AssetPairs").get("result");
-		Iterator<String> fieldNames = node.getFieldNames();
-		String coin, exchange;
-		for (JsonNode jsonNode; fieldNames.hasNext();) {
-			jsonNode = node.get(fieldNames.next());
-			coin = jsonNode.get("base").getTextValue().substring(1);
-			exchange = jsonNode.get("quote").getTextValue().substring(1);
-			pairs.add(new Pair(coin, exchange));
+		JsonNode node = readJsonFromUrl("https://api.kraken.com/0/public/AssetPairs");
+		if(node.get("error").getElements().hasNext())
+			throw new IOException(node.get("error").getElements().next().asText());
+		else {
+			for (JsonNode asset : node.get("result"))
+				pairs.add(new Pair(asset.get("base").asText().substring(1), asset.get("quote").asText().substring(1)));
 		}
 		return pairs;
 	}
@@ -48,16 +44,15 @@ public final class KrakenExchange extends Exchange {
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
 		JsonNode node = readJsonFromUrl("https://api.kraken.com/0/public/Ticker?pair=" + pairCode(pair));
-		if(node.get("error").getElements().hasNext()) {
-			throw new MalformedURLException(node.get("error").getElements().next().getTextValue());
-		} else {
+		if(node.get("error").getElements().hasNext())
+			throw new IOException(node.get("error").getElements().next().asText());
+		else
 			return parseTicker(node, pair);
-		}
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("result").get(pairCode(pair)).get("c").getElements().next().getTextValue();
+		return node.get("result").get(pairCode(pair)).get("c").getElements().next().asText();
 	}
 
 	private String pairCode(Pair pair) {

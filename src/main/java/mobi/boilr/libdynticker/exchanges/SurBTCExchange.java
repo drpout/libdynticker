@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +35,7 @@ public final class SurBTCExchange extends Exchange {
 		if(node.has("indicators"))
 			return parseTicker(node, pair);
 		else
-			throw new MalformedURLException("Invalid pair: " + pair);
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override

@@ -1,18 +1,15 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
+import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.map.ObjectMapper;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class DSXExchange extends Exchange {
 	private static final List<Pair> PAIRS;
@@ -37,16 +34,12 @@ public final class DSXExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		HttpsURLConnection uc = (HttpsURLConnection) buildConnection("https://dsx.uk/mapi/ticker/" +
-				pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase());
-		uc.setRequestMethod("GET");
-		uc.connect();
-		JsonNode node = new ObjectMapper().readTree(uc.getInputStream());
-		if(node.has(pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase())) {
+		String pairCode = pair.getCoin().toLowerCase() + pair.getExchange().toLowerCase();
+		JsonNode node = readJsonFromUrl("https://dsx.uk/mapi/ticker/" + pairCode);
+		if(node.has(pairCode))
 			return parseTicker(node, pair);
-		} else {
-			throw new MalformedURLException();
-		}
+		else
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override

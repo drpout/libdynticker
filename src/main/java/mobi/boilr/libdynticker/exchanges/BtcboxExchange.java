@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,7 +35,7 @@ public final class BtcboxExchange extends Exchange {
 		if(node.has(pair.getCoin().toLowerCase()))
 			return parseTicker(node, pair);
 		else
-			throw new MalformedURLException("Invalid pair: " + pair);
+			throw new IOException("Invalid pair: " + pair);
 	}
 
 	@Override

@@ -1,16 +1,14 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.codehaus.jackson.JsonNode;
+
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
-
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 
 public final class ItBitExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -32,19 +30,18 @@ public final class ItBitExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-			IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		// https://api.itbit.com/v1/markets/XBTUSD/ticker
 		JsonNode node = readJsonFromUrl("https://api.itbit.com/v1/markets/" +
 				pair.getCoin() + pair.getExchange() + "/ticker");
 		if(node.has("error"))
-			throw new MalformedURLException(node.get("error").get("message").getTextValue());
+			throw new IOException(node.get("error").get("message").asText());
 		return parseTicker(node, pair);
 	}
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) {
-		return node.get("lastPrice").getTextValue();
+		return node.get("lastPrice").asText();
 	}
 
 }

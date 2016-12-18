@@ -1,17 +1,15 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import mobi.boilr.libdynticker.core.Exchange;
-import mobi.boilr.libdynticker.core.Pair;
-
 import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
+
+import mobi.boilr.libdynticker.core.Exchange;
+import mobi.boilr.libdynticker.core.Pair;
 
 public final class CCEXExchange extends Exchange {
 
@@ -20,8 +18,7 @@ public final class CCEXExchange extends Exchange {
 	}
 
 	@Override
-	protected List<Pair> getPairsFromAPI() throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
 		JsonNode node = readJsonFromUrl("https://c-cex.com/t/pairs.json");
 		TypeReference<List<String>> typeRef = new TypeReference<List<String>>() {
@@ -36,8 +33,7 @@ public final class CCEXExchange extends Exchange {
 	}
 
 	@Override
-	protected String getTicker(Pair pair) throws JsonProcessingException, MalformedURLException,
-	IOException {
+	protected String getTicker(Pair pair) throws IOException {
 		// https://c-cex.com/t/btc-usd.json
 		JsonNode node = readJsonFromUrl("https://c-cex.com/t/"
 				+ pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + ".json");

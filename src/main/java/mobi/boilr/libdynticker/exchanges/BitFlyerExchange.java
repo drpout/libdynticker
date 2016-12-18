@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,6 +9,7 @@ import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class BitFlyerExchange extends Exchange {
 	private static final List<Pair> pairs;
@@ -38,7 +38,7 @@ public final class BitFlyerExchange extends Exchange {
 		if(node.get("product_code").asText().equals(productCode))
 			return parseTicker(node, pair);
 		else
-			throw new MalformedURLException("Invalid pair: " + pair);
+			throw new NoMarketDataException(pair);
 	}
 
 	@Override

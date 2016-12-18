@@ -46,6 +46,6 @@ public final class BTC38Exchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("ticker").get("last").toString();
+		return node.get("ticker").get("last").asText();
 	}
 }

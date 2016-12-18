@@ -1,7 +1,6 @@
 package mobi.boilr.libdynticker.exchanges;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +8,7 @@ import org.codehaus.jackson.JsonNode;
 
 import mobi.boilr.libdynticker.core.Exchange;
 import mobi.boilr.libdynticker.core.Pair;
+import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class YuanbaoExchange extends Exchange {
 
@@ -36,7 +36,7 @@ public final class YuanbaoExchange extends Exchange {
 		JsonNode node = readJsonFromUrl(
 				"https://www.yuanbao.com/api_market/getInfo_cny/coin/" + pair.getCoin().toLowerCase());
 		if(node.get("available_supply").isBoolean())
-			throw new MalformedURLException("Invalid pair: " + pair);
+			throw new NoMarketDataException(pair);
 		else
 			return parseTicker(node, pair);
 	}
