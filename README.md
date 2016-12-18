@@ -99,7 +99,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [HitBTC](https://hitbtc.com)
 * [Mulcoin](https://www.mulcoin.com)
 * [Poloniex](https://www.poloniex.com)
-* [Vircurex](https://vircurex.com)
 * [Yobit](http://yobit.net)
 
 ### Bullion
@@ -140,6 +139,7 @@ Most are now offline.
 * [~~OneWorldCoin~~](https://www.oneworldcoin.com)
 * [~~Yunbi~~](https://yunbi.com)
 * [~~Vault of Satoshi~~](https://www.vaultofsatoshi.com)
+* [~~Vircurex~~](https://vircurex.com)
 
 ## Using this library
 
