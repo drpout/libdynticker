@@ -94,6 +94,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Bter](https://bter.com)
 * [C-CEX](https://c-cex.com)
 * [Cryptonit](https://cryptonit.net)
+* [Cryptopia](https://www.cryptopia.co.nz/Exchange)
 * [EmpoEX](https://empoex.com)
 * [HitBTC](https://hitbtc.com)
 * [Mulcoin](https://www.mulcoin.com)
