@@ -40,8 +40,8 @@ public final class CoinsecureExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		String value = node.get("result").get(0).get(0).get("lasttrade").get(0).get("bid").get(0).get(0).get("rate")
-				.asText();
+		String value = node.get("result").get(0).get(0).get("lasttrade").get(0).getElements().next().get(0).get(0)
+				.get("rate").asText();
 		int len = value.length();
 		return value.substring(0, len - 2) + "." + value.substring(len - 2, len);
 	}
