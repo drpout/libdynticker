@@ -26,7 +26,7 @@
 		<jdk.version>1.6</jdk.version>
 		<release.description>
 			\+ Added Cryptopia, Livecoin.
-			\* Fixed Coinsecure, Gatecoin, Yuanbao.
+			\* Fixed Coinsecure, EmpoEX, Gatecoin, Yuanbao.
 			\- Removed Coinbase, Vircurex.
 		</release.description>
 	</properties>

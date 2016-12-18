@@ -39,7 +39,7 @@ public final class EmpoExExchange extends Exchange {
 			NoMarketDataException {
 		for(JsonNode n : node){
 			if(n.get("pairname").asText().equals(pair.getCoin()+"-"+pair.getExchange()))
-			return n.get("last").asText();
+				return n.get("last").asText().replace(",", "");
 		}
 		throw new NoMarketDataException(pair);
 	}
