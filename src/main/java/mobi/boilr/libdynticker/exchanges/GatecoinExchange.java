@@ -41,7 +41,11 @@ public final class GatecoinExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		return node.get("transactions").get(0).get("price").asText();
+		JsonNode transactions = node.get("transactions");
+		if(transactions.size() > 0)
+			return transactions.get(0).get("price").asText();
+		else
+			return "NaN";
 	}
 
 }
