@@ -83,6 +83,7 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Urdubit](https://urdubit.com)
 * [VBTC](https://vbtc.vn)
 * [VirWox](https://www.virwox.com)
+* [Yuanbao](https://yuanbao.com)
 * [Zaif](https://zaif.jp)
 * [Zyado](https://www.zyado.com)
 
@@ -100,7 +101,6 @@ The main goal of libdynticker is to get the traded pairs dynamically. That way i
 * [Poloniex](https://www.poloniex.com)
 * [Vircurex](https://vircurex.com)
 * [Yobit](http://yobit.net)
-* [Yuanbaohui](http://yuanbaohui.com)
 
 ### Bullion
 * [BullionVault](https://www.bullionvault.com)

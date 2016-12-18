@@ -26,7 +26,7 @@
 		<jdk.version>1.6</jdk.version>
 		<release.description>
 			\+ Added Cryptopia, Livecoin.
-			\* Fixed Coinsecure.
+			\* Fixed Coinsecure, Yuanbao.
 			\- Removed Coinbase.
 		</release.description>
 	</properties>
