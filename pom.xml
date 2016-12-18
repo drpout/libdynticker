@@ -27,7 +27,7 @@
 		<release.description>
 			\+ Added Cryptopia, Livecoin.
 			\* Fixed Coinsecure, EmpoEX, Gatecoin, Yuanbao.
-			\- Removed Coinbase, Vircurex.
+			\- Removed BTCGreece, Coinbase, Vircurex.
 		</release.description>
 	</properties>
 
