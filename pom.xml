@@ -6,7 +6,7 @@
 
 	<groupId>mobi.boilr</groupId>
 	<artifactId>libdynticker</artifactId>
-	<version>0.7.0</version>
+	<version>0.8.0</version>
 	<packaging>jar</packaging>
 	<name>libdynticker</name>
 	<description>Java library to retrieve trading pairs and last value from cryptocurrency and bullion exchanges.</description>
@@ -25,10 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.6</jdk.version>
 		<release.description>
-			\+ Added Cryptopia, Livecoin.
-			\* Fixed Coinsecure, EmpoEX, Gatecoin, Yuanbao.
-			\* Code cleaning and harmonization.
-			\- Removed BTCGreece, Coinbase, Vircurex.
+			\* Fixed BitMEX.
 		</release.description>
 	</properties>
 

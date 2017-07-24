@@ -33,9 +33,10 @@ public class BitMEXExchangeTest extends ExchangeTest {
 		List<Pair> pairs;
 		try {
 			pairs = testExchange.getPairs();
-			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD", "XBT24H")));
-			Assert.assertTrue(pairs.contains(new Pair("ETH", "XBT", "ETH7D")));
-			Assert.assertFalse(pairs.contains(new Pair("DOGE", "XBT", "DOGE1H")));
+			Assert.assertTrue(pairs.contains(new Pair("XBT", "U17", "XBTU17")));
+			Assert.assertTrue(pairs.contains(new Pair("SEGWIT", "XBT", "B_SEGWITZ17")));
+			Assert.assertTrue(pairs.contains(new Pair("XBT", "USD", "XBTUSD")));
+			Assert.assertFalse(pairs.contains(new Pair("DOGE", "XBT", "DOGEXBT")));
 		}
 		catch(IOException e) {
 			Assert.fail();

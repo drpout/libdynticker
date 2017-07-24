@@ -20,13 +20,23 @@ public final class BitMEXExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = readJsonFromUrl(API_URL + "/instrument/active?columns=underlying,quoteCurrency");
+		JsonNode node = readJsonFromUrl(API_URL + "/instrument/active");
 		if(node.has("error"))
 			throw new IOException(node.get("error").get("message").asText());
 		else {
+			String typ, coin, exchange, market;
 			for(JsonNode inst : node) {
-				pairs.add(new Pair(inst.get("underlying").asText(), inst.get("quoteCurrency").asText(),
-						inst.get("symbol").asText()));
+				typ = inst.get("typ").asText();
+				coin = inst.get("underlying").asText();
+				exchange = inst.get("quoteCurrency").asText();
+				market = inst.get("symbol").asText();
+				if(typ.equals("FFICSX")) {
+					coin = inst.get("rootSymbol").asText();
+					exchange = inst.get("underlying").asText();
+				} else if(typ.equals("FFCCSX") && exchange.equals("USD")) {
+					exchange = market.substring(3);
+				}
+				pairs.add(new Pair(coin, exchange, market));
 			}
 		}
 		return pairs;
