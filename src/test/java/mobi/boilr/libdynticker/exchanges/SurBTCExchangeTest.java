@@ -34,7 +34,7 @@ public class SurBTCExchangeTest extends ExchangeTest {
 			pairs = testExchange.getPairs();
 			Assert.assertNotEquals(0, pairs.size());
 			Assert.assertTrue(pairs.contains(new Pair("BTC", "CLP")));
-			Assert.assertTrue(pairs.contains(new Pair("BTC", "COP")));
+			Assert.assertTrue(pairs.contains(new Pair("ETH", "CLP")));
 			Assert.assertFalse(pairs.contains(new Pair("Invalid", "BTC")));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,7 +48,7 @@ public class SurBTCExchangeTest extends ExchangeTest {
 			Pair pair = new Pair("BTC", "CLP");
 			JsonNode node = (new ObjectMapper().readTree(new File("src/test/json/surbtc-ticker.json")));
 			String lastValue = testExchange.parseTicker(node, pair);
-			Assert.assertEquals("409938.29", lastValue);
+			Assert.assertEquals("1708685.0", lastValue);
 		} catch (IOException e) {
 			e.printStackTrace();
 			Assert.fail();

@@ -1,1 +1,1 @@
-{"indicators":[{"key":"last_price","value":40993829},{"key":"max_bid","value":40320000},{"key":"min_ask","value":40339743},{"key":"last_price_variation_24h","value":-0.0010769037290124794},{"key":"last_price_variation_7d","value":-0.00975152664949619}]}
+{"ticker":{"last_price":["1708685.0","CLP"],"min_ask":["1708635.0","CLP"],"max_bid":["1693003.0","CLP"],"volume":["26.51478414","BTC"],"price_variation_24h":"-0.037","price_variation_7d":"0.064"}}

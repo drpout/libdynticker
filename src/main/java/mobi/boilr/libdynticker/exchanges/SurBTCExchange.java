@@ -12,6 +12,8 @@ import mobi.boilr.libdynticker.core.exception.NoMarketDataException;
 
 public final class SurBTCExchange extends Exchange {
 
+	private static final String BASE_URL = "https://www.surbtc.com/api/v2/markets/";
+
 	public SurBTCExchange(long expiredPeriod) {
 		super("SURBTC", expiredPeriod);
 	}
@@ -19,7 +21,7 @@ public final class SurBTCExchange extends Exchange {
 	@Override
 	protected List<Pair> getPairsFromAPI() throws IOException {
 		List<Pair> pairs = new ArrayList<Pair>();
-		JsonNode node = readJsonFromUrl("https://www.surbtc.com/api/v1/markets");
+		JsonNode node = readJsonFromUrl(BASE_URL);
 		if(node.has("markets")) {
 			for(JsonNode market : node.get("markets"))
 				pairs.add(new Pair(market.get("base_currency").asText(), market.get("quote_currency").asText()));
@@ -29,10 +31,10 @@ public final class SurBTCExchange extends Exchange {
 
 	@Override
 	protected String getTicker(Pair pair) throws IOException {
-		// https://www.surbtc.com/api/v1/markets/btc-clp/indicators
-		JsonNode node = readJsonFromUrl("https://www.surbtc.com/api/v1/markets/" + 
-				pair.getCoin().toLowerCase() + "-" + pair.getExchange().toLowerCase() + "/indicators");
-		if(node.has("indicators"))
+		// https://www.surbtc.com/api/v2/markets/btc-clp/ticker
+		JsonNode node = readJsonFromUrl(BASE_URL + pair.getCoin().toLowerCase() + "-" +
+				pair.getExchange().toLowerCase() + "/ticker");
+		if(node.has("ticker"))
 			return parseTicker(node, pair);
 		else
 			throw new NoMarketDataException(pair);
@@ -40,14 +42,7 @@ public final class SurBTCExchange extends Exchange {
 
 	@Override
 	public String parseTicker(JsonNode node, Pair pair) throws IOException {
-		for(JsonNode indicator : node.get("indicators")) {
-			if(indicator.get("key").asText().equals("last_price")) {
-				String value = indicator.get("value").asText();
-				int len = value.length();
-				return value.substring(0, len - 2) + "." + value.substring(len - 2, len);
-			}
-		}
-		throw new NoMarketDataException(pair);
+		return node.get("ticker").get("last_price").get(0).asText();
 	}
 
 }
