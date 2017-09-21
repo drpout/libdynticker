@@ -25,7 +25,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<jdk.version>1.7</jdk.version>
 		<release.description>
-			\* Fixed BitMEX, Bitstamp, SURBTC.
+			\* Fixed BitMEX, Bitstamp, Kraken, SURBTC.
 		</release.description>
 	</properties>
 
