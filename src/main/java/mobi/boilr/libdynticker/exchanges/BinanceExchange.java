@@ -19,14 +19,12 @@ public class BinanceExchange extends mobi.boilr.libdynticker.core.Exchange {
     protected List<Pair> getPairsFromAPI() throws IOException {
         JsonNode jsonNode = readJsonFromUrl("https://www.binance.com/api/v1/ticker/allPrices");
         ArrayList<Pair> pairs = new ArrayList<>();
+        String matchExchange = "(BTC|ETH|BNB|USDT)$";
         for (JsonNode node : jsonNode) {
             String symbol = node.get("symbol").asText();
-            if (symbol.chars().allMatch(Character::isLetter)) {
-                String matchExchange = "(BTC|ETH|BNB|USDT)$";
-                String coin = symbol.replaceFirst(matchExchange, "");
-                String exchange = symbol.replaceFirst(coin, "");
-                pairs.add(new Pair(coin, exchange));
-            }
+            String coin = symbol.replaceFirst(matchExchange, "");
+            String exchange = symbol.replaceFirst(coin, "");
+            pairs.add(new Pair(coin, exchange));
         }
         return pairs;
     }
