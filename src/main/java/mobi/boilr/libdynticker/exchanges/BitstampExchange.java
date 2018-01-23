@@ -23,6 +23,12 @@ public final class BitstampExchange extends Exchange {
 		tempPairs.add(new Pair("LTC", "USD"));
 		tempPairs.add(new Pair("LTC", "EUR"));
 		tempPairs.add(new Pair("LTC", "BTC"));
+		tempPairs.add(new Pair("ETH", "USD"));
+		tempPairs.add(new Pair("ETH", "EUR"));
+		tempPairs.add(new Pair("ETH", "BTC"));
+		tempPairs.add(new Pair("BCH", "USD"));
+		tempPairs.add(new Pair("BCH", "EUR"));
+		tempPairs.add(new Pair("BCH", "BTC"));
 		pairs = Collections.unmodifiableList(tempPairs);
 	}
 
